@@ -7,7 +7,7 @@ export const contactPage = {
     "Contact Hartnett Capital to introduce a business, property, digital asset, dataset, partnership, or other opportunity.",
   body: `
     ${pageIntro({
-      index: "05",
+      index: "06",
       eyebrow: "Share an opportunity",
       title: "Begin a direct,<br>confidential conversation.",
       copy: "We welcome conversations with owners, founders, operators, intermediaries, investors, and strategic partners.",

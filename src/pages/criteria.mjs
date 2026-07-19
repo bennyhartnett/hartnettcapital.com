@@ -19,7 +19,7 @@ export const criteriaPage = {
     "Explore the business and asset characteristics Hartnett Capital considers when evaluating acquisitions and partnerships.",
   body: `
     ${pageIntro({
-      index: "03",
+      index: "04",
       eyebrow: "Investment criteria",
       title: "Durable foundations.<br>Meaningful potential.",
       copy: "We are most interested in businesses and assets where long-term ownership, focused execution, and strong relationships can create measurable value.",
@@ -54,6 +54,8 @@ export const criteriaPage = {
             <div><dt>Structures</dt><dd>Acquisitions, ventures &amp; partnerships</dd></div>
           </dl>
           <p class="mandate-note">Fit is determined by the quality of the opportunity and our ability to contribute—not by a checklist alone.</p>
+          ${linkArrow("Explore our focus areas", "/focus/")}
+          <span class="inline-link-separator" aria-hidden="true"></span>
           ${linkArrow("Share an opportunity", "/contact/")}
         </div>
       </div>

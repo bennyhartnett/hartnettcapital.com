@@ -6,6 +6,7 @@ export const site = {
   navigation: [
     { href: "/firm/", label: "About" },
     { href: "/strategy/", label: "What We Do" },
+    { href: "/focus/", label: "Focus" },
     { href: "/criteria/", label: "Criteria" },
     { href: "/partnerships/", label: "Partnerships" },
   ],

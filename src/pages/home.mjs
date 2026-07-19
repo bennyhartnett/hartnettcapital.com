@@ -42,9 +42,25 @@ export const homePage = {
       </div>
     </section>
 
+    <section class="asset-preview section section--blue-soft">
+      <div class="shell section-heading">
+        <p class="section-label">02 / Where we focus</p>
+        <h2 class="display reveal">Useful assets.<br>Unrealized potential.</h2>
+      </div>
+      <div class="shell asset-preview__grid">
+        <a class="asset-preview__item reveal" href="/focus/#companies"><span>01</span><div><h3>Operating companies</h3><p>Established businesses with durable demand and room to improve.</p></div><b aria-hidden="true">↗</b></a>
+        <a class="asset-preview__item reveal" href="/focus/#real-estate"><span>02</span><div><h3>Real estate</h3><p>Properties and real assets where active ownership can strengthen value.</p></div><b aria-hidden="true">↗</b></a>
+        <a class="asset-preview__item reveal" href="/focus/#software"><span>03</span><div><h3>Software &amp; platforms</h3><p>Useful products with practical workflows and operating leverage.</p></div><b aria-hidden="true">↗</b></a>
+        <a class="asset-preview__item reveal" href="/focus/#digital"><span>04</span><div><h3>Digital assets</h3><p>Websites, domains, and media properties with owned distribution.</p></div><b aria-hidden="true">↗</b></a>
+        <a class="asset-preview__item reveal" href="/focus/#data"><span>05</span><div><h3>Data &amp; information</h3><p>Proprietary knowledge made more useful through technology.</p></div><b aria-hidden="true">↗</b></a>
+        <a class="asset-preview__item reveal" href="/focus/#intellectual-property"><span>06</span><div><h3>IP &amp; brands</h3><p>Distinctive rights with recognition, scarcity, or room to extend.</p></div><b aria-hidden="true">↗</b></a>
+      </div>
+      <div class="shell asset-preview__link">${linkArrow("Explore all focus areas", "/focus/")}</div>
+    </section>
+
     <section class="focus section section--navy">
       <div class="shell section-heading">
-        <p class="section-label section-label--light">02 / What we do</p>
+        <p class="section-label section-label--light">03 / What we do</p>
         <h2 class="display reveal">Active ownership.<br>Disciplined execution.</h2>
       </div>
       <div class="shell focus-grid">
@@ -63,7 +79,7 @@ export const homePage = {
     <section class="standards section">
       <div class="shell standards__grid">
         <div>
-          <p class="section-label">03 / Our approach</p>
+          <p class="section-label">04 / Our approach</p>
           <h2 class="display reveal">Patient ownership.<br>Lasting value.</h2>
         </div>
         <div class="standards__list reveal">

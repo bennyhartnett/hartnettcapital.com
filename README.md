@@ -7,6 +7,7 @@ A multi-page investment and operating company website built from reusable page m
 - `/` — Homepage
 - `/firm` — Company overview
 - `/strategy` — Acquisition and operating approach
+- `/focus` — Asset classes and areas of interest
 - `/criteria` — Investment criteria
 - `/partnerships` — Partnership audiences and philosophy
 - `/contact` — Opportunity inquiries

@@ -48,6 +48,7 @@ function renderFooter() {
         <div class="footer__links">
           <a href="/firm/">About</a>
           <a href="/strategy/">What We Do</a>
+          <a href="/focus/">Focus</a>
           <a href="/criteria/">Criteria</a>
           <a href="/partnerships/">Partnerships</a>
           <a href="/contact/">Contact</a>
@@ -77,11 +78,11 @@ export function renderDocument(page, styles, clientScript, origin = "{{ORIGIN}}"
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${page.description}">
   <meta property="og:url" content="${canonical}">
-  <meta property="og:image" content="${origin}/og-v3.png">
+  <meta property="og:image" content="${origin}/og-v4.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${title}">
   <meta name="twitter:description" content="${page.description}">
-  <meta name="twitter:image" content="${origin}/og-v3.png">
+  <meta name="twitter:image" content="${origin}/og-v4.png">
   <link rel="icon" type="image/svg+xml" href="/hc-logo.svg">
   <title>${title}</title>
   <style>${styles}</style>

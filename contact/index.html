@@ -11,11 +11,11 @@
   <meta property="og:title" content="Contact | Hartnett Capital">
   <meta property="og:description" content="Contact Hartnett Capital to introduce a business, property, digital asset, dataset, partnership, or other opportunity.">
   <meta property="og:url" content="https://hartnettcapital.com/contact/">
-  <meta property="og:image" content="https://hartnettcapital.com/og-v3.png">
+  <meta property="og:image" content="https://hartnettcapital.com/og-v4.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Contact | Hartnett Capital">
   <meta name="twitter:description" content="Contact Hartnett Capital to introduce a business, property, digital asset, dataset, partnership, or other opportunity.">
-  <meta name="twitter:image" content="https://hartnettcapital.com/og-v3.png">
+  <meta name="twitter:image" content="https://hartnettcapital.com/og-v4.png">
   <link rel="icon" type="image/svg+xml" href="/hc-logo.svg">
   <title>Contact | Hartnett Capital</title>
   <style>:root {
@@ -118,6 +118,17 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .standards__list p { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(27px, 2.6vw, 40px); letter-spacing: -.035em; }
 .standards__list .text-link { margin-top: 42px; }
 
+/* Homepage focus preview */
+.asset-preview__grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(16,18,23,.3); border-left: 1px solid rgba(16,18,23,.3); }
+.asset-preview__item { min-height: 185px; display: grid; grid-template-columns: 54px 1fr auto; gap: 18px; align-items: center; padding: 30px; border-right: 1px solid rgba(16,18,23,.3); border-bottom: 1px solid rgba(16,18,23,.3); transition: color 180ms ease, background 180ms ease; }
+.asset-preview__item > span { align-self: start; color: var(--blue); font-size: 10px; font-weight: 800; }
+.asset-preview__item h3 { margin: 0 0 8px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(28px, 2.3vw, 38px); font-weight: 400; line-height: 1; letter-spacing: -.035em; }
+.asset-preview__item p { max-width: 420px; margin: 0; color: #4f5662; font-size: 14px; }
+.asset-preview__item b { font-size: 20px; font-weight: 400; }
+.asset-preview__item:hover { color: white; background: var(--blue); }
+.asset-preview__item:hover > span, .asset-preview__item:hover p { color: white; }
+.asset-preview__link { margin-top: 38px; }
+
 /* Interior hero */
 .page-hero { position: relative; min-height: 770px; padding: 78px 0 0; overflow: hidden; color: white; background: var(--navy); }
 .page-hero--blue { background: var(--blue); }
@@ -183,6 +194,20 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .mandate-list dt { color: #4f5662; font-size: 11px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
 .mandate-list dd { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 29px; letter-spacing: -.03em; }
 .mandate-note { max-width: 580px; margin-bottom: 38px; color: #4f5662; }
+.inline-link-separator { display: inline-block; width: 22px; }
+
+/* Focus areas */
+.focus-detail { background: var(--paper); }
+.asset-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.asset-card { min-height: 540px; padding: 34px; display: flex; flex-direction: column; scroll-margin-top: 78px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.asset-card__meta { display: flex; justify-content: space-between; gap: 24px; color: var(--blue); font-size: 10px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.asset-card h3 { max-width: 600px; margin: auto 0 24px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(40px, 4.4vw, 64px); font-weight: 400; line-height: .94; letter-spacing: -.05em; }
+.asset-card > p { max-width: 580px; margin-bottom: 30px; color: var(--muted); font-size: 16px; }
+.asset-card ul { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.asset-card li { padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.focus-standard .two-column-copy { border-color: rgba(255,255,255,.3); }
+.two-column-copy--light p { color: rgba(255,255,255,.68); }
+.focus-standard .text-link { border-color: white; }
 
 /* Contact */
 .contact-page__grid { display: grid; grid-template-columns: .3fr 1.7fr; gap: clamp(48px, 7vw, 108px); }
@@ -229,6 +254,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
   .strategy-block__grid { grid-template-columns: 70px 1fr; }
   .strategy-block__copy { grid-column: 2; }
   .criteria-grid { grid-template-columns: repeat(2, 1fr); }
+  .asset-card { min-height: 500px; }
   .footer__bottom { grid-template-columns: 1fr 1fr; padding: 24px 0; }
   .footer__links { justify-self: end; }
   .footer__bottom > p { grid-column: 1 / -1; justify-self: start; }
@@ -257,6 +283,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
   .home-hero__visual > span, .home-hero__visual img { left: 24px; }
   .home-hero__visual p { right: 24px; }
   .focus-grid { grid-template-columns: 1fr; }
+  .asset-preview__grid, .asset-grid { grid-template-columns: 1fr; }
+  .asset-preview__item { min-height: 170px; grid-template-columns: 38px 1fr auto; padding: 24px 20px; }
   .focus-card { min-height: 310px; }
   .standards__list > div { grid-template-columns: 50px 1fr; }
   .page-hero { min-height: 680px; padding-top: 68px; }
@@ -270,6 +298,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
   .strategy-block__number { font-size: 38px; }
   .strategy-block .display { font-size: 44px; }
   .criteria-grid { grid-template-columns: 1fr; }
+  .asset-card { min-height: 480px; padding: 26px 22px; }
   .criterion { min-height: 300px; }
   .mandate-list div { grid-template-columns: .8fr 1.2fr; }
   .mandate-list dd { font-size: 23px; }
@@ -301,6 +330,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
           
         <a href="/firm/">About</a>
         <a href="/strategy/">What We Do</a>
+        <a href="/focus/">Focus</a>
         <a href="/criteria/">Criteria</a>
         <a href="/partnerships/">Partnerships</a>
           <a class="nav-links__mobile-contact" href="/contact/">Share an Opportunity</a>
@@ -316,7 +346,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
     <section class="page-hero page-hero--red">
       <div class="shell page-hero__grid">
         <div class="page-hero__meta">
-          <span>05</span>
+          <span>06</span>
           <span>Share an opportunity</span>
         </div>
         <div class="page-hero__content reveal">
@@ -359,6 +389,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
         <div class="footer__links">
           <a href="/firm/">About</a>
           <a href="/strategy/">What We Do</a>
+          <a href="/focus/">Focus</a>
           <a href="/criteria/">Criteria</a>
           <a href="/partnerships/">Partnerships</a>
           <a href="/contact/">Contact</a>

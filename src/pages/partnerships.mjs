@@ -16,7 +16,7 @@ export const partnershipsPage = {
     "Hartnett Capital partners with owners, founders, operators, investors, property owners, developers, advisors, and strategic partners.",
   body: `
     ${pageIntro({
-      index: "04",
+      index: "05",
       eyebrow: "Partnerships",
       title: "Relationships before transactions.",
       copy: "The strongest opportunities often begin with aligned people, clear responsibilities, mutual trust, and a shared long-term vision.",
