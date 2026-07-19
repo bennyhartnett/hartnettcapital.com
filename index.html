@@ -3,10 +3,1132 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hartnett Capital</title>
+  <meta name="description" content="Hartnett Capital is an independent family office investing permanent capital in enduring businesses, real assets, and special situations.">
+  <meta name="theme-color" content="#081a33">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hartnett Capital | Independent Family Office">
+  <meta property="og:description" content="Permanent capital. Patient ownership. Long-term conviction.">
+  <meta property="og:image" content="https://hartnettcapital.com/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hartnett Capital | Independent Family Office">
+  <meta name="twitter:description" content="Permanent capital. Patient ownership. Long-term conviction.">
+  <meta name="twitter:image" content="https://hartnettcapital.com/og.png">
+  <title>Hartnett Capital | Independent Family Office</title>
+
+  <style>
+    :root {
+      --navy: #081a33;
+      --blue: #1747e8;
+      --blue-soft: #dfe7ff;
+      --red: #ef4c36;
+      --ivory: #f4f0e8;
+      --paper: #fbfaf7;
+      --ink: #101217;
+      --muted: #5f6470;
+      --line: rgba(16, 18, 23, 0.16);
+      --max: 1440px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 78px;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 100;
+      padding: 10px 14px;
+      color: white;
+      background: var(--ink);
+      transform: translateY(-180%);
+      transition: transform 160ms ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .page {
+      overflow: hidden;
+    }
+
+    .shell {
+      width: min(calc(100% - 48px), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 30;
+      background: rgba(251, 250, 247, 0.86);
+      border-bottom: 1px solid rgba(16, 18, 23, 0.1);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .brand {
+      justify-self: start;
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      position: relative;
+      flex: 0 0 auto;
+      background: var(--blue);
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      background: var(--paper);
+    }
+
+    .brand-mark::before {
+      width: 3px;
+      height: 21px;
+      left: 9px;
+      top: 6px;
+      box-shadow: 13px 0 0 var(--paper);
+    }
+
+    .brand-mark::after {
+      width: 13px;
+      height: 3px;
+      left: 9px;
+      top: 15px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: -6px;
+      height: 2px;
+      background: var(--blue);
+      transition: right 180ms ease;
+    }
+
+    .nav-links a:hover::after {
+      right: 0;
+    }
+
+    .nav-cta {
+      justify-self: end;
+      padding: 11px 16px;
+      border: 1px solid var(--ink);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      transition: color 160ms ease, background 160ms ease;
+    }
+
+    .nav-cta:hover {
+      color: white;
+      background: var(--ink);
+    }
+
+    .menu-toggle {
+      display: none;
+      justify-self: end;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      margin: 5px auto;
+      background: var(--ink);
+      transition: transform 160ms ease;
+    }
+
+    .hero {
+      min-height: 900px;
+      padding-top: 78px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(420px, 0.85fr);
+      background: var(--ivory);
+    }
+
+    .hero-main {
+      min-height: 822px;
+      padding: 92px max(5vw, 44px) 58px max(4vw, 48px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--line);
+    }
+
+    .hero-kicker {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .hero-kicker::before {
+      content: "";
+      width: 44px;
+      height: 2px;
+      background: var(--blue);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 54px;
+      max-width: 850px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(72px, 8vw, 138px);
+      line-height: 0.84;
+      letter-spacing: -0.07em;
+      font-weight: 400;
+    }
+
+    .hero-lower {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.45fr) minmax(300px, 0.55fr);
+      gap: 70px;
+      align-items: end;
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+    }
+
+    .hero-index {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 42px;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-index small {
+      font-family: Inter, ui-sans-serif, sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-copy {
+      margin: 0;
+      max-width: 520px;
+      font-size: clamp(18px, 1.7vw, 26px);
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-visual {
+      min-height: 822px;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        var(--navy);
+      background-size: 44px 44px;
+      color: white;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      width: 580px;
+      height: 580px;
+      border: 120px solid var(--blue);
+      border-radius: 50%;
+      top: 90px;
+      right: -250px;
+      transform: rotate(-12deg);
+    }
+
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      width: 175px;
+      height: 540px;
+      background: var(--red);
+      left: 16%;
+      bottom: -175px;
+      transform: rotate(38deg);
+      transform-origin: center;
+    }
+
+    .visual-label {
+      position: absolute;
+      top: 47px;
+      left: 42px;
+      z-index: 3;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .visual-type {
+      position: absolute;
+      inset: auto 35px 42px 42px;
+      z-index: 3;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 30px;
+    }
+
+    .visual-monogram {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(140px, 20vw, 320px);
+      line-height: 0.72;
+      letter-spacing: -0.1em;
+      color: rgba(255, 255, 255, 0.93);
+    }
+
+    .visual-caption {
+      max-width: 165px;
+      margin: 0;
+      font-size: 11px;
+      line-height: 1.6;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .statement {
+      padding: 150px 0 132px;
+      background: var(--paper);
+    }
+
+    .statement-grid {
+      display: grid;
+      grid-template-columns: minmax(190px, 0.3fr) minmax(0, 1.7fr);
+      gap: 70px;
+    }
+
+    .section-number {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border-top: 2px solid var(--blue);
+      padding-top: 14px;
+    }
+
+    .statement h2 {
+      max-width: 1140px;
+      margin-bottom: 52px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(48px, 6.6vw, 102px);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      font-weight: 400;
+    }
+
+    .statement-copy {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      border-top: 1px solid var(--line);
+      padding-top: 34px;
+    }
+
+    .statement-copy p {
+      margin: 0;
+      max-width: 520px;
+      font-size: 17px;
+      color: var(--muted);
+    }
+
+    .strategy {
+      background: var(--navy);
+      color: white;
+    }
+
+    .strategy-header {
+      padding: 105px 0 48px;
+      display: grid;
+      grid-template-columns: 0.32fr 1.68fr;
+      gap: 70px;
+    }
+
+    .strategy .section-number {
+      color: var(--blue-soft);
+      border-color: var(--blue-soft);
+    }
+
+    .strategy h2 {
+      margin: 0;
+      max-width: 880px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(48px, 6vw, 90px);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      font-weight: 400;
+    }
+
+    .strategy-list {
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .strategy-row {
+      min-height: 220px;
+      display: grid;
+      grid-template-columns: 0.32fr 0.68fr 1fr;
+      gap: 55px;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      transition: background 180ms ease;
+    }
+
+    .strategy-row:hover {
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .strategy-row .num {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 62px;
+      line-height: 1;
+      color: var(--blue-soft);
+    }
+
+    .strategy-row h3 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(34px, 3.3vw, 54px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 400;
+    }
+
+    .strategy-row p {
+      margin: 0;
+      max-width: 510px;
+      color: rgba(255, 255, 255, 0.66);
+      font-size: 16px;
+    }
+
+    .criteria {
+      padding: 140px 0;
+      background: var(--blue-soft);
+    }
+
+    .criteria-grid {
+      display: grid;
+      grid-template-columns: 0.48fr 1.52fr;
+      gap: 85px;
+    }
+
+    .criteria-intro {
+      position: sticky;
+      top: 120px;
+      align-self: start;
+    }
+
+    .criteria-intro h2 {
+      margin: 24px 0 25px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(47px, 5vw, 72px);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      font-weight: 400;
+    }
+
+    .criteria-intro p {
+      max-width: 380px;
+      color: var(--muted);
+    }
+
+    .criteria-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid rgba(16, 18, 23, 0.3);
+      border-left: 1px solid rgba(16, 18, 23, 0.3);
+    }
+
+    .criteria-card {
+      min-height: 280px;
+      padding: 30px;
+      border-right: 1px solid rgba(16, 18, 23, 0.3);
+      border-bottom: 1px solid rgba(16, 18, 23, 0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: background 180ms ease, color 180ms ease;
+    }
+
+    .criteria-card:hover {
+      color: white;
+      background: var(--blue);
+    }
+
+    .criteria-card small {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .criteria-card h3 {
+      margin: 0;
+      max-width: 300px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 35px;
+      line-height: 1.03;
+      letter-spacing: -0.04em;
+      font-weight: 400;
+    }
+
+    .contact {
+      position: relative;
+      padding: 155px 0 55px;
+      color: white;
+      background: var(--red);
+      overflow: hidden;
+    }
+
+    .contact::after {
+      content: "HC";
+      position: absolute;
+      right: -40px;
+      bottom: -170px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: min(42vw, 620px);
+      font-weight: 400;
+      letter-spacing: -0.12em;
+      line-height: 1;
+      color: rgba(255, 255, 255, 0.1);
+      pointer-events: none;
+    }
+
+    .contact-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 0.35fr 1.65fr;
+      gap: 70px;
+      margin-bottom: 130px;
+    }
+
+    .contact .section-number {
+      color: white;
+      border-color: white;
+    }
+
+    .contact h2 {
+      max-width: 970px;
+      margin-bottom: 55px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(60px, 8vw, 126px);
+      line-height: 0.88;
+      letter-spacing: -0.065em;
+      font-weight: 400;
+    }
+
+    .contact-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .contact-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 50px;
+      min-width: 300px;
+      padding: 19px 22px;
+      color: var(--ink);
+      background: white;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: transform 160ms ease;
+    }
+
+    .contact-button:hover {
+      transform: translateY(-3px);
+    }
+
+    .contact-note {
+      max-width: 330px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 13px;
+    }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: end;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.4);
+      font-size: 10px;
+      line-height: 1.6;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.68);
+    }
+
+    footer p {
+      margin: 0;
+      max-width: 870px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 980px) {
+      .nav {
+        grid-template-columns: 1fr auto;
+      }
+
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links.open {
+        position: absolute;
+        top: 78px;
+        left: 0;
+        right: 0;
+        display: grid;
+        gap: 0;
+        padding: 0 24px 24px;
+        background: var(--paper);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav-links.open a {
+        padding: 17px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main {
+        min-height: 700px;
+        border-right: 0;
+      }
+
+      .hero-visual {
+        min-height: 620px;
+      }
+
+      .statement-grid,
+      .strategy-header,
+      .criteria-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .strategy-row {
+        grid-template-columns: 120px 0.8fr 1.2fr;
+      }
+
+      .criteria-intro {
+        position: static;
+      }
+    }
+
+    @media (max-width: 700px) {
+      html {
+        scroll-padding-top: 68px;
+      }
+
+      .shell {
+        width: min(calc(100% - 30px), var(--max));
+      }
+
+      .topbar {
+        backdrop-filter: blur(12px);
+      }
+
+      .nav {
+        min-height: 68px;
+      }
+
+      .nav-links.open {
+        top: 68px;
+      }
+
+      .brand {
+        font-size: 11px;
+      }
+
+      .brand-mark {
+        width: 31px;
+        height: 31px;
+      }
+
+      .hero {
+        padding-top: 68px;
+      }
+
+      .hero-main {
+        min-height: 650px;
+        padding: 65px 20px 38px;
+      }
+
+      h1 {
+        margin-top: 70px;
+        margin-bottom: 40px;
+        font-size: clamp(62px, 21vw, 96px);
+      }
+
+      .hero-lower {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .hero-index {
+        font-size: 33px;
+      }
+
+      .hero-copy {
+        font-size: 18px;
+      }
+
+      .hero-visual {
+        min-height: 500px;
+      }
+
+      .hero-visual::before {
+        width: 440px;
+        height: 440px;
+        border-width: 86px;
+        right: -230px;
+      }
+
+      .hero-visual::after {
+        left: 6%;
+      }
+
+      .visual-label {
+        top: 30px;
+        left: 24px;
+      }
+
+      .visual-type {
+        inset: auto 24px 30px 24px;
+      }
+
+      .visual-monogram {
+        font-size: 170px;
+      }
+
+      .visual-caption {
+        max-width: 120px;
+        font-size: 9px;
+      }
+
+      .statement,
+      .criteria {
+        padding: 95px 0;
+      }
+
+      .statement h2,
+      .strategy h2,
+      .criteria-intro h2 {
+        font-size: 47px;
+      }
+
+      .statement-copy {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .strategy-header {
+        padding: 86px 0 36px;
+      }
+
+      .strategy-row {
+        min-height: 290px;
+        grid-template-columns: 68px 1fr;
+        gap: 22px;
+        padding: 30px 0;
+      }
+
+      .strategy-row .num {
+        grid-row: 1 / span 2;
+        font-size: 42px;
+      }
+
+      .strategy-row h3 {
+        font-size: 38px;
+      }
+
+      .strategy-row p {
+        grid-column: 2;
+      }
+
+      .criteria-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .criteria-card {
+        min-height: 230px;
+      }
+
+      .contact {
+        padding-top: 100px;
+      }
+
+      .contact h2 {
+        font-size: 60px;
+      }
+
+      .contact-button {
+        min-width: 0;
+        width: 100%;
+        gap: 18px;
+      }
+
+      footer {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Hello, World!</h1>
-  <p>Welcome to hartnettcapital.com</p>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="page">
+    <header class="topbar">
+      <div class="shell nav">
+        <a class="brand" href="#top" aria-label="Hartnett Capital home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Hartnett Capital</span>
+        </a>
+
+        <nav class="nav-links" id="siteMenu" aria-label="Primary navigation">
+          <a href="#firm">The Family Office</a>
+          <a href="#strategy">Strategy</a>
+          <a href="#criteria">Criteria</a>
+        </nav>
+
+        <a class="nav-cta" href="#contact">Private Inquiries</a>
+
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="siteMenu">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-main">
+          <div class="hero-kicker">Independent family office</div>
+
+          <div>
+            <h1>We are a<br>family office.</h1>
+
+            <div class="hero-lower">
+              <div class="hero-index">
+                01
+                <small>Long-duration<br>perspective</small>
+              </div>
+
+              <p class="hero-copy">
+                We invest our own capital behind durable businesses, differentiated assets,
+                and opportunities where thoughtful ownership can create lasting value.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="visual-label">Hartnett / Family Office / 2026</div>
+          <div class="visual-type">
+            <div class="visual-monogram">H</div>
+            <p class="visual-caption">
+              Permanent capital. Patient ownership. Long-term conviction.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="statement" id="firm">
+        <div class="shell statement-grid">
+          <div class="section-number">01 / The Family Office</div>
+
+          <div>
+            <h2 class="reveal">Built to think in generations, not quarters.</h2>
+
+            <div class="statement-copy reveal">
+              <p>
+                Hartnett Capital is an independent family office designed around patience,
+                discretion, and direct accountability. We pursue a limited number of opportunities
+                where our capital and perspective can be genuinely useful.
+              </p>
+
+              <p>
+                Our permanent capital gives us the freedom to invest across stages, structures,
+                and asset classes without forcing an opportunity into a predetermined mandate.
+                The common thread is simple: clear fundamentals and durable relevance.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="strategy" id="strategy">
+        <div class="shell strategy-header">
+          <div class="section-number">02 / Strategy</div>
+          <h2 class="reveal">Where we concentrate attention.</h2>
+        </div>
+
+        <div class="shell strategy-list">
+          <article class="strategy-row reveal">
+            <div class="num">01</div>
+            <h3>Operating Businesses</h3>
+            <p>
+              Profitable or emerging companies with differentiated capabilities, sensible
+              economics, and room for durable, technology-enabled growth.
+            </p>
+          </article>
+
+          <article class="strategy-row reveal">
+            <div class="num">02</div>
+            <h3>Real &amp; Strategic Assets</h3>
+            <p>
+              Property, infrastructure, and scarce assets supported by practical utility,
+              enduring demand, or a distinct location advantage.
+            </p>
+          </article>
+
+          <article class="strategy-row reveal">
+            <div class="num">03</div>
+            <h3>Special Situations</h3>
+            <p>
+              Complex, overlooked, or transitional opportunities where speed, creativity,
+              and flexible capital matter more than a conventional process.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="criteria" id="criteria">
+        <div class="shell criteria-grid">
+          <div class="criteria-intro">
+            <div class="section-number">03 / Criteria</div>
+            <h2>What earns a closer look.</h2>
+            <p>
+              We prefer understandable opportunities with strong incentives and more than one
+              path to a successful outcome.
+            </p>
+          </div>
+
+          <div class="criteria-cards">
+            <article class="criteria-card reveal">
+              <small>01 / Durable demand</small>
+              <h3>A product or asset people will continue to need.</h3>
+            </article>
+
+            <article class="criteria-card reveal">
+              <small>02 / Defensible position</small>
+              <h3>Structural advantages that improve with time.</h3>
+            </article>
+
+            <article class="criteria-card reveal">
+              <small>03 / Aligned operators</small>
+              <h3>Capable people with meaningful ownership and integrity.</h3>
+            </article>
+
+            <article class="criteria-card reveal">
+              <small>04 / Asymmetric potential</small>
+              <h3>Downside that can be understood and upside worth pursuing.</h3>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <div class="shell">
+          <div class="contact-grid">
+            <div class="section-number">04 / Contact</div>
+
+            <div>
+              <h2 class="reveal">Bring us something worth owning.</h2>
+
+              <div class="contact-actions reveal">
+                <a class="contact-button" href="mailto:inquiries@hartnettcapital.com">
+                  Start a conversation
+                  <span aria-hidden="true">↗</span>
+                </a>
+
+                <p class="contact-note">
+                  Direct introductions regarding investments, acquisitions, partnerships,
+                  and proprietary opportunities are welcome.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <footer>
+            <p>
+              © 2026 Hartnett Capital. This website is for general informational purposes only
+              and does not constitute an offer to sell or a solicitation to purchase any security.
+            </p>
+            <p>Independent family office</p>
+          </footer>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const menuButton = document.querySelector(".menu-toggle");
+    const menu = document.querySelector(".nav-links");
+
+    menuButton.addEventListener("click", () => {
+      const open = menu.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(open));
+      menuButton.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    });
+
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.setAttribute("aria-label", "Open menu");
+      });
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.14 }
+    );
+
+    document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+  </script>
 </body>
 </html>
