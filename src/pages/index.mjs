@@ -3,7 +3,8 @@ import { criteriaPage } from "./criteria.mjs";
 import { firmPage } from "./firm.mjs";
 import { homePage } from "./home.mjs";
 import { notFoundPage } from "./not-found.mjs";
+import { partnershipsPage } from "./partnerships.mjs";
 import { strategyPage } from "./strategy.mjs";
 
-export const pages = [homePage, firmPage, strategyPage, criteriaPage, contactPage];
+export const pages = [homePage, firmPage, strategyPage, criteriaPage, partnershipsPage, contactPage];
 export { notFoundPage };

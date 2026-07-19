@@ -1,48 +1,60 @@
 import { linkArrow, pageIntro } from "../site.mjs";
 
+const criteria = [
+  ["01", "Durable demand", "A product, service, property, or asset supported by recurring or resilient demand."],
+  ["02", "Sound economics", "Positive cash flow or a credible, understandable path to profitability."],
+  ["03", "Defensible value", "Intellectual property, data, brand equity, digital presence, scarcity, or another ownership advantage."],
+  ["04", "Trusted relationships", "Strong customer, community, supplier, or market relationships worth preserving."],
+  ["05", "Room to improve", "Clear opportunities for operational, technological, commercial, or management improvement."],
+  ["06", "Thoughtful transition", "Owners who care about continuity, reputation, employees, customers, and the next chapter."],
+  ["07", "Capable operators", "Experienced people seeking aligned capital and a long-term operating partner."],
+  ["08", "Overlooked potential", "Assets that have been underdeveloped, undercapitalized, or poorly managed."],
+  ["09", "Long-term fit", "The potential to create meaningful value through patient, responsible ownership."],
+];
+
 export const criteriaPage = {
   path: "/criteria/",
   title: "Investment Criteria",
   description:
-    "See the qualities Hartnett Capital values when evaluating businesses, assets, operators, and special situations.",
+    "Explore the business and asset characteristics Hartnett Capital considers when evaluating acquisitions and partnerships.",
   body: `
     ${pageIntro({
       index: "03",
-      eyebrow: "Criteria",
-      title: "What earns<br>a closer look.",
-      copy: "We do not force opportunities into a rigid box. We do look for a consistent set of qualities that can support a strong long-term outcome.",
+      eyebrow: "Investment criteria",
+      title: "Durable foundations.<br>Meaningful potential.",
+      copy: "We are most interested in businesses and assets where long-term ownership, focused execution, and strong relationships can create measurable value.",
       variant: "red",
     })}
 
     <section class="section criteria-detail">
       <div class="shell criteria-detail__intro">
-        <p class="section-label">Our lens</p>
-        <h2 class="display reveal">Six questions shape our first view.</h2>
+        <p class="section-label">What earns a closer look</p>
+        <h2 class="display reveal">The qualities we value.</h2>
       </div>
       <div class="shell criteria-grid">
-        <article class="criterion reveal"><span>01</span><h3>Will demand endure?</h3><p>The product, service, or asset solves a real problem that is unlikely to disappear.</p></article>
-        <article class="criterion reveal"><span>02</span><h3>Why does it win?</h3><p>Its position is supported by capability, scarcity, relationships, data, brand, or structural advantage.</p></article>
-        <article class="criterion reveal"><span>03</span><h3>Are incentives aligned?</h3><p>Capable people have meaningful ownership, sound judgment, and a reputation for integrity.</p></article>
-        <article class="criterion reveal"><span>04</span><h3>Are the economics sound?</h3><p>The model can produce attractive returns without relying on fragile assumptions.</p></article>
-        <article class="criterion reveal"><span>05</span><h3>Can we understand the downside?</h3><p>Key risks can be identified, evaluated, and addressed through price, structure, or action.</p></article>
-        <article class="criterion reveal"><span>06</span><h3>Can we contribute?</h3><p>Our capital, perspective, network, or flexibility can improve the probability of success.</p></article>
+        ${criteria
+          .map(
+            ([number, title, copy]) => `<article class="criterion reveal"><span>${number}</span><h3>${title}</h3><p>${copy}</p></article>`,
+          )
+          .join("")}
       </div>
     </section>
 
     <section class="section mandate section--blue-soft">
       <div class="shell split-heading">
-        <p class="section-label">Mandate</p>
+        <p class="section-label">Areas of interest</p>
         <div>
-          <h2 class="display reveal">Selective by choice.<br>Flexible by design.</h2>
+          <h2 class="display reveal">A broad mandate.<br>A consistent philosophy.</h2>
           <dl class="mandate-list reveal">
-            <div><dt>Time horizon</dt><dd>Long duration</dd></div>
-            <div><dt>Stage</dt><dd>Flexible</dd></div>
-            <div><dt>Role</dt><dd>Minority to control</dd></div>
-            <div><dt>Structure</dt><dd>Equity, debt, or hybrid</dd></div>
-            <div><dt>Geography</dt><dd>Selective</dd></div>
+            <div><dt>Companies</dt><dd>Operating &amp; recurring revenue</dd></div>
+            <div><dt>Real assets</dt><dd>Real estate, land &amp; infrastructure</dd></div>
+            <div><dt>Technology</dt><dd>Software, platforms &amp; applications</dd></div>
+            <div><dt>Digital</dt><dd>Websites, domains, data &amp; media</dd></div>
+            <div><dt>Intellectual property</dt><dd>Brands, patents, trademarks &amp; licenses</dd></div>
+            <div><dt>Structures</dt><dd>Acquisitions, ventures &amp; partnerships</dd></div>
           </dl>
-          <p class="mandate-note">Fit is ultimately determined by the quality of the opportunity, not by a checklist alone.</p>
-          ${linkArrow("Discuss an opportunity", "/contact/")}
+          <p class="mandate-note">Fit is determined by the quality of the opportunity and our ability to contribute—not by a checklist alone.</p>
+          ${linkArrow("Share an opportunity", "/contact/")}
         </div>
       </div>
     </section>`,

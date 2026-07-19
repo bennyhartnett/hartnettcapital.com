@@ -17,9 +17,9 @@ function renderHeader(activePath) {
         </a>
         <nav class="nav-links" id="site-menu" aria-label="Primary navigation">
           ${links}
-          <a class="nav-links__mobile-contact" href="/contact/">Private Inquiries</a>
+          <a class="nav-links__mobile-contact" href="/contact/">Share an Opportunity</a>
         </nav>
-        <a class="nav-cta" href="/contact/"${activePath === "/contact/" ? ' aria-current="page"' : ""}>Private Inquiries</a>
+        <a class="nav-cta" href="/contact/"${activePath === "/contact/" ? ' aria-current="page"' : ""}>Share an Opportunity</a>
         <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
           <span></span><span></span>
         </button>
@@ -33,11 +33,11 @@ function renderFooter() {
     <footer class="footer">
       <div class="shell footer__lead">
         <div>
-          <p class="eyebrow">A direct line</p>
-          <h2>Have something<br>worth owning?</h2>
+          <p class="eyebrow">A direct conversation</p>
+          <h2>Have an opportunity<br>built to endure?</h2>
         </div>
         <a class="footer__contact" href="mailto:${site.email}">
-          <span>Start a conversation</span><span aria-hidden="true">↗</span>
+          <span>Share an opportunity</span><span aria-hidden="true">↗</span>
         </a>
       </div>
       <div class="shell footer__bottom">
@@ -46,9 +46,10 @@ function renderFooter() {
           <span>Hartnett Capital</span>
         </a>
         <div class="footer__links">
-          <a href="/firm/">The Firm</a>
-          <a href="/strategy/">Strategy</a>
+          <a href="/firm/">About</a>
+          <a href="/strategy/">What We Do</a>
           <a href="/criteria/">Criteria</a>
+          <a href="/partnerships/">Partnerships</a>
           <a href="/contact/">Contact</a>
         </div>
         <p>© ${year} Hartnett Capital. All rights reserved.</p>
@@ -76,11 +77,11 @@ export function renderDocument(page, styles, clientScript, origin = "{{ORIGIN}}"
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${page.description}">
   <meta property="og:url" content="${canonical}">
-  <meta property="og:image" content="${origin}/og-v2.png">
+  <meta property="og:image" content="${origin}/og-v3.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${title}">
   <meta name="twitter:description" content="${page.description}">
-  <meta name="twitter:image" content="${origin}/og-v2.png">
+  <meta name="twitter:image" content="${origin}/og-v3.png">
   <link rel="icon" type="image/svg+xml" href="/hc-logo.svg">
   <title>${title}</title>
   <style>${styles}</style>

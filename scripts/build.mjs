@@ -9,7 +9,7 @@ const siteOrigin = "https://hartnettcapital.com";
 const [styles, clientScript, socialCard, logo] = await Promise.all([
   readFile(resolve(root, "src", "styles.css"), "utf8"),
   readFile(resolve(root, "src", "client.js"), "utf8"),
-  readFile(resolve(root, "og-v2.png")),
+  readFile(resolve(root, "og-v3.png")),
   readFile(resolve(root, "hc-logo.svg"), "utf8"),
 ]);
 
@@ -60,7 +60,7 @@ export default {
       return new Response("Method Not Allowed", { status: 405, headers: { ...securityHeaders, Allow: "GET, HEAD" } });
     }
 
-    if (url.pathname === "/og.png" || url.pathname === "/og-v2.png") {
+    if (url.pathname === "/og.png" || url.pathname === "/og-v2.png" || url.pathname === "/og-v3.png") {
       return new Response(isHead ? null : socialCardBytes(), { headers: { ...securityHeaders, "Cache-Control": "public, max-age=86400", "Content-Type": "image/png" } });
     }
     if (url.pathname === "/hc-logo.svg") {

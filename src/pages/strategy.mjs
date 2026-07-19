@@ -1,53 +1,53 @@
 import { linkArrow, pageIntro } from "../site.mjs";
 
+const operatingBlocks = [
+  ["01", "Acquire", "acquire", "Established assets with a durable foundation.", "We acquire businesses and assets with recurring demand, defensible value, or meaningful growth potential.", ["Operating companies", "Real estate and specialty properties", "Digital, data, and intellectual-property assets"]],
+  ["02", "Operate", "operate", "Attention where it changes the outcome.", "We take an active role in strategy, systems, technology, financial performance, and day-to-day execution.", ["Strategy and capital allocation", "Operating systems and accountability", "Technology, automation, and data"]],
+  ["03", "Build", "build", "Create when the best asset does not yet exist.", "We launch new companies, products, platforms, datasets, brands, and digital properties when an opportunity is better created than purchased.", ["Internal ventures", "Software and digital products", "Brands, media, and proprietary data"]],
+  ["04", "Improve", "improve", "Make strong foundations more valuable.", "We modernize operations through better processes, technology, automation, data, branding, and management.", ["Operational discipline", "Technology-enabled efficiency", "Commercial and brand development"]],
+  ["05", "Partner", "partner", "Aligned people expand what is possible.", "We form long-term relationships with founders, operators, investors, property owners, developers, and strategic partners.", ["Operator-led acquisitions", "Joint ventures", "Strategic and capital partnerships"]],
+  ["06", "Hold", "hold", "Let exceptional assets compound.", "We prioritize durable ownership and compounding value over short-term financial engineering.", ["Patient capital", "Responsible stewardship", "Flexible time horizons"]],
+];
+
 export const strategyPage = {
   path: "/strategy/",
-  title: "Strategy",
+  title: "What We Do",
   description:
-    "Explore Hartnett Capital's focus across operating businesses, real and strategic assets, and special situations.",
+    "Hartnett Capital acquires, operates, builds, improves, partners, and holds durable businesses and differentiated assets.",
   body: `
     ${pageIntro({
       index: "02",
-      eyebrow: "Strategy",
-      title: "Flexible in form.<br>Disciplined in judgment.",
-      copy: "We invest across a focused set of opportunity types, united by understandable fundamentals and the potential to build lasting value.",
+      eyebrow: "What we do",
+      title: "Acquire. Operate.<br>Build. Hold.",
+      copy: "We combine capital, operating capability, technology, and long-term relationships to strengthen the assets under our control.",
       variant: "blue",
     })}
 
     <section class="strategy-detail">
-      <article class="strategy-block" id="operating-businesses">
-        <div class="shell strategy-block__grid">
-          <p class="strategy-block__number">01</p>
-          <div><p class="section-label">Operating businesses</p><h2 class="display reveal">Businesses built to compound.</h2></div>
-          <div class="strategy-block__copy reveal"><p>We are drawn to profitable or emerging companies with differentiated capabilities, sensible economics, and durable customer value.</p><h3>We pay attention to</h3><ul><li>Recurring or resilient demand</li><li>Healthy unit economics</li><li>A credible path to durable growth</li><li>Operators with meaningful alignment</li></ul></div>
-        </div>
-      </article>
-      <article class="strategy-block strategy-block--ivory" id="real-assets">
-        <div class="shell strategy-block__grid">
-          <p class="strategy-block__number">02</p>
-          <div><p class="section-label">Real &amp; strategic assets</p><h2 class="display reveal">Utility, scarcity, and staying power.</h2></div>
-          <div class="strategy-block__copy reveal"><p>We consider property, infrastructure, and other assets supported by practical utility, constrained supply, or a distinct location advantage.</p><h3>We pay attention to</h3><ul><li>Clear underlying usefulness</li><li>Replacement cost and supply constraints</li><li>Multiple sources of value</li><li>Durable local or structural demand</li></ul></div>
-        </div>
-      </article>
-      <article class="strategy-block strategy-block--navy" id="special-situations">
-        <div class="shell strategy-block__grid">
-          <p class="strategy-block__number">03</p>
-          <div><p class="section-label section-label--light">Special situations</p><h2 class="display reveal">Complexity can create opportunity.</h2></div>
-          <div class="strategy-block__copy reveal"><p>We look at overlooked, transitional, or time-sensitive situations where flexible capital and direct decisions may create an advantage.</p><h3>We pay attention to</h3><ul><li>Understandable complexity</li><li>Protected downside</li><li>Creative but practical structuring</li><li>More than one path to value</li></ul></div>
-        </div>
-      </article>
+${operatingBlocks
+        .map(
+          ([number, label, id, heading, copy, points], index) => `
+            <article class="strategy-block${index % 3 === 1 ? " strategy-block--ivory" : index % 3 === 2 ? " strategy-block--navy" : ""}" id="${id}">
+              <div class="shell strategy-block__grid">
+                <p class="strategy-block__number">${number}</p>
+                <div><p class="section-label${index % 3 === 2 ? " section-label--light" : ""}">${label}</p><h2 class="display reveal">${heading}</h2></div>
+                <div class="strategy-block__copy reveal"><p>${copy}</p><h3>Where we focus</h3><ul>${points.map((point) => `<li>${point}</li>`).join("")}</ul></div>
+              </div>
+            </article>`,
+        )
+        .join("")}
     </section>
 
     <section class="section process">
       <div class="shell split-heading">
-        <p class="section-label">Our process</p>
+        <p class="section-label">How we create value</p>
         <div>
-          <h2 class="display reveal">Simple by design.<br>Rigorous in practice.</h2>
+          <h2 class="display reveal">Fundamentals first.<br>Execution every day.</h2>
           <ol class="process-list reveal">
-            <li><span>01</span><div><h3>Understand</h3><p>Start with the people, the economics, and the real source of advantage.</p></div></li>
-            <li><span>02</span><div><h3>Underwrite</h3><p>Study what must go right, what can go wrong, and what remains true across scenarios.</p></div></li>
-            <li><span>03</span><div><h3>Structure</h3><p>Match the capital and ownership approach to the opportunity.</p></div></li>
-            <li><span>04</span><div><h3>Support</h3><p>Stay engaged where our perspective and network can be useful.</p></div></li>
+            <li><span>01</span><div><h3>Understand</h3><p>Identify the real source of value, the people who sustain it, and the risks that matter.</p></div></li>
+            <li><span>02</span><div><h3>Align</h3><p>Match the ownership structure, incentives, and responsibilities to the opportunity.</p></div></li>
+            <li><span>03</span><div><h3>Improve</h3><p>Apply focused operating work, technology, data, and capital where they can change the outcome.</p></div></li>
+            <li><span>04</span><div><h3>Compound</h3><p>Reinvest in durable advantages and allow long-term ownership to do its work.</p></div></li>
           </ol>
           ${linkArrow("Review our criteria", "/criteria/")}
         </div>

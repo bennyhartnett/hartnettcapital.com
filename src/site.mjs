@@ -1,12 +1,13 @@
 export const site = {
   name: "Hartnett Capital",
   description:
-    "Hartnett Capital is an independent family office investing permanent capital in enduring businesses, real assets, and special situations.",
+    "Hartnett Capital is a private investment and operating company focused on acquiring, building, and managing durable businesses and differentiated assets.",
   email: "inquiries@hartnettcapital.com",
   navigation: [
-    { href: "/firm/", label: "The Firm" },
-    { href: "/strategy/", label: "Strategy" },
+    { href: "/firm/", label: "About" },
+    { href: "/strategy/", label: "What We Do" },
     { href: "/criteria/", label: "Criteria" },
+    { href: "/partnerships/", label: "Partnerships" },
   ],
 };
 

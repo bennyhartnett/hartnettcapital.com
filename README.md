@@ -1,14 +1,15 @@
 # hartnettcapital.com
 
-A multi-page family office website built from reusable page modules and a shared master layout.
+A multi-page investment and operating company website built from reusable page modules and a shared master layout.
 
 ## Site structure
 
 - `/` — Homepage
-- `/firm` — Firm overview
-- `/strategy` — Investment strategy
+- `/firm` — Company overview
+- `/strategy` — Acquisition and operating approach
 - `/criteria` — Investment criteria
-- `/contact` — Private inquiries
+- `/partnerships` — Partnership audiences and philosophy
+- `/contact` — Opportunity inquiries
 
 Page content lives in `src/pages`, while global navigation, metadata, footer, styling, and browser behavior are centralized in `src`.
 
