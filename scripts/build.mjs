@@ -1,27 +1,43 @@
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { renderDocument } from "../src/layout.mjs";
+import { notFoundPage, pages } from "../src/pages/index.mjs";
 
 const root = resolve(import.meta.dirname, "..");
 const outDir = resolve(root, "dist", "server");
-const html = await readFile(resolve(root, "index.html"), "utf8");
-const socialCard = await readFile(resolve(root, "og.png"));
-const logo = await readFile(resolve(root, "hc-logo.svg"), "utf8");
+const [styles, clientScript, socialCard, logo] = await Promise.all([
+  readFile(resolve(root, "src", "styles.css"), "utf8"),
+  readFile(resolve(root, "src", "client.js"), "utf8"),
+  readFile(resolve(root, "og-v2.png")),
+  readFile(resolve(root, "hc-logo.svg"), "utf8"),
+]);
+
+const renderedPages = Object.fromEntries(
+  pages.map((page) => [page.path, renderDocument(page, styles, clientScript)]),
+);
+const notFoundHtml = renderDocument(notFoundPage, styles, clientScript);
+const sitemapPaths = pages.map((page) => page.path);
 
 const worker = `
-const HTML = ${JSON.stringify(html)};
+const PAGES = ${JSON.stringify(renderedPages)};
+const NOT_FOUND = ${JSON.stringify(notFoundHtml)};
+const SITEMAP_PATHS = ${JSON.stringify(sitemapPaths)};
 const SOCIAL_CARD_BASE64 = ${JSON.stringify(socialCard.toString("base64"))};
 const LOGO = ${JSON.stringify(logo)};
 
 function socialCardBytes() {
   const decoded = atob(SOCIAL_CARD_BASE64);
   const bytes = new Uint8Array(decoded.length);
-  for (let index = 0; index < decoded.length; index += 1) {
-    bytes[index] = decoded.charCodeAt(index);
-  }
+  for (let index = 0; index < decoded.length; index += 1) bytes[index] = decoded.charCodeAt(index);
   return bytes;
 }
 
+function documentHtml(template, origin) {
+  return template.replaceAll("{{ORIGIN}}", origin);
+}
+
 const securityHeaders = {
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
   "Referrer-Policy": "strict-origin-when-cross-origin",
   "X-Content-Type-Options": "nosniff",
   "X-Frame-Options": "SAMEORIGIN",
@@ -31,48 +47,38 @@ export default {
   async fetch(request) {
     const url = new URL(request.url);
     const isHead = request.method === "HEAD";
-
     if (request.method !== "GET" && !isHead) {
-      return new Response("Method Not Allowed", {
-        status: 405,
-        headers: { ...securityHeaders, Allow: "GET, HEAD" },
-      });
+      return new Response("Method Not Allowed", { status: 405, headers: { ...securityHeaders, Allow: "GET, HEAD" } });
     }
 
     if (url.pathname === "/og.png") {
-      return new Response(isHead ? null : socialCardBytes(), {
-        headers: {
-          ...securityHeaders,
-          "Cache-Control": "public, max-age=86400",
-          "Content-Type": "image/png",
-        },
-      });
+      return new Response(isHead ? null : socialCardBytes(), { headers: { ...securityHeaders, "Cache-Control": "public, max-age=86400", "Content-Type": "image/png" } });
     }
-
     if (url.pathname === "/hc-logo.svg") {
-      return new Response(isHead ? null : LOGO, {
-        headers: {
-          ...securityHeaders,
-          "Cache-Control": "public, max-age=86400",
-          "Content-Type": "image/svg+xml; charset=UTF-8",
-        },
-      });
+      return new Response(isHead ? null : LOGO, { headers: { ...securityHeaders, "Cache-Control": "public, max-age=86400", "Content-Type": "image/svg+xml; charset=UTF-8" } });
+    }
+    if (url.pathname === "/robots.txt") {
+      const robots = "User-agent: *\\nAllow: /\\nSitemap: " + url.origin + "/sitemap.xml\\n";
+      return new Response(isHead ? null : robots, { headers: { ...securityHeaders, "Content-Type": "text/plain; charset=UTF-8" } });
+    }
+    if (url.pathname === "/sitemap.xml") {
+      const urls = SITEMAP_PATHS.map((path) => "<url><loc>" + url.origin + (path === "/" ? "/" : path) + "</loc></url>").join("");
+      const sitemap = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + urls + "</urlset>";
+      return new Response(isHead ? null : sitemap, { headers: { ...securityHeaders, "Content-Type": "application/xml; charset=UTF-8" } });
     }
 
-    if (url.pathname === "/" || url.pathname === "/index.html") {
-      return new Response(isHead ? null : HTML, {
-        headers: {
-          ...securityHeaders,
-          "Cache-Control": "public, max-age=300",
-          "Content-Type": "text/html; charset=UTF-8",
-        },
-      });
+    let path = url.pathname === "/index.html" ? "/" : url.pathname;
+    if (path.length > 1 && path.endsWith("/")) {
+      const destination = new URL(url);
+      destination.pathname = path.slice(0, -1);
+      return Response.redirect(destination.toString(), 308);
     }
 
-    return new Response("Not Found", {
-      status: 404,
-      headers: { ...securityHeaders, "Content-Type": "text/plain; charset=UTF-8" },
-    });
+    const template = PAGES[path];
+    if (template) {
+      return new Response(isHead ? null : documentHtml(template, url.origin), { headers: { ...securityHeaders, "Cache-Control": "public, max-age=300", "Content-Type": "text/html; charset=UTF-8" } });
+    }
+    return new Response(isHead ? null : documentHtml(NOT_FOUND, url.origin), { status: 404, headers: { ...securityHeaders, "Cache-Control": "no-store", "Content-Type": "text/html; charset=UTF-8" } });
   },
 };
 `;
@@ -81,4 +87,4 @@ await rm(resolve(root, "dist"), { recursive: true, force: true });
 await mkdir(outDir, { recursive: true });
 await writeFile(resolve(outDir, "index.js"), worker);
 
-console.log("Built Hartnett Capital site.");
+console.log(`Built ${pages.length} Hartnett Capital pages with shared layout.`);
