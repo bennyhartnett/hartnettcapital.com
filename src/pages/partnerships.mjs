@@ -12,6 +12,8 @@ const partners = [
 export const partnershipsPage = {
   path: "/partnerships/",
   title: "Partnerships",
+  seoTitle: "Owner, Founder & Operator Partnerships | Hartnett Capital",
+  schemaType: "CollectionPage",
   description:
     "Hartnett Capital partners with owners, founders, operators, investors, property owners, developers, advisors, and strategic partners.",
   body: `

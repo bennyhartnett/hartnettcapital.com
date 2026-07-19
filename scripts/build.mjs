@@ -9,7 +9,7 @@ const siteOrigin = "https://hartnettcapital.com";
 const [styles, clientScript, socialCard, logo] = await Promise.all([
   readFile(resolve(root, "src", "styles.css"), "utf8"),
   readFile(resolve(root, "src", "client.js"), "utf8"),
-  readFile(resolve(root, "og-v4.png")),
+  readFile(resolve(root, "og-v5.png")),
   readFile(resolve(root, "hc-logo.svg"), "utf8"),
 ]);
 
@@ -26,6 +26,31 @@ const sitemapPaths = pages.map((page) => page.path);
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemapPaths
   .map((path) => `<url><loc>${siteOrigin}${path}</loc></url>`)
   .join("")}</urlset>`;
+const llmsText = `# Hartnett Capital
+
+> Hartnett Capital is a privately held investment and operating company founded and headquartered in McLean, Virginia.
+
+## Core facts
+
+- Hartnett Capital acquires, builds, operates, improves, partners with, and holds durable businesses and differentiated assets.
+- Focus areas include operating companies, commercial and residential real estate, software and platforms, digital assets, proprietary data, intellectual property, brands, media properties, and infrastructure.
+- The firm creates value through active operations, technology, automation, data, capital, strong relationships, and long-term ownership.
+- Hartnett Capital works with owners, founders, independent operators, property owners, developers, investors, family offices, advisors, intermediaries, and strategic partners.
+
+## Primary pages
+
+- [About Hartnett Capital](${siteOrigin}/firm/): Company overview, perspective, values, and ownership philosophy.
+- [What We Do](${siteOrigin}/strategy/): Acquisition, operating, building, improvement, partnership, and holding approach.
+- [Focus Areas](${siteOrigin}/focus/): Asset classes and areas of investment interest.
+- [Investment Criteria](${siteOrigin}/criteria/): Characteristics considered when evaluating businesses and assets.
+- [Partnerships](${siteOrigin}/partnerships/): Partnership audiences and approach.
+- [Contact](${siteOrigin}/contact/): How to share an opportunity directly and discreetly.
+
+## Contact
+
+- Email: inquiries@hartnettcapital.com
+- Website: ${siteOrigin}/
+`;
 
 const worker = `
 const PAGES = ${JSON.stringify(renderedPages)};
@@ -33,6 +58,7 @@ const NOT_FOUND = ${JSON.stringify(notFoundHtml)};
 const SITEMAP_PATHS = ${JSON.stringify(sitemapPaths)};
 const SOCIAL_CARD_BASE64 = ${JSON.stringify(socialCard.toString("base64"))};
 const LOGO = ${JSON.stringify(logo)};
+const LLMS_TEXT = ${JSON.stringify(llmsText)};
 
 function socialCardBytes() {
   const decoded = atob(SOCIAL_CARD_BASE64);
@@ -60,7 +86,7 @@ export default {
       return new Response("Method Not Allowed", { status: 405, headers: { ...securityHeaders, Allow: "GET, HEAD" } });
     }
 
-    if (url.pathname === "/og.png" || url.pathname === "/og-v2.png" || url.pathname === "/og-v3.png" || url.pathname === "/og-v4.png") {
+    if (url.pathname === "/og.png" || url.pathname === "/og-v2.png" || url.pathname === "/og-v3.png" || url.pathname === "/og-v4.png" || url.pathname === "/og-v5.png") {
       return new Response(isHead ? null : socialCardBytes(), { headers: { ...securityHeaders, "Cache-Control": "public, max-age=86400", "Content-Type": "image/png" } });
     }
     if (url.pathname === "/hc-logo.svg") {
@@ -69,6 +95,9 @@ export default {
     if (url.pathname === "/robots.txt") {
       const robots = "User-agent: *\\nAllow: /\\nSitemap: " + url.origin + "/sitemap.xml\\n";
       return new Response(isHead ? null : robots, { headers: { ...securityHeaders, "Content-Type": "text/plain; charset=UTF-8" } });
+    }
+    if (url.pathname === "/llms.txt") {
+      return new Response(isHead ? null : LLMS_TEXT, { headers: { ...securityHeaders, "Cache-Control": "public, max-age=3600", "Content-Type": "text/plain; charset=UTF-8" } });
     }
     if (url.pathname === "/sitemap.xml") {
       const urls = SITEMAP_PATHS.map((path) => "<url><loc>" + url.origin + (path === "/" ? "/" : path) + "</loc></url>").join("");
@@ -109,6 +138,7 @@ await Promise.all([
   writeFile(resolve(root, ".nojekyll"), ""),
   writeFile(resolve(root, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${siteOrigin}/sitemap.xml\n`),
   writeFile(resolve(root, "sitemap.xml"), sitemapXml),
+  writeFile(resolve(root, "llms.txt"), llmsText),
 ]);
 
 console.log(`Built ${pages.length} shared-layout pages for GitHub Pages and Sites.`);

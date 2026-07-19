@@ -1,5 +1,124 @@
 import { site } from "./site.mjs";
 
+function serializeJsonLd(value) {
+  return JSON.stringify(value).replaceAll("<", "\\u003c");
+}
+
+function escapeHtml(value) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+function renderStructuredData(page, origin, canonical, title) {
+  const organizationId = `${origin}/#organization`;
+  const websiteId = `${origin}/#website`;
+  const webpageId = `${canonical}#webpage`;
+  const place = {
+    "@type": "Place",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: site.location.locality,
+      addressRegion: site.location.region,
+      addressCountry: site.location.country,
+    },
+  };
+  const graph = [
+    {
+      "@type": "Organization",
+      "@id": organizationId,
+      name: site.name,
+      url: `${origin}/`,
+      logo: {
+        "@type": "ImageObject",
+        url: `${origin}/hc-logo.svg`,
+        contentUrl: `${origin}/hc-logo.svg`,
+        width: 28,
+        height: 35,
+      },
+      description: site.description,
+      email: site.email,
+      foundingLocation: place,
+      location: place,
+      knowsAbout: site.focusAreas,
+    },
+    {
+      "@type": "WebSite",
+      "@id": websiteId,
+      url: `${origin}/`,
+      name: site.name,
+      description: site.description,
+      inLanguage: "en-US",
+      publisher: { "@id": organizationId },
+    },
+    {
+      "@type": page.schemaType ?? "WebPage",
+      "@id": webpageId,
+      url: canonical,
+      name: title,
+      description: page.description,
+      inLanguage: "en-US",
+      isPartOf: { "@id": websiteId },
+      about: { "@id": organizationId },
+      publisher: { "@id": organizationId },
+      primaryImageOfPage: {
+        "@type": "ImageObject",
+        url: `${origin}${site.socialImage.path}`,
+        contentUrl: `${origin}${site.socialImage.path}`,
+        width: site.socialImage.width,
+        height: site.socialImage.height,
+        caption: site.socialImage.alt,
+        representativeOfPage: true,
+      },
+    },
+  ];
+
+  if (page.path !== "/" && page.path !== "/404") {
+    const breadcrumbId = `${canonical}#breadcrumb`;
+    graph.push({
+      "@type": "BreadcrumbList",
+      "@id": breadcrumbId,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: `${origin}/`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: page.breadcrumbLabel ?? page.title,
+          item: canonical,
+        },
+      ],
+    });
+    graph[2].breadcrumb = { "@id": breadcrumbId };
+  }
+
+  if (page.faqs?.length) {
+    graph.push({
+      "@type": "FAQPage",
+      "@id": `${canonical}#faq`,
+      mainEntity: page.faqs.map(({ question, answer }) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: answer,
+        },
+      })),
+    });
+  }
+
+  return `<script type="application/ld+json">${serializeJsonLd({
+    "@context": "https://schema.org",
+    "@graph": graph,
+  })}</script>`;
+}
+
 function renderHeader(activePath) {
   const links = site.navigation
     .map(
@@ -63,28 +182,48 @@ function renderFooter() {
 
 export function renderDocument(page, styles, clientScript, origin = "{{ORIGIN}}") {
   const canonical = page.path === "/" ? `${origin}/` : `${origin}${page.path}`;
-  const title = page.title === site.name ? page.title : `${page.title} | ${site.name}`;
+  const title = page.seoTitle ?? (page.title === site.name ? page.title : `${page.title} | ${site.name}`);
+  const robots = page.noIndex
+    ? "noindex, nofollow"
+    : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
+  const htmlTitle = escapeHtml(title);
+  const htmlDescription = escapeHtml(page.description);
+  const htmlImageAlt = escapeHtml(site.socialImage.alt);
 
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="${page.description}">
+  <meta name="description" content="${htmlDescription}">
+  <meta name="robots" content="${robots}">
+  <meta name="googlebot" content="${robots}">
+  <meta name="application-name" content="${site.name}">
+  <meta name="author" content="${site.name}">
   <meta name="theme-color" content="#081a33">
+  <meta name="color-scheme" content="light">
   <link rel="canonical" href="${canonical}">
+  <link rel="sitemap" type="application/xml" href="${origin}/sitemap.xml">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
   <meta property="og:site_name" content="${site.name}">
-  <meta property="og:title" content="${title}">
-  <meta property="og:description" content="${page.description}">
+  <meta property="og:title" content="${htmlTitle}">
+  <meta property="og:description" content="${htmlDescription}">
   <meta property="og:url" content="${canonical}">
-  <meta property="og:image" content="${origin}/og-v4.png">
+  <meta property="og:image" content="${origin}${site.socialImage.path}">
+  <meta property="og:image:secure_url" content="${origin}${site.socialImage.path}">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="${site.socialImage.width}">
+  <meta property="og:image:height" content="${site.socialImage.height}">
+  <meta property="og:image:alt" content="${htmlImageAlt}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="${title}">
-  <meta name="twitter:description" content="${page.description}">
-  <meta name="twitter:image" content="${origin}/og-v4.png">
+  <meta name="twitter:title" content="${htmlTitle}">
+  <meta name="twitter:description" content="${htmlDescription}">
+  <meta name="twitter:image" content="${origin}${site.socialImage.path}">
+  <meta name="twitter:image:alt" content="${htmlImageAlt}">
   <link rel="icon" type="image/svg+xml" href="/hc-logo.svg">
-  <title>${title}</title>
+  <title>${htmlTitle}</title>
+  ${renderStructuredData(page, origin, canonical, title)}
   <style>${styles}</style>
 </head>
 <body class="${page.bodyClass ?? ""}">

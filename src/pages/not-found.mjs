@@ -4,6 +4,7 @@ export const notFoundPage = {
   path: "/404",
   title: "Page Not Found",
   description: "The requested page could not be found.",
+  noIndex: true,
   bodyClass: "not-found",
   body: `
     <section class="not-found__content">

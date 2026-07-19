@@ -12,6 +12,8 @@ const operatingBlocks = [
 export const strategyPage = {
   path: "/strategy/",
   title: "What We Do",
+  seoTitle: "Investment & Operating Strategy | Hartnett Capital",
+  schemaType: "WebPage",
   description:
     "Hartnett Capital acquires, operates, builds, improves, partners, and holds durable businesses and differentiated assets.",
   body: `

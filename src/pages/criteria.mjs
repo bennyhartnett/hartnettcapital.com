@@ -15,6 +15,8 @@ const criteria = [
 export const criteriaPage = {
   path: "/criteria/",
   title: "Investment Criteria",
+  seoTitle: "Business & Asset Investment Criteria | Hartnett Capital",
+  schemaType: "CollectionPage",
   description:
     "Explore the business and asset characteristics Hartnett Capital considers when evaluating acquisitions and partnerships.",
   body: `

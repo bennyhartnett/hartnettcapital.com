@@ -1,8 +1,28 @@
 export const site = {
   name: "Hartnett Capital",
+  url: "https://hartnettcapital.com",
   description:
     "Founded and headquartered in McLean, Virginia, Hartnett Capital is a private investment and operating company focused on durable businesses and differentiated assets.",
   email: "inquiries@hartnettcapital.com",
+  location: {
+    locality: "McLean",
+    region: "Virginia",
+    country: "US",
+  },
+  socialImage: {
+    path: "/og-v5.png",
+    width: 1732,
+    height: 908,
+    alt: "Hartnett Capital — Building enduring value.",
+  },
+  focusAreas: [
+    "Operating companies",
+    "Commercial and residential real estate",
+    "Software and platforms",
+    "Digital assets and media properties",
+    "Proprietary data and information assets",
+    "Intellectual property and brands",
+  ],
   navigation: [
     { href: "/firm/", label: "About" },
     { href: "/strategy/", label: "What We Do" },

@@ -54,6 +54,8 @@ const focusAreas = [
 export const focusPage = {
   path: "/focus/",
   title: "Focus Areas",
+  seoTitle: "Investment Focus Areas | Hartnett Capital",
+  schemaType: "CollectionPage",
   description:
     "Explore Hartnett Capital's focus across operating companies, real estate, software, digital assets, proprietary data, intellectual property, and brands.",
   body: `

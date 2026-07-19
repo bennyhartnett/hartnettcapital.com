@@ -3,6 +3,8 @@ import { pageIntro, site } from "../site.mjs";
 export const contactPage = {
   path: "/contact/",
   title: "Contact",
+  seoTitle: "Contact Hartnett Capital | Share an Opportunity",
+  schemaType: "ContactPage",
   description:
     "Contact Hartnett Capital to introduce a business, property, digital asset, dataset, partnership, or other opportunity.",
   body: `

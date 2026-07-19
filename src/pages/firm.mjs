@@ -3,8 +3,11 @@ import { linkArrow, pageIntro } from "../site.mjs";
 export const firmPage = {
   path: "/firm/",
   title: "About",
+  seoTitle: "About Hartnett Capital | Investment & Operating Company",
+  breadcrumbLabel: "About",
+  schemaType: "AboutPage",
   description:
-    "Founded and headquartered in McLean, Virginia, Hartnett Capital is a privately held investment and operating company focused on durable businesses and differentiated assets.",
+    "Learn about Hartnett Capital, a privately held investment and operating company in McLean, Virginia, built for active ownership and long-term value.",
   body: `
     ${pageIntro({
       index: "01",

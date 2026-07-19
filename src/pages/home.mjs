@@ -1,10 +1,40 @@
 import { linkArrow } from "../site.mjs";
 
+const faqs = [
+  {
+    question: "What is Hartnett Capital?",
+    answer:
+      "Hartnett Capital is a privately held investment and operating company founded and headquartered in McLean, Virginia.",
+  },
+  {
+    question: "What does Hartnett Capital invest in?",
+    answer:
+      "Hartnett Capital considers operating companies, commercial and residential real estate, software and platforms, digital assets, proprietary data, intellectual property, brands, media properties, and infrastructure.",
+  },
+  {
+    question: "How does Hartnett Capital create value?",
+    answer:
+      "Hartnett Capital acquires and builds durable assets, then strengthens them through disciplined operations, technology, automation, data, capital, relationships, and long-term ownership.",
+  },
+  {
+    question: "Who does Hartnett Capital partner with?",
+    answer:
+      "Hartnett Capital works with business owners, founders, independent operators, property owners, developers, investors, family offices, advisors, intermediaries, and strategic partners.",
+  },
+  {
+    question: "How can I share an opportunity with Hartnett Capital?",
+    answer:
+      "Send a concise overview and relevant context to inquiries@hartnettcapital.com. Inquiries are reviewed directly and discreetly.",
+  },
+];
+
 export const homePage = {
   path: "/",
   title: "Hartnett Capital",
+  seoTitle: "Hartnett Capital | Private Investment & Operating Company",
   description:
-    "Founded and headquartered in McLean, Virginia, Hartnett Capital acquires, builds, and operates companies, real estate, digital assets, software, intellectual property, and proprietary data.",
+    "Hartnett Capital is a private investment and operating company in McLean, Virginia, acquiring and building durable businesses and differentiated assets.",
+  faqs,
   bodyClass: "home",
   body: `
     <section class="home-hero">
@@ -88,6 +118,24 @@ export const homePage = {
           <div><span>03</span><p>Technology-enabled improvement</p></div>
           <div><span>04</span><p>Relationship-driven growth</p></div>
           ${linkArrow("Explore what we do", "/strategy/")}
+        </div>
+      </div>
+    </section>
+
+    <section class="company-facts section section--blue-soft" aria-labelledby="company-facts-title">
+      <div class="shell split-heading">
+        <p class="section-label">05 / At a glance</p>
+        <div>
+          <h2 class="display reveal" id="company-facts-title">Clear answers.<br>Direct access.</h2>
+          <dl class="company-facts__list reveal">
+            ${faqs
+              .map(
+                ({ question, answer }) =>
+                  `<div><dt>${question}</dt><dd>${answer}</dd></div>`,
+              )
+              .join("")}
+          </dl>
+          ${linkArrow("Start a conversation", "/contact/")}
         </div>
       </div>
     </section>`,

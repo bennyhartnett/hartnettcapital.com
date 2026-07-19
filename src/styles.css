@@ -97,6 +97,10 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .standards__list span { color: var(--blue); font-size: 10px; font-weight: 800; }
 .standards__list p { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(27px, 2.6vw, 40px); letter-spacing: -.035em; }
 .standards__list .text-link { margin-top: 42px; }
+.company-facts__list { margin: 0 0 42px; border-top: 1px solid rgba(16,18,23,.3); }
+.company-facts__list > div { display: grid; grid-template-columns: minmax(230px, .7fr) minmax(0, 1.3fr); gap: clamp(30px, 5vw, 78px); padding: 28px 0; border-bottom: 1px solid rgba(16,18,23,.3); }
+.company-facts__list dt { font-family: Georgia, "Times New Roman", serif; font-size: clamp(24px, 2.2vw, 34px); line-height: 1.08; letter-spacing: -.035em; }
+.company-facts__list dd { margin: 0; align-self: center; color: #4f5662; font-size: 16px; line-height: 1.65; }
 
 /* Homepage focus preview */
 .asset-preview__grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(16,18,23,.3); border-left: 1px solid rgba(16,18,23,.3); }
@@ -230,6 +234,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
   .home-hero__main { min-height: 720px; border-right: 0; }
   .home-hero__visual { min-height: 600px; }
   .standards__grid { grid-template-columns: 1fr; }
+  .company-facts__list > div { grid-template-columns: 1fr; gap: 18px; }
   .principle { grid-template-columns: 78px .8fr 1.2fr; }
   .strategy-block__grid { grid-template-columns: 70px 1fr; }
   .strategy-block__copy { grid-column: 2; }
