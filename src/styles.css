@@ -69,7 +69,11 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .home-hero__lower { display: grid; grid-template-columns: minmax(290px, 1fr) auto; gap: clamp(32px, 5vw, 78px); align-items: end; padding-top: 30px; border-top: 1px solid var(--line); }
 .home-hero__lower p { max-width: 610px; margin-bottom: 0; font-size: clamp(18px, 1.55vw, 24px); line-height: 1.36; letter-spacing: -0.02em; }
 .hero-actions { display: grid; justify-items: start; gap: 22px; }
-.home-hero__visual { position: relative; min-height: 802px; overflow: hidden; color: white; background: linear-gradient(rgba(255,255,255,.075) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,.075) 1px,transparent 1px), var(--navy); background-size: 44px 44px; }
+.home-hero__visual { position: relative; min-height: 802px; overflow: hidden; color: white; background: linear-gradient(rgba(255,255,255,.075) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,.075) 1px,transparent 1px), var(--navy); background-position: center; background-size: 44px 44px; animation: hero-grid-pulse 4.8s ease-in-out infinite; }
+@keyframes hero-grid-pulse {
+  0%, 100% { background-size: 44px 44px; }
+  50% { background-size: 54px 54px; }
+}
 .home-hero__visual::before { content: ""; position: absolute; width: 580px; height: 580px; top: 86px; right: -250px; border: 118px solid var(--blue); border-radius: 50%; transform: rotate(-12deg); }
 .home-hero__visual::after { content: ""; position: absolute; width: 170px; height: 540px; left: 16%; bottom: -175px; background: var(--red); transform: rotate(38deg); }
 .home-hero__visual > span { position: absolute; z-index: 2; top: 45px; left: 42px; color: rgba(255,255,255,.64); font-size: 9px; font-weight: 800; letter-spacing: .17em; text-transform: uppercase; }
