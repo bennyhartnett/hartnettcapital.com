@@ -5,10 +5,12 @@ const root = resolve(import.meta.dirname, "..");
 const outDir = resolve(root, "dist", "server");
 const html = await readFile(resolve(root, "index.html"), "utf8");
 const socialCard = await readFile(resolve(root, "og.png"));
+const logo = await readFile(resolve(root, "hc-logo.svg"), "utf8");
 
 const worker = `
 const HTML = ${JSON.stringify(html)};
 const SOCIAL_CARD_BASE64 = ${JSON.stringify(socialCard.toString("base64"))};
+const LOGO = ${JSON.stringify(logo)};
 
 function socialCardBytes() {
   const decoded = atob(SOCIAL_CARD_BASE64);
@@ -43,6 +45,16 @@ export default {
           ...securityHeaders,
           "Cache-Control": "public, max-age=86400",
           "Content-Type": "image/png",
+        },
+      });
+    }
+
+    if (url.pathname === "/hc-logo.svg") {
+      return new Response(isHead ? null : LOGO, {
+        headers: {
+          ...securityHeaders,
+          "Cache-Control": "public, max-age=86400",
+          "Content-Type": "image/svg+xml; charset=UTF-8",
         },
       });
     }

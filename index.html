@@ -13,6 +13,7 @@
   <meta name="twitter:title" content="Hartnett Capital | Independent Family Office">
   <meta name="twitter:description" content="Permanent capital. Patient ownership. Long-term conviction.">
   <meta name="twitter:image" content="https://hartnettcapital.com/og.png">
+  <link rel="icon" type="image/svg+xml" href="/hc-logo.svg">
   <title>Hartnett Capital | Independent Family Office</title>
 
   <style>
@@ -116,33 +117,11 @@
     }
 
     .brand-mark {
-      width: 34px;
-      height: 34px;
-      position: relative;
+      width: 28px;
+      height: 35px;
+      display: block;
       flex: 0 0 auto;
-      background: var(--blue);
-    }
-
-    .brand-mark::before,
-    .brand-mark::after {
-      content: "";
-      position: absolute;
-      background: var(--paper);
-    }
-
-    .brand-mark::before {
-      width: 3px;
-      height: 21px;
-      left: 9px;
-      top: 6px;
-      box-shadow: 13px 0 0 var(--paper);
-    }
-
-    .brand-mark::after {
-      width: 13px;
-      height: 3px;
-      left: 9px;
-      top: 15px;
+      object-fit: contain;
     }
 
     .nav-links {
@@ -356,11 +335,11 @@
     }
 
     .visual-monogram {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(140px, 20vw, 320px);
-      line-height: 0.72;
-      letter-spacing: -0.1em;
-      color: rgba(255, 255, 255, 0.93);
+      width: clamp(115px, 13vw, 190px);
+      height: auto;
+      display: block;
+      filter: invert(1);
+      opacity: 0.93;
     }
 
     .visual-caption {
@@ -567,16 +546,15 @@
     }
 
     .contact::after {
-      content: "HC";
+      content: "";
       position: absolute;
-      right: -40px;
-      bottom: -170px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: min(42vw, 620px);
-      font-weight: 400;
-      letter-spacing: -0.12em;
-      line-height: 1;
-      color: rgba(255, 255, 255, 0.1);
+      width: min(36vw, 430px);
+      aspect-ratio: 552 / 686;
+      right: 1vw;
+      bottom: -125px;
+      background: rgba(255, 255, 255, 0.1);
+      -webkit-mask: url("/hc-logo.svg") center / contain no-repeat;
+      mask: url("/hc-logo.svg") center / contain no-repeat;
       pointer-events: none;
     }
 
@@ -757,7 +735,7 @@
       }
 
       .brand-mark {
-        width: 31px;
+        width: 25px;
         height: 31px;
       }
 
@@ -814,7 +792,7 @@
       }
 
       .visual-monogram {
-        font-size: 170px;
+        width: 140px;
       }
 
       .visual-caption {
@@ -917,7 +895,7 @@
     <header class="topbar">
       <div class="shell nav">
         <a class="brand" href="#top" aria-label="Hartnett Capital home">
-          <span class="brand-mark" aria-hidden="true"></span>
+          <img class="brand-mark" src="/hc-logo.svg" width="28" height="35" alt="">
           <span>Hartnett Capital</span>
         </a>
 
@@ -961,7 +939,7 @@
         <div class="hero-visual" aria-hidden="true">
           <div class="visual-label">Hartnett / Family Office / 2026</div>
           <div class="visual-type">
-            <div class="visual-monogram">H</div>
+            <img class="visual-monogram" src="/hc-logo.svg" width="190" height="236" alt="">
             <p class="visual-caption">
               Permanent capital. Patient ownership. Long-term conviction.
             </p>
