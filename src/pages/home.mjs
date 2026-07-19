@@ -4,7 +4,7 @@ export const homePage = {
   path: "/",
   title: "Hartnett Capital",
   description:
-    "Hartnett Capital acquires, builds, and operates companies, real estate, digital assets, software, intellectual property, and proprietary data.",
+    "Founded and headquartered in McLean, Virginia, Hartnett Capital acquires, builds, and operates companies, real estate, digital assets, software, intellectual property, and proprietary data.",
   bodyClass: "home",
   body: `
     <section class="home-hero">
@@ -13,7 +13,7 @@ export const homePage = {
         <div>
           <h1>Building enduring value through ownership and operation.</h1>
           <div class="home-hero__lower">
-            <p>Hartnett Capital acquires, builds, and operates companies, real estate, digital assets, software, intellectual property, and proprietary data.</p>
+            <p>Founded and headquartered in McLean, Virginia, Hartnett Capital acquires, builds, and operates companies, real estate, digital assets, software, intellectual property, and proprietary data.</p>
             <div class="hero-actions">
               ${linkArrow("Share an opportunity", "/contact/", "button-link")}
               ${linkArrow("About Hartnett Capital", "/firm/")}

@@ -4,13 +4,13 @@ export const firmPage = {
   path: "/firm/",
   title: "About",
   description:
-    "Hartnett Capital is a privately held investment and operating company focused on acquiring, building, and managing durable businesses and differentiated assets.",
+    "Founded and headquartered in McLean, Virginia, Hartnett Capital is a privately held investment and operating company focused on durable businesses and differentiated assets.",
   body: `
     ${pageIntro({
       index: "01",
       eyebrow: "About Hartnett Capital",
       title: "Built to own.<br>Equipped to operate.",
-      copy: "We are a privately held investment and operating company focused on acquiring, building, and managing durable businesses and differentiated assets.",
+      copy: "Founded and headquartered in McLean, Virginia, we are a privately held investment and operating company focused on acquiring, building, and managing durable businesses and differentiated assets.",
     })}
 
     <section class="section page-statement">
