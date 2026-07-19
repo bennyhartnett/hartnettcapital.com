@@ -5,6 +5,7 @@ import { notFoundPage, pages } from "../src/pages/index.mjs";
 
 const root = resolve(import.meta.dirname, "..");
 const outDir = resolve(root, "dist", "server");
+const siteOrigin = "https://hartnettcapital.com";
 const [styles, clientScript, socialCard, logo] = await Promise.all([
   readFile(resolve(root, "src", "styles.css"), "utf8"),
   readFile(resolve(root, "src", "client.js"), "utf8"),
@@ -16,7 +17,15 @@ const renderedPages = Object.fromEntries(
   pages.map((page) => [page.path, renderDocument(page, styles, clientScript)]),
 );
 const notFoundHtml = renderDocument(notFoundPage, styles, clientScript);
+const staticPages = pages.map((page) => ({
+  ...page,
+  html: renderDocument(page, styles, clientScript, siteOrigin),
+}));
+const staticNotFoundHtml = renderDocument(notFoundPage, styles, clientScript, siteOrigin);
 const sitemapPaths = pages.map((page) => page.path);
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemapPaths
+  .map((path) => `<url><loc>${siteOrigin}${path}</loc></url>`)
+  .join("")}</urlset>`;
 
 const worker = `
 const PAGES = ${JSON.stringify(renderedPages)};
@@ -51,7 +60,7 @@ export default {
       return new Response("Method Not Allowed", { status: 405, headers: { ...securityHeaders, Allow: "GET, HEAD" } });
     }
 
-    if (url.pathname === "/og.png") {
+    if (url.pathname === "/og.png" || url.pathname === "/og-v2.png") {
       return new Response(isHead ? null : socialCardBytes(), { headers: { ...securityHeaders, "Cache-Control": "public, max-age=86400", "Content-Type": "image/png" } });
     }
     if (url.pathname === "/hc-logo.svg") {
@@ -68,9 +77,10 @@ export default {
     }
 
     let path = url.pathname === "/index.html" ? "/" : url.pathname;
-    if (path.length > 1 && path.endsWith("/")) {
+    if (path.endsWith("/index.html")) path = path.slice(0, -10);
+    if (path.length > 1 && !path.endsWith("/") && PAGES[path + "/"]) {
       const destination = new URL(url);
-      destination.pathname = path.slice(0, -1);
+      destination.pathname = path + "/";
       return Response.redirect(destination.toString(), 308);
     }
 
@@ -87,4 +97,18 @@ await rm(resolve(root, "dist"), { recursive: true, force: true });
 await mkdir(outDir, { recursive: true });
 await writeFile(resolve(outDir, "index.js"), worker);
 
-console.log(`Built ${pages.length} Hartnett Capital pages with shared layout.`);
+await Promise.all(
+  staticPages.map(async (page) => {
+    const outputDirectory = page.path === "/" ? root : resolve(root, page.path.slice(1));
+    await mkdir(outputDirectory, { recursive: true });
+    await writeFile(resolve(outputDirectory, "index.html"), page.html);
+  }),
+);
+await Promise.all([
+  writeFile(resolve(root, "404.html"), staticNotFoundHtml),
+  writeFile(resolve(root, ".nojekyll"), ""),
+  writeFile(resolve(root, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${siteOrigin}/sitemap.xml\n`),
+  writeFile(resolve(root, "sitemap.xml"), sitemapXml),
+]);
+
+console.log(`Built ${pages.length} shared-layout pages for GitHub Pages and Sites.`);

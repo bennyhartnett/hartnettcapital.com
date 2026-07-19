@@ -1,7 +1,7 @@
 import { linkArrow, pageIntro } from "../site.mjs";
 
 export const criteriaPage = {
-  path: "/criteria",
+  path: "/criteria/",
   title: "Investment Criteria",
   description:
     "See the qualities Hartnett Capital values when evaluating businesses, assets, operators, and special situations.",
@@ -42,7 +42,7 @@ export const criteriaPage = {
             <div><dt>Geography</dt><dd>Selective</dd></div>
           </dl>
           <p class="mandate-note">Fit is ultimately determined by the quality of the opportunity, not by a checklist alone.</p>
-          ${linkArrow("Discuss an opportunity", "/contact")}
+          ${linkArrow("Discuss an opportunity", "/contact/")}
         </div>
       </div>
     </section>`,

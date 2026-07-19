@@ -17,9 +17,9 @@ function renderHeader(activePath) {
         </a>
         <nav class="nav-links" id="site-menu" aria-label="Primary navigation">
           ${links}
-          <a class="nav-links__mobile-contact" href="/contact">Private Inquiries</a>
+          <a class="nav-links__mobile-contact" href="/contact/">Private Inquiries</a>
         </nav>
-        <a class="nav-cta" href="/contact"${activePath === "/contact" ? ' aria-current="page"' : ""}>Private Inquiries</a>
+        <a class="nav-cta" href="/contact/"${activePath === "/contact/" ? ' aria-current="page"' : ""}>Private Inquiries</a>
         <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
           <span></span><span></span>
         </button>
@@ -46,10 +46,10 @@ function renderFooter() {
           <span>Hartnett Capital</span>
         </a>
         <div class="footer__links">
-          <a href="/firm">The Firm</a>
-          <a href="/strategy">Strategy</a>
-          <a href="/criteria">Criteria</a>
-          <a href="/contact">Contact</a>
+          <a href="/firm/">The Firm</a>
+          <a href="/strategy/">Strategy</a>
+          <a href="/criteria/">Criteria</a>
+          <a href="/contact/">Contact</a>
         </div>
         <p>© ${year} Hartnett Capital. All rights reserved.</p>
       </div>
@@ -59,8 +59,8 @@ function renderFooter() {
     </footer>`;
 }
 
-export function renderDocument(page, styles, clientScript) {
-  const canonical = page.path === "/" ? "{{ORIGIN}}/" : `{{ORIGIN}}${page.path}`;
+export function renderDocument(page, styles, clientScript, origin = "{{ORIGIN}}") {
+  const canonical = page.path === "/" ? `${origin}/` : `${origin}${page.path}`;
   const title = page.title === site.name ? page.title : `${page.title} | ${site.name}`;
 
   return `<!DOCTYPE html>
@@ -76,11 +76,11 @@ export function renderDocument(page, styles, clientScript) {
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${page.description}">
   <meta property="og:url" content="${canonical}">
-  <meta property="og:image" content="{{ORIGIN}}/og.png">
+  <meta property="og:image" content="${origin}/og-v2.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${title}">
   <meta name="twitter:description" content="${page.description}">
-  <meta name="twitter:image" content="{{ORIGIN}}/og.png">
+  <meta name="twitter:image" content="${origin}/og-v2.png">
   <link rel="icon" type="image/svg+xml" href="/hc-logo.svg">
   <title>${title}</title>
   <style>${styles}</style>

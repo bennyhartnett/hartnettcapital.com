@@ -1,7 +1,7 @@
 import { pageIntro, site } from "../site.mjs";
 
 export const contactPage = {
-  path: "/contact",
+  path: "/contact/",
   title: "Contact",
   description:
     "Contact Hartnett Capital regarding investments, acquisitions, partnerships, and proprietary opportunities.",

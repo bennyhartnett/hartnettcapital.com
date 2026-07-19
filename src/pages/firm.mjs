@@ -1,7 +1,7 @@
 import { linkArrow, pageIntro } from "../site.mjs";
 
 export const firmPage = {
-  path: "/firm",
+  path: "/firm/",
   title: "The Firm",
   description:
     "Learn how Hartnett Capital's permanent-capital structure supports patient decisions, flexible partnerships, and long-term ownership.",
@@ -45,7 +45,7 @@ export const firmPage = {
         <div>
           <blockquote class="reveal">“The ability to wait is only useful when paired with the willingness to act.”</blockquote>
           <p>We aim to be measured in our analysis and decisive when the facts align.</p>
-          ${linkArrow("Explore our strategy", "/strategy")}
+          ${linkArrow("Explore our strategy", "/strategy/")}
         </div>
       </div>
     </section>`,

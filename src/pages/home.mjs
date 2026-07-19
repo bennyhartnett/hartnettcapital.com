@@ -14,7 +14,7 @@ export const homePage = {
           <h1>Built to own<br>for the long term.</h1>
           <div class="home-hero__lower">
             <p>We invest our own capital behind enduring businesses, differentiated assets, and opportunities where thoughtful ownership can create lasting value.</p>
-            ${linkArrow("Discover the firm", "/firm", "button-link")}
+            ${linkArrow("Discover the firm", "/firm/", "button-link")}
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@ export const homePage = {
             <p>Hartnett Capital is designed around patience, discretion, and direct accountability. Our permanent capital lets us evaluate each opportunity on its own merits.</p>
             <p>We concentrate on a limited number of situations where sound judgment, flexible structure, and an ownership mindset can make a real difference.</p>
           </div>
-          ${linkArrow("How we are built", "/firm")}
+          ${linkArrow("How we are built", "/firm/")}
         </div>
       </div>
     </section>
@@ -45,13 +45,13 @@ export const homePage = {
         <h2 class="display reveal">A flexible mandate.<br>A consistent standard.</h2>
       </div>
       <div class="shell focus-grid">
-        <a class="focus-card reveal" href="/strategy#operating-businesses">
+        <a class="focus-card reveal" href="/strategy/#operating-businesses">
           <span>01</span><h3>Operating<br>Businesses</h3><p>Durable companies with differentiated capabilities and room to compound.</p><b aria-hidden="true">↗</b>
         </a>
-        <a class="focus-card reveal" href="/strategy#real-assets">
+        <a class="focus-card reveal" href="/strategy/#real-assets">
           <span>02</span><h3>Real &amp; Strategic<br>Assets</h3><p>Useful, scarce assets supported by enduring demand or distinct advantage.</p><b aria-hidden="true">↗</b>
         </a>
-        <a class="focus-card reveal" href="/strategy#special-situations">
+        <a class="focus-card reveal" href="/strategy/#special-situations">
           <span>03</span><h3>Special<br>Situations</h3><p>Complex opportunities where speed, creativity, and flexible capital matter.</p><b aria-hidden="true">↗</b>
         </a>
       </div>
@@ -68,7 +68,7 @@ export const homePage = {
           <div><span>02</span><p>A defensible position</p></div>
           <div><span>03</span><p>Aligned, capable people</p></div>
           <div><span>04</span><p>Asymmetric potential</p></div>
-          ${linkArrow("View our criteria", "/criteria")}
+          ${linkArrow("View our criteria", "/criteria/")}
         </div>
       </div>
     </section>`,

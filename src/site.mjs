@@ -4,9 +4,9 @@ export const site = {
     "Hartnett Capital is an independent family office investing permanent capital in enduring businesses, real assets, and special situations.",
   email: "inquiries@hartnettcapital.com",
   navigation: [
-    { href: "/firm", label: "The Firm" },
-    { href: "/strategy", label: "Strategy" },
-    { href: "/criteria", label: "Criteria" },
+    { href: "/firm/", label: "The Firm" },
+    { href: "/strategy/", label: "Strategy" },
+    { href: "/criteria/", label: "Criteria" },
   ],
 };
 

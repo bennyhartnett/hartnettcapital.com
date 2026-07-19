@@ -1,7 +1,7 @@
 import { linkArrow, pageIntro } from "../site.mjs";
 
 export const strategyPage = {
-  path: "/strategy",
+  path: "/strategy/",
   title: "Strategy",
   description:
     "Explore Hartnett Capital's focus across operating businesses, real and strategic assets, and special situations.",
@@ -49,7 +49,7 @@ export const strategyPage = {
             <li><span>03</span><div><h3>Structure</h3><p>Match the capital and ownership approach to the opportunity.</p></div></li>
             <li><span>04</span><div><h3>Support</h3><p>Stay engaged where our perspective and network can be useful.</p></div></li>
           </ol>
-          ${linkArrow("Review our criteria", "/criteria")}
+          ${linkArrow("Review our criteria", "/criteria/")}
         </div>
       </div>
     </section>`,
