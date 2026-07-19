@@ -132,7 +132,7 @@ function renderHeader(activePath) {
       <div class="shell nav">
         <a class="brand" href="/" aria-label="Hartnett Capital home">
           <img class="brand-mark" src="/hc-logo.svg" width="28" height="35" alt="">
-          <span>Hartnett Capital</span>
+          <span class="brand-name"><span>Hartnett</span><span>Capital</span></span>
         </a>
         <nav class="nav-links" id="site-menu" aria-label="Primary navigation">
           ${links}
@@ -162,7 +162,7 @@ function renderFooter() {
       <div class="shell footer__bottom">
         <a class="brand brand--light" href="/" aria-label="Hartnett Capital home">
           <img class="brand-mark" src="/hc-logo.svg" width="28" height="35" alt="">
-          <span>Hartnett Capital</span>
+          <span class="brand-name"><span>Hartnett</span><span>Capital</span></span>
         </a>
         <div class="footer__links">
           <a href="/firm/">About</a>
