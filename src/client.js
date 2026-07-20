@@ -72,7 +72,7 @@ if (progressBar) {
 const scrollSkies = [...document.querySelectorAll("[data-scroll-sky]")];
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-if (scrollSkies.length && !reducedMotion.matches) {
+if (scrollSkies.length) {
   let cloudFrame;
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
@@ -87,8 +87,9 @@ if (scrollSkies.length && !reducedMotion.matches) {
       const progress = clamp((viewportHeight - rect.top) / (viewportHeight + rect.height), 0, 1);
       const phase = progress - .5;
       const direction = index % 2 === 0 ? 1 : -1;
-      sky.style.setProperty("--cloud-field-x", `${(phase * 180 * direction).toFixed(1)}px`);
-      sky.style.setProperty("--cloud-field-y", `${(phase * -320).toFixed(1)}px`);
+      const motionScale = reducedMotion.matches ? .2 : 1;
+      sky.style.setProperty("--cloud-field-x", `${(phase * 240 * direction * motionScale).toFixed(1)}px`);
+      sky.style.setProperty("--cloud-field-y", `${(phase * 600 * motionScale).toFixed(1)}px`);
     });
   };
 
@@ -98,6 +99,7 @@ if (scrollSkies.length && !reducedMotion.matches) {
 
   window.addEventListener("scroll", requestCloudUpdate, { passive: true });
   window.addEventListener("resize", requestCloudUpdate);
+  if ("addEventListener" in reducedMotion) reducedMotion.addEventListener("change", requestCloudUpdate);
   updateClouds();
 }
 
