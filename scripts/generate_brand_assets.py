@@ -370,15 +370,18 @@ def generate_logo_pngs() -> list[Path]:
 
 
 def favicon_svg() -> str:
-    padding = 118
+    padding = 32
     scale = (1024 - padding * 2) / MARK_HEIGHT
     width = MARK_WIDTH * scale
     x = (1024 - width) / 2
     return f'''<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="Hartnett Capital">
   <title>Hartnett Capital</title>
-  <rect width="1024" height="1024" fill="{NAVY}"/>
-  <g fill="{WHITE}" transform="translate({x:.3f} {padding}) scale({scale:.8f})">
+  <style>
+    .mark {{ fill: {NAVY}; }}
+    @media (prefers-color-scheme: dark) {{ .mark {{ fill: {WHITE}; }} }}
+  </style>
+  <g class="mark" transform="translate({x:.3f} {padding}) scale({scale:.8f})">
     <path d="{LEFT_PATH}"/>
     <path d="{RIGHT_PATH}"/>
   </g>
@@ -395,10 +398,19 @@ def generate_favicons() -> list[Path]:
     rendered: dict[int, Image.Image] = {}
     for size in (16, 32, 48, 180, 192, 512):
         scale_factor = 4 if size <= 48 else 2
-        canvas = Image.new("RGB", (size * scale_factor, size * scale_factor), NAVY)
+        is_favicon = size <= 48
+        canvas = Image.new(
+            "RGBA" if is_favicon else "RGB",
+            (size * scale_factor, size * scale_factor),
+            (0, 0, 0, 0) if is_favicon else NAVY,
+        )
         draw = ImageDraw.Draw(canvas)
-        pad = size * scale_factor * 0.115
-        draw_mark(draw, (pad, pad, canvas.width - pad * 2, canvas.height - pad * 2), WHITE)
+        pad = size * scale_factor * (1 / 32 if is_favicon else 0.115)
+        draw_mark(
+            draw,
+            (pad, pad, canvas.width - pad * 2, canvas.height - pad * 2),
+            NAVY if is_favicon else WHITE,
+        )
         rendered[size] = canvas.resize((size, size), Image.Resampling.LANCZOS)
 
     names = {
