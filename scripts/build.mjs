@@ -6,12 +6,36 @@ import { notFoundPage, pages } from "../src/pages/index.mjs";
 const root = resolve(import.meta.dirname, "..");
 const outDir = resolve(root, "dist", "server");
 const siteOrigin = "https://hartnettcapital.com";
-const [styles, clientScript, socialCard, logo] = await Promise.all([
+const runtimeAssetDefinitions = [
+  ["/og.png", "og.png", "image/png", "public, max-age=86400"],
+  ["/hc-logo.svg", "hc-logo.svg", "image/svg+xml; charset=UTF-8", "public, max-age=86400"],
+  ["/favicon.svg", "favicon.svg", "image/svg+xml; charset=UTF-8", "public, max-age=604800"],
+  ["/favicon.ico", "favicon.ico", "image/x-icon", "public, max-age=604800"],
+  ["/favicon-16x16.png", "favicon-16x16.png", "image/png", "public, max-age=604800"],
+  ["/favicon-32x32.png", "favicon-32x32.png", "image/png", "public, max-age=604800"],
+  ["/apple-touch-icon.png", "apple-touch-icon.png", "image/png", "public, max-age=604800"],
+  ["/site-icon-192.png", "site-icon-192.png", "image/png", "public, max-age=604800"],
+  ["/site-icon-512.png", "site-icon-512.png", "image/png", "public, max-age=604800"],
+  ["/site.webmanifest", "site.webmanifest", "application/manifest+json; charset=UTF-8", "public, max-age=3600"],
+  ["/brand/fonts/InterVariable.woff2", "brand/fonts/InterVariable.woff2", "font/woff2", "public, max-age=31536000, immutable"],
+  ["/brand/logos/svg/hartnett-capital-monogram-navy.svg", "brand/logos/svg/hartnett-capital-monogram-navy.svg", "image/svg+xml; charset=UTF-8", "public, max-age=31536000, immutable"],
+  ["/brand/logos/svg/hartnett-capital-monogram-white.svg", "brand/logos/svg/hartnett-capital-monogram-white.svg", "image/svg+xml; charset=UTF-8", "public, max-age=31536000, immutable"],
+];
+const [styles, clientScript, ...runtimeAssetBuffers] = await Promise.all([
   readFile(resolve(root, "src", "styles.css"), "utf8"),
   readFile(resolve(root, "src", "client.js"), "utf8"),
-  readFile(resolve(root, "og-v5.png")),
-  readFile(resolve(root, "hc-logo.svg"), "utf8"),
+  ...runtimeAssetDefinitions.map(([, path]) => readFile(resolve(root, path))),
 ]);
+const runtimeAssets = Object.fromEntries(
+  runtimeAssetDefinitions.map(([urlPath, , contentType, cacheControl], index) => [
+    urlPath,
+    {
+      body: runtimeAssetBuffers[index].toString("base64"),
+      contentType,
+      cacheControl,
+    },
+  ]),
+);
 
 const renderedPages = Object.fromEntries(
   pages.map((page) => [page.path, renderDocument(page, styles, clientScript)]),
@@ -56,12 +80,11 @@ const worker = `
 const PAGES = ${JSON.stringify(renderedPages)};
 const NOT_FOUND = ${JSON.stringify(notFoundHtml)};
 const SITEMAP_PATHS = ${JSON.stringify(sitemapPaths)};
-const SOCIAL_CARD_BASE64 = ${JSON.stringify(socialCard.toString("base64"))};
-const LOGO = ${JSON.stringify(logo)};
+const RUNTIME_ASSETS = ${JSON.stringify(runtimeAssets)};
 const LLMS_TEXT = ${JSON.stringify(llmsText)};
 
-function socialCardBytes() {
-  const decoded = atob(SOCIAL_CARD_BASE64);
+function assetBytes(base64) {
+  const decoded = atob(base64);
   const bytes = new Uint8Array(decoded.length);
   for (let index = 0; index < decoded.length; index += 1) bytes[index] = decoded.charCodeAt(index);
   return bytes;
@@ -86,11 +109,15 @@ export default {
       return new Response("Method Not Allowed", { status: 405, headers: { ...securityHeaders, Allow: "GET, HEAD" } });
     }
 
-    if (url.pathname === "/og.png" || url.pathname === "/og-v2.png" || url.pathname === "/og-v3.png" || url.pathname === "/og-v4.png" || url.pathname === "/og-v5.png") {
-      return new Response(isHead ? null : socialCardBytes(), { headers: { ...securityHeaders, "Cache-Control": "public, max-age=86400", "Content-Type": "image/png" } });
-    }
-    if (url.pathname === "/hc-logo.svg") {
-      return new Response(isHead ? null : LOGO, { headers: { ...securityHeaders, "Cache-Control": "public, max-age=86400", "Content-Type": "image/svg+xml; charset=UTF-8" } });
+    const asset = RUNTIME_ASSETS[url.pathname];
+    if (asset) {
+      return new Response(isHead ? null : assetBytes(asset.body), {
+        headers: {
+          ...securityHeaders,
+          "Cache-Control": asset.cacheControl,
+          "Content-Type": asset.contentType,
+        },
+      });
     }
     if (url.pathname === "/robots.txt") {
       const robots = "User-agent: *\\nAllow: /\\nSitemap: " + url.origin + "/sitemap.xml\\n";

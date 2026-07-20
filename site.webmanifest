@@ -1,0 +1,21 @@
+{
+  "name": "Hartnett Capital",
+  "short_name": "Hartnett Capital",
+  "description": "Private investment and operating company based in McLean, Virginia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FBFAF7",
+  "theme_color": "#081A33",
+  "icons": [
+    {
+      "src": "/site-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/site-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

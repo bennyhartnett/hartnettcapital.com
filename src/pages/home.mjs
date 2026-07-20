@@ -53,7 +53,7 @@ export const homePage = {
       </div>
       <div class="home-hero__visual" aria-hidden="true">
         <span>Hartnett / Investment + Operations</span>
-        <img src="/hc-logo.svg" width="190" height="236" alt="">
+        <img src="/brand/logos/svg/hartnett-capital-monogram-white.svg" width="190" height="236" alt="">
         <p>Acquire.<br>Operate.<br>Build.<br>Hold.</p>
       </div>
     </section>

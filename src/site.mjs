@@ -10,7 +10,7 @@ export const site = {
     country: "US",
   },
   socialImage: {
-    path: "/og-v5.png",
+    path: "/og.png",
     width: 1732,
     height: 908,
     alt: "Hartnett Capital — Building enduring value.",

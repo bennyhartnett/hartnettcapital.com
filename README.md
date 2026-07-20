@@ -15,3 +15,7 @@ A multi-page investment and operating company website built from reusable page m
 Page content lives in `src/pages`, while global navigation, metadata, footer, styling, and browser behavior are centralized in `src`.
 
 `npm run build` generates the root static files GitHub Pages publishes and the Sites-compatible server bundle from the same source.
+
+## Brand system
+
+The distribution-ready brand kit, design tokens, logo family, fonts, social artwork, and usage rules live in [`brand/`](brand/README.md). Run `npm run brand:generate` after changing the source mark or brand asset generator.

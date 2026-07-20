@@ -33,10 +33,10 @@ function renderStructuredData(page, origin, canonical, title) {
       url: `${origin}/`,
       logo: {
         "@type": "ImageObject",
-        url: `${origin}/hc-logo.svg`,
-        contentUrl: `${origin}/hc-logo.svg`,
-        width: 28,
-        height: 35,
+        url: `${origin}/brand/logos/svg/hartnett-capital-monogram-navy.svg`,
+        contentUrl: `${origin}/brand/logos/svg/hartnett-capital-monogram-navy.svg`,
+        width: 552,
+        height: 686,
       },
       description: site.description,
       email: site.email,
@@ -131,7 +131,7 @@ function renderHeader(activePath) {
     <header class="topbar">
       <div class="shell nav">
         <a class="brand" href="/" aria-label="Hartnett Capital home">
-          <img class="brand-mark" src="/hc-logo.svg" width="28" height="35" alt="">
+          <img class="brand-mark" src="/brand/logos/svg/hartnett-capital-monogram-navy.svg" width="28" height="35" alt="">
           <span class="brand-name"><span>Hartnett</span><span>Capital</span></span>
         </a>
         <nav class="nav-links" id="site-menu" aria-label="Primary navigation">
@@ -160,8 +160,8 @@ function renderFooter() {
         </a>
       </div>
       <div class="shell footer__bottom">
-        <a class="brand brand--light" href="/" aria-label="Hartnett Capital home">
-          <img class="brand-mark" src="/hc-logo.svg" width="28" height="35" alt="">
+        <a class="brand" href="/" aria-label="Hartnett Capital home">
+          <img class="brand-mark" src="/brand/logos/svg/hartnett-capital-monogram-navy.svg" width="28" height="35" alt="">
           <span class="brand-name"><span>Hartnett</span><span>Capital</span></span>
         </a>
         <div class="footer__links">
@@ -221,7 +221,11 @@ export function renderDocument(page, styles, clientScript, origin = "{{ORIGIN}}"
   <meta name="twitter:description" content="${htmlDescription}">
   <meta name="twitter:image" content="${origin}${site.socialImage.path}">
   <meta name="twitter:image:alt" content="${htmlImageAlt}">
-  <link rel="icon" type="image/svg+xml" href="/hc-logo.svg">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
   <title>${htmlTitle}</title>
   ${renderStructuredData(page, origin, canonical, title)}
   <style>${styles}</style>
