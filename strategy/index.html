@@ -101,6 +101,11 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity 600ms ease var(--stagger, 0ms), transform 600ms ease var(--stagger, 0ms); }
 .reveal.visible { opacity: 1; transform: none; }
 .scroll-progress { position: fixed; inset: 0 0 auto; z-index: 40; height: 2px; background: var(--blue); transform: scaleX(var(--scroll-progress, 0)); transform-origin: left; pointer-events: none; }
+.grid-scroll-surface { position: relative; isolation: isolate; overflow: hidden; background-attachment: scroll; animation: none; }
+.grid-scroll-line { position: absolute; inset: 0; z-index: -1; display: block; overflow: hidden; pointer-events: none; }
+.grid-scroll-line::before, .grid-scroll-line::after { content: ""; position: absolute; display: block; background: var(--blue); box-shadow: 0 0 12px rgba(23, 71, 232, .32); }
+.grid-scroll-line::before { top: var(--grid-line-y, 44px); right: var(--grid-line-right, 44px); left: var(--grid-line-x, 44px); height: 2px; transform: scaleX(var(--grid-line-progress, 0)); transform-origin: left center; }
+.grid-scroll-line::after { top: var(--grid-line-y, 44px); bottom: var(--grid-line-bottom, 44px); left: var(--grid-line-x, 44px); width: 2px; transform: scaleY(var(--grid-line-progress, 0)); transform-origin: center top; }
 .nav > *, .home-hero > *, .home-hero__lower > *, .split-heading > *, .two-column-copy > *, .section-heading > *, .standards__grid > *, .asset-preview__item > *, .pathways__intro > *, .pathways__grid > *, .page-hero__grid > *, .principle > *, .operating-model__grid > *, .feature-quote__grid > *, .strategy-block__grid > *, .criteria-detail__intro > *, .criteria-grid > *, .asset-grid > *, .contact-page__grid > *, .contact-guidance > *, .contact-checklist li > *, .footer__lead > *, .footer__directory > *, .sitemap-page__grid > *, .faq-group > * { min-width: 0; }
 
 /* Master navigation */
@@ -880,6 +885,75 @@ if (progressBar) {
   window.addEventListener("scroll", updateProgress, { passive: true });
   window.addEventListener("resize", updateProgress);
   updateProgress();
+}
+
+const gridSurfaces = [...document.querySelectorAll([
+  ".section--navy",
+  ".home-hero__visual",
+  ".page-hero:not(.page-hero--blue):not(.page-hero--red)",
+  ".feature-quote",
+  ".strategy-block--navy",
+  ".search-hero",
+  ".access-page__story",
+  ".not-found__content",
+].join(", "))];
+
+if (gridSurfaces.length) {
+  const gridSize = 44;
+  let gridFrame;
+
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  const positiveModulo = (value, divisor) => ((value % divisor) + divisor) % divisor;
+
+  const alignTraceToGrid = (surface) => {
+    const width = surface.clientWidth;
+    const height = surface.clientHeight;
+    const phaseX = positiveModulo((width - gridSize) / 2, gridSize);
+    const phaseY = positiveModulo((height - gridSize) / 2, gridSize);
+    const lineX = phaseX + gridSize;
+    const lineY = phaseY + gridSize;
+    const lastLineX = phaseX + Math.max(1, Math.floor((width - gridSize - phaseX) / gridSize)) * gridSize;
+    const lastLineY = phaseY + Math.max(1, Math.floor((height - gridSize - phaseY) / gridSize)) * gridSize;
+
+    surface.style.setProperty("--grid-line-x", `${lineX.toFixed(1)}px`);
+    surface.style.setProperty("--grid-line-y", `${lineY.toFixed(1)}px`);
+    surface.style.setProperty("--grid-line-right", `${Math.max(gridSize, width - lastLineX).toFixed(1)}px`);
+    surface.style.setProperty("--grid-line-bottom", `${Math.max(gridSize, height - lastLineY).toFixed(1)}px`);
+  };
+
+  const updateGridLines = () => {
+    gridFrame = undefined;
+    const viewportHeight = window.innerHeight;
+    const scrollTop = window.scrollY;
+
+    gridSurfaces.forEach((surface) => {
+      const surfaceTop = surface.getBoundingClientRect().top + scrollTop;
+      const start = surfaceTop < viewportHeight ? 0 : surfaceTop - viewportHeight * .85;
+      const end = Math.max(start + 1, surfaceTop + surface.offsetHeight - viewportHeight * .18);
+      const progress = clamp((scrollTop - start) / (end - start), 0, 1);
+      surface.style.setProperty("--grid-line-progress", progress.toFixed(4));
+    });
+  };
+
+  const requestGridUpdate = () => {
+    if (gridFrame === undefined) gridFrame = requestAnimationFrame(updateGridLines);
+  };
+
+  gridSurfaces.forEach((surface) => {
+    surface.classList.add("grid-scroll-surface");
+    const line = document.createElement("i");
+    line.className = "grid-scroll-line";
+    line.setAttribute("aria-hidden", "true");
+    surface.append(line);
+    alignTraceToGrid(surface);
+  });
+
+  window.addEventListener("scroll", requestGridUpdate, { passive: true });
+  window.addEventListener("resize", () => {
+    gridSurfaces.forEach(alignTraceToGrid);
+    requestGridUpdate();
+  });
+  updateGridLines();
 }
 
 const scrollSkies = [...document.querySelectorAll("[data-scroll-sky]")];

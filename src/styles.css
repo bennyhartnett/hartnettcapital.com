@@ -62,6 +62,11 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity 600ms ease var(--stagger, 0ms), transform 600ms ease var(--stagger, 0ms); }
 .reveal.visible { opacity: 1; transform: none; }
 .scroll-progress { position: fixed; inset: 0 0 auto; z-index: 40; height: 2px; background: var(--blue); transform: scaleX(var(--scroll-progress, 0)); transform-origin: left; pointer-events: none; }
+.grid-scroll-surface { position: relative; isolation: isolate; overflow: hidden; background-attachment: scroll; animation: none; }
+.grid-scroll-line { position: absolute; inset: 0; z-index: -1; display: block; overflow: hidden; pointer-events: none; }
+.grid-scroll-line::before, .grid-scroll-line::after { content: ""; position: absolute; display: block; background: var(--blue); box-shadow: 0 0 12px rgba(23, 71, 232, .32); }
+.grid-scroll-line::before { top: var(--grid-line-y, 44px); right: var(--grid-line-right, 44px); left: var(--grid-line-x, 44px); height: 2px; transform: scaleX(var(--grid-line-progress, 0)); transform-origin: left center; }
+.grid-scroll-line::after { top: var(--grid-line-y, 44px); bottom: var(--grid-line-bottom, 44px); left: var(--grid-line-x, 44px); width: 2px; transform: scaleY(var(--grid-line-progress, 0)); transform-origin: center top; }
 .nav > *, .home-hero > *, .home-hero__lower > *, .split-heading > *, .two-column-copy > *, .section-heading > *, .standards__grid > *, .asset-preview__item > *, .pathways__intro > *, .pathways__grid > *, .page-hero__grid > *, .principle > *, .operating-model__grid > *, .feature-quote__grid > *, .strategy-block__grid > *, .criteria-detail__intro > *, .criteria-grid > *, .asset-grid > *, .contact-page__grid > *, .contact-guidance > *, .contact-checklist li > *, .footer__lead > *, .footer__directory > *, .sitemap-page__grid > *, .faq-group > * { min-width: 0; }
 
 /* Master navigation */

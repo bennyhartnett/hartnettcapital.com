@@ -69,6 +69,75 @@ if (progressBar) {
   updateProgress();
 }
 
+const gridSurfaces = [...document.querySelectorAll([
+  ".section--navy",
+  ".home-hero__visual",
+  ".page-hero:not(.page-hero--blue):not(.page-hero--red)",
+  ".feature-quote",
+  ".strategy-block--navy",
+  ".search-hero",
+  ".access-page__story",
+  ".not-found__content",
+].join(", "))];
+
+if (gridSurfaces.length) {
+  const gridSize = 44;
+  let gridFrame;
+
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  const positiveModulo = (value, divisor) => ((value % divisor) + divisor) % divisor;
+
+  const alignTraceToGrid = (surface) => {
+    const width = surface.clientWidth;
+    const height = surface.clientHeight;
+    const phaseX = positiveModulo((width - gridSize) / 2, gridSize);
+    const phaseY = positiveModulo((height - gridSize) / 2, gridSize);
+    const lineX = phaseX + gridSize;
+    const lineY = phaseY + gridSize;
+    const lastLineX = phaseX + Math.max(1, Math.floor((width - gridSize - phaseX) / gridSize)) * gridSize;
+    const lastLineY = phaseY + Math.max(1, Math.floor((height - gridSize - phaseY) / gridSize)) * gridSize;
+
+    surface.style.setProperty("--grid-line-x", `${lineX.toFixed(1)}px`);
+    surface.style.setProperty("--grid-line-y", `${lineY.toFixed(1)}px`);
+    surface.style.setProperty("--grid-line-right", `${Math.max(gridSize, width - lastLineX).toFixed(1)}px`);
+    surface.style.setProperty("--grid-line-bottom", `${Math.max(gridSize, height - lastLineY).toFixed(1)}px`);
+  };
+
+  const updateGridLines = () => {
+    gridFrame = undefined;
+    const viewportHeight = window.innerHeight;
+    const scrollTop = window.scrollY;
+
+    gridSurfaces.forEach((surface) => {
+      const surfaceTop = surface.getBoundingClientRect().top + scrollTop;
+      const start = surfaceTop < viewportHeight ? 0 : surfaceTop - viewportHeight * .85;
+      const end = Math.max(start + 1, surfaceTop + surface.offsetHeight - viewportHeight * .18);
+      const progress = clamp((scrollTop - start) / (end - start), 0, 1);
+      surface.style.setProperty("--grid-line-progress", progress.toFixed(4));
+    });
+  };
+
+  const requestGridUpdate = () => {
+    if (gridFrame === undefined) gridFrame = requestAnimationFrame(updateGridLines);
+  };
+
+  gridSurfaces.forEach((surface) => {
+    surface.classList.add("grid-scroll-surface");
+    const line = document.createElement("i");
+    line.className = "grid-scroll-line";
+    line.setAttribute("aria-hidden", "true");
+    surface.append(line);
+    alignTraceToGrid(surface);
+  });
+
+  window.addEventListener("scroll", requestGridUpdate, { passive: true });
+  window.addEventListener("resize", () => {
+    gridSurfaces.forEach(alignTraceToGrid);
+    requestGridUpdate();
+  });
+  updateGridLines();
+}
+
 const scrollSkies = [...document.querySelectorAll("[data-scroll-sky]")];
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
