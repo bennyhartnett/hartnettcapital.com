@@ -96,7 +96,7 @@ export const faqPage = {
   faqs,
   body: `
     ${pageIntro({
-      index: "07",
+      index: "08",
       eyebrow: "Frequently asked questions",
       title: "Clear answers.<br>Direct access.",
       copy: "A practical overview of our mandate, ownership approach, partnership model, and how to begin a conversation.",

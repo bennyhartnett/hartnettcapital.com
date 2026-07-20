@@ -57,6 +57,35 @@ export const firmPage = {
       </div>
     </section>
 
+    <section class="section how-organized">
+      <div class="shell split-heading">
+        <p class="section-label">How the firm is organized</p>
+        <div>
+          <h2 class="display reveal">Permanent capital.<br>Principal decisions.</h2>
+          <div class="two-column-copy reveal">
+            <p>Hartnett Capital is structured as a private holding company, not a fund. We invest our own capital, without outside limited partners, fixed fund lives, or fundraising cycles that dictate when assets must be bought or sold.</p>
+            <p>Decisions are made by the principals who will live with them. That keeps our process direct: the people you meet in the first conversation are the people who evaluate the opportunity, structure the agreement, and stay engaged through ownership.</p>
+          </div>
+          ${linkArrow("Read common questions", "/faq/")}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--blue-soft what-we-avoid">
+      <div class="shell split-heading">
+        <p class="section-label">What we avoid</p>
+        <div>
+          <h2 class="display reveal">Discipline is mostly<br>saying no.</h2>
+          <ol class="process-list reveal">
+            <li><span>01</span><div><h3>Turnarounds by cutting</h3><p>We improve businesses by strengthening them, not by dismantling what made them work.</p></div></li>
+            <li><span>02</span><div><h3>Momentum markets</h3><p>Assets priced on narrative and urgency rather than durable demand and understandable economics.</p></div></li>
+            <li><span>03</span><div><h3>What we can't understand</h3><p>If we cannot explain how a business creates value in plain language, we pass.</p></div></li>
+            <li><span>04</span><div><h3>Adversarial transactions</h3><p>Situations that begin with misaligned incentives rarely improve after closing. We prefer willing partners.</p></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
     <section class="section feature-quote">
       <div class="shell feature-quote__grid">
         <p class="section-label">Our philosophy</p>
@@ -64,6 +93,8 @@ export const firmPage = {
           <blockquote class="reveal">“Understand what makes an asset valuable. Preserve it. Then improve everything around it.”</blockquote>
           <p>Our decisions are guided by fundamentals rather than trends. We favor durable demand, clear ownership advantages, strong cash-generation potential, and opportunities where focused execution can produce meaningful improvement.</p>
           ${linkArrow("See what we do", "/strategy/")}
+          <span class="inline-link-separator" aria-hidden="true"></span>
+          ${linkArrow("Read our perspectives", "/insights/")}
         </div>
       </div>
     </section>`,

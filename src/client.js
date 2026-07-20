@@ -27,7 +27,7 @@ if (menuButton && menu) {
     }
   });
 
-  const desktopNavigation = window.matchMedia("(min-width: 1051px)");
+  const desktopNavigation = window.matchMedia("(min-width: 1261px)");
   desktopNavigation.addEventListener("change", ({ matches }) => {
     if (matches) closeMenu();
   });
@@ -216,29 +216,65 @@ if (searchForm) {
   runSearch(initialQuery, { updateUrl: false });
 }
 
-const passwordToggle = document.querySelector("[data-password-toggle]");
-if (passwordToggle) {
-  const passwordInput = document.querySelector("#login-password");
-  passwordToggle.addEventListener("click", () => {
-    const show = passwordInput.type === "password";
-    passwordInput.type = show ? "text" : "password";
-    passwordToggle.textContent = show ? "Hide" : "Show";
-    passwordToggle.setAttribute("aria-label", show ? "Hide password" : "Show password");
-    passwordToggle.setAttribute("aria-pressed", String(show));
-    passwordInput.focus();
-  });
-}
+document.querySelectorAll("[data-intake-form]").forEach((form) => {
+  const status = form.querySelector("[data-form-status]");
+  const submitButton = form.querySelector('button[type="submit"]');
+  const submitLabel = submitButton.innerHTML;
+  const endpoint = form.dataset.endpoint;
+  const mailto = form.action.startsWith("mailto:") ? form.action : null;
 
-const loginForm = document.querySelector("[data-login-form]");
-if (loginForm) {
-  const status = document.querySelector("[data-login-status]");
-  loginForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (!loginForm.reportValidity()) return;
-
-    loginForm.querySelector("#login-password").value = "";
+  const showStatus = (html, isError) => {
     status.hidden = false;
-    status.textContent = "Secure account access is not connected yet. Contact Hartnett Capital for portal assistance.";
-    status.focus?.();
+    status.innerHTML = html;
+    status.classList.toggle("is-error", Boolean(isError));
+  };
+
+  const labeledValues = () =>
+    [...form.querySelectorAll(".form-field")]
+      .map((field) => {
+        const label = field.querySelector("label");
+        const control = field.querySelector("input, textarea, select");
+        if (!control || !control.value) return null;
+        return `${label.textContent.replace(/\s*·\s*optional\s*$/i, "").trim()}: ${control.value}`;
+      })
+      .filter(Boolean)
+      .join("\n");
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    if (form.querySelector('[name="_gotcha"]').value) {
+      form.classList.add("is-sent");
+      showStatus("Thank you. Your note has been received.");
+      return;
+    }
+
+    if (!endpoint) {
+      const subject = encodeURIComponent(form.dataset.subject);
+      const body = encodeURIComponent(labeledValues());
+      window.location.href = `${mailto}?subject=${subject}&body=${body}`;
+      showStatus("Your email application should open with your message prepared. If it does not, email us directly and we will pick it up from there.");
+      return;
+    }
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending…";
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+      if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+      form.classList.add("is-sent");
+      showStatus("Thank you. Your note has been received and will be reviewed directly.");
+    } catch {
+      submitButton.disabled = false;
+      submitButton.innerHTML = submitLabel;
+      showStatus(
+        'Something went wrong sending your note. Please try again, or email <a href="mailto:inquiries@hartnettcapital.com">inquiries@hartnettcapital.com</a> directly.',
+        true,
+      );
+    }
   });
-}
+});

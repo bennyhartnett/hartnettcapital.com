@@ -121,6 +121,27 @@ function renderStructuredData(page, origin, canonical, title) {
     }
   }
 
+  if (page.article) {
+    graph.push({
+      "@type": "Article",
+      "@id": `${canonical}#article`,
+      headline: page.article.headline,
+      description: page.description,
+      datePublished: page.article.datePublished,
+      dateModified: page.article.dateModified ?? page.article.datePublished,
+      author: { "@id": organizationId },
+      publisher: { "@id": organizationId },
+      mainEntityOfPage: { "@id": webpageId },
+      image: {
+        "@type": "ImageObject",
+        url: `${origin}${site.socialImage.path}`,
+        width: site.socialImage.width,
+        height: site.socialImage.height,
+      },
+      inLanguage: "en-US",
+    });
+  }
+
   return `<script type="application/ld+json">${serializeJsonLd({
     "@context": "https://schema.org",
     "@graph": graph,
@@ -145,12 +166,12 @@ function renderHeader(activePath) {
         <nav class="nav-links" id="site-menu" aria-label="Primary navigation">
           ${links}
           <a class="nav-links__mobile-utility" href="/search/">Search</a>
-          <a class="nav-links__mobile-utility" href="/login/">Sign in</a>
+          <a class="nav-links__mobile-utility" href="/login/">Portal</a>
           <a class="nav-links__mobile-contact" href="/contact/">Share an Opportunity</a>
         </nav>
         <div class="nav-utilities">
           <a class="nav-search" href="/search/"${activePath === "/search/" ? ' aria-current="page"' : ""}>Search</a>
-          <a class="nav-login" href="/login/"${activePath === "/login/" ? ' aria-current="page"' : ""}>Sign in</a>
+          <a class="nav-login" href="/login/"${activePath === "/login/" ? ' aria-current="page"' : ""}>Portal</a>
           <a class="nav-cta" href="/contact/"${activePath === "/contact/" ? ' aria-current="page"' : ""}>Share an Opportunity</a>
         </div>
         <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
@@ -225,7 +246,13 @@ export function renderDocument(page, styles, clientScript, origin = "{{ORIGIN}}"
   <meta name="color-scheme" content="light">
   <link rel="canonical" href="${canonical}">
   <link rel="sitemap" type="application/xml" href="${origin}/sitemap.xml">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="${page.ogType ?? "website"}">${
+    page.article
+      ? `
+  <meta property="article:published_time" content="${page.article.datePublished}">
+  <meta property="article:modified_time" content="${page.article.dateModified ?? page.article.datePublished}">`
+      : ""
+  }
   <meta property="og:locale" content="en_US">
   <meta property="og:site_name" content="${site.name}">
   <meta property="og:title" content="${htmlTitle}">

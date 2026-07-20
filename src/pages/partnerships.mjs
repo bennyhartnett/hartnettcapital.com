@@ -65,6 +65,19 @@ export const partnershipsPage = {
       </div>
     </section>
 
+    <section class="section section--blue-soft principles partner-commitments">
+      <div class="shell section-heading section-heading--compact">
+        <p class="section-label">What partners can expect</p>
+        <h2 class="display reveal">Commitments we make in every relationship.</h2>
+      </div>
+      <div class="shell principle-list">
+        <article class="principle reveal"><span>01</span><h3>Direct access</h3><p>You work with the decision-makers from the first conversation through ownership — no layers, no hand-offs.</p></article>
+        <article class="principle reveal"><span>02</span><h3>Confidentiality by default</h3><p>Conversations are handled with discretion as a matter of practice, and formal confidentiality is documented when the situation calls for it.</p></article>
+        <article class="principle reveal"><span>03</span><h3>A fast, honest no</h3><p>If we are not the right fit, we say so quickly and plainly, so your time and options are respected.</p></article>
+        <article class="principle reveal"><span>04</span><h3>Alignment before work</h3><p>Responsibilities, incentives, and expectations are put in writing before the real work begins — never assumed.</p></article>
+      </div>
+    </section>
+
     <section class="section partnership-principles">
       <div class="shell split-heading">
         <p class="section-label">How we partner</p>
@@ -75,6 +88,8 @@ export const partnershipsPage = {
             <p>Our structures are flexible, but our standard is consistent: mutual trust, direct communication, measurable value creation, and responsible stewardship.</p>
           </div>
           ${linkArrow("Discuss a partnership", "/contact/")}
+          <span class="inline-link-separator" aria-hidden="true"></span>
+          ${linkArrow("Read our perspectives", "/insights/")}
         </div>
       </div>
     </section>`,

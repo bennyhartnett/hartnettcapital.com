@@ -9,7 +9,7 @@ export const sitemapPage = {
     "Browse the complete Hartnett Capital website, including company information, investment focus areas, partnership pathways, criteria, and contact details.",
   body: `
     ${pageIntro({
-      index: "08",
+      index: "09",
       eyebrow: "Sitemap",
       title: "Explore Hartnett Capital.",
       copy: "A complete directory of our company, investment focus, ownership approach, partnership pathways, and contact information.",
@@ -29,9 +29,9 @@ export const sitemapPage = {
               </section>`,
           )
           .join("")}
-        <section class="sitemap-group" aria-labelledby="sitemap-group-3">
-          <p class="section-label">04</p>
-          <h2 id="sitemap-group-3">Site directory</h2>
+        <section class="sitemap-group" aria-labelledby="sitemap-group-${site.sitemapGroups.length}">
+          <p class="section-label">0${site.sitemapGroups.length + 1}</p>
+          <h2 id="sitemap-group-${site.sitemapGroups.length}">Site directory</h2>
           <div class="sitemap-group__links">
             <a href="/"><span>Home</span><span aria-hidden="true">↗</span></a>
             <a href="/sitemap.xml"><span>XML Sitemap</span><span aria-hidden="true">↗</span></a>
