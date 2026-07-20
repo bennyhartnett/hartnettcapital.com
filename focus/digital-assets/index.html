@@ -129,7 +129,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .home-hero__lower { display: grid; grid-template-columns: minmax(290px, 1fr) auto; gap: clamp(32px, 5vw, 78px); align-items: end; padding-top: 30px; border-top: 1px solid var(--line); }
 .home-hero__lower p { max-width: 610px; margin-bottom: 0; font-size: clamp(18px, 1.55vw, 24px); line-height: 1.36; letter-spacing: -0.02em; }
 .hero-actions { display: grid; justify-items: start; gap: 22px; }
-.home-hero__visual { position: relative; min-height: max(642px, calc(100svh - 78px)); overflow: hidden; color: white; background: linear-gradient(rgba(255,255,255,.075) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,.075) 1px,transparent 1px), var(--navy); background-position: center; background-size: 44px 44px; animation: hero-grid-pulse 4.8s ease-in-out infinite; }
+.home-hero__visual { position: relative; min-height: max(642px, calc(100svh - 78px)); overflow: hidden; color: white; background: linear-gradient(rgba(255,255,255,.075) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,.075) 1px,transparent 1px), var(--navy); background-position: center; background-size: 44px 44px; background-attachment: fixed; animation: hero-grid-pulse 4.8s ease-in-out infinite; }
 @keyframes hero-grid-pulse {
   0%, 100% { background-size: 44px 44px; }
   50% { background-size: 54px 54px; }
