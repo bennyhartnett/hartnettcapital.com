@@ -79,23 +79,16 @@ if (scrollSkies.length && !reducedMotion.matches) {
   const updateClouds = () => {
     cloudFrame = undefined;
     const viewportHeight = window.innerHeight;
-    const viewportCenter = viewportHeight / 2;
 
-    scrollSkies.forEach((sky) => {
+    scrollSkies.forEach((sky, index) => {
       const rect = sky.getBoundingClientRect();
       if (rect.bottom < -180 || rect.top > viewportHeight + 180) return;
 
-      const sectionCenter = rect.top + rect.height / 2;
-      const distance = viewportCenter - sectionCenter;
-      const setCloudPosition = (name, xSpeed, ySpeed, maxX, maxY) => {
-        sky.style.setProperty(`--cloud-${name}-x`, `${clamp(distance * xSpeed, -maxX, maxX).toFixed(1)}px`);
-        sky.style.setProperty(`--cloud-${name}-y`, `${clamp(distance * ySpeed, -maxY, maxY).toFixed(1)}px`);
-      };
-
-      setCloudPosition("one", .15, -.035, 150, 42);
-      setCloudPosition("two", -.1, .045, 120, 52);
-      setCloudPosition("three", .07, -.025, 90, 34);
-      setCloudPosition("four", -.045, .02, 62, 26);
+      const progress = clamp((viewportHeight - rect.top) / (viewportHeight + rect.height), 0, 1);
+      const phase = progress - .5;
+      const direction = index % 2 === 0 ? 1 : -1;
+      sky.style.setProperty("--cloud-field-x", `${(phase * 180 * direction).toFixed(1)}px`);
+      sky.style.setProperty("--cloud-field-y", `${(phase * -320).toFixed(1)}px`);
     });
   };
 
