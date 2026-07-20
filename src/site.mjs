@@ -30,6 +30,39 @@ export const site = {
     { href: "/criteria/", label: "Criteria" },
     { href: "/partnerships/", label: "Partnerships" },
   ],
+  sitemapGroups: [
+    {
+      label: "Company",
+      links: [
+        { href: "/firm/", label: "About" },
+        { href: "/strategy/", label: "What We Do" },
+        { href: "/criteria/", label: "Investment Criteria" },
+        { href: "/faq/", label: "Frequently Asked Questions" },
+      ],
+    },
+    {
+      label: "Focus Areas",
+      links: [
+        { href: "/focus/", label: "Focus Overview" },
+        { href: "/focus/operating-companies/", label: "Operating Companies" },
+        { href: "/focus/real-estate/", label: "Real Estate" },
+        { href: "/focus/software-platforms/", label: "Software & Platforms" },
+        { href: "/focus/digital-assets/", label: "Digital Assets" },
+        { href: "/focus/data-information/", label: "Data & Information" },
+        { href: "/focus/intellectual-property-brands/", label: "IP & Brands" },
+      ],
+    },
+    {
+      label: "Partnerships",
+      links: [
+        { href: "/partnerships/", label: "Partnerships Overview" },
+        { href: "/partnerships/owners-founders/", label: "Owners & Founders" },
+        { href: "/partnerships/operators/", label: "Independent Operators" },
+        { href: "/partnerships/strategic-partners/", label: "Strategic Partners" },
+        { href: "/contact/", label: "Share an Opportunity" },
+      ],
+    },
+  ],
 };
 
 export function linkArrow(label, href, className = "text-link") {

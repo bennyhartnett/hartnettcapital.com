@@ -77,40 +77,48 @@ function renderStructuredData(page, origin, canonical, title) {
 
   if (page.path !== "/" && page.path !== "/404") {
     const breadcrumbId = `${canonical}#breadcrumb`;
+    const breadcrumbItems = [
+      { name: "Home", item: `${origin}/` },
+      ...(page.breadcrumbs ?? []).map(({ name, path }) => ({
+        name,
+        item: `${origin}${path}`,
+      })),
+      {
+        name: page.breadcrumbLabel ?? page.title,
+        item: canonical,
+      },
+    ];
     graph.push({
       "@type": "BreadcrumbList",
       "@id": breadcrumbId,
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: `${origin}/`,
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: page.breadcrumbLabel ?? page.title,
-          item: canonical,
-        },
-      ],
+      itemListElement: breadcrumbItems.map(({ name, item }, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name,
+        item,
+      })),
     });
     graph[2].breadcrumb = { "@id": breadcrumbId };
   }
 
   if (page.faqs?.length) {
-    graph.push({
-      "@type": "FAQPage",
-      "@id": `${canonical}#faq`,
-      mainEntity: page.faqs.map(({ question, answer }) => ({
-        "@type": "Question",
-        name: question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: answer,
-        },
-      })),
-    });
+    const mainEntity = page.faqs.map(({ question, answer }) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: answer,
+      },
+    }));
+    if (page.schemaType === "FAQPage") {
+      graph[2].mainEntity = mainEntity;
+    } else {
+      graph.push({
+        "@type": "FAQPage",
+        "@id": `${canonical}#faq`,
+        mainEntity,
+      });
+    }
   }
 
   return `<script type="application/ld+json">${serializeJsonLd({
@@ -148,6 +156,15 @@ function renderHeader(activePath) {
 
 function renderFooter() {
   const year = new Date().getFullYear();
+  const sitemapGroups = site.sitemapGroups
+    .map(
+      ({ label, links }) => `
+        <div class="footer__link-group">
+          <p>${label}</p>
+          ${links.map(({ href, label: linkLabel }) => `<a href="${href}">${linkLabel}</a>`).join("")}
+        </div>`,
+    )
+    .join("");
   return `
     <footer class="footer">
       <div class="shell footer__lead">
@@ -159,22 +176,16 @@ function renderFooter() {
           <span>Share an opportunity</span><span aria-hidden="true">↗</span>
         </a>
       </div>
-      <div class="shell footer__bottom">
+      <div class="shell footer__directory">
         <a class="brand" href="/" aria-label="Hartnett Capital home">
           <img class="brand-mark" src="/brand/logos/svg/hartnett-capital-monogram-navy.svg" width="28" height="35" alt="">
           <span class="brand-name"><span>Hartnett</span><span>Capital</span></span>
         </a>
-        <div class="footer__links">
-          <a href="/firm/">About</a>
-          <a href="/strategy/">What We Do</a>
-          <a href="/focus/">Focus</a>
-          <a href="/criteria/">Criteria</a>
-          <a href="/partnerships/">Partnerships</a>
-          <a href="/contact/">Contact</a>
-        </div>
+        <nav class="footer__links" aria-label="Footer navigation">${sitemapGroups}</nav>
         <div class="footer__meta">
           <p>McLean, Virginia</p>
           <p>© ${year} Hartnett Capital</p>
+          <a href="/sitemap/">View full sitemap</a>
         </div>
       </div>
       <div class="shell footer__disclosure">

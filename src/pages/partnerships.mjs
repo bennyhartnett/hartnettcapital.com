@@ -1,12 +1,12 @@
 import { linkArrow, pageIntro } from "../site.mjs";
 
 const partners = [
-  ["01", "Business owners", "Owners considering succession, a sale, or the next stage of growth."],
-  ["02", "Founders", "Founders seeking an engaged, long-term operating partner."],
-  ["03", "Independent operators", "Capable operators looking to acquire or grow a company."],
-  ["04", "Property owners", "Owners and developers pursuing acquisitions, redevelopment, or joint ventures."],
-  ["05", "Investors &amp; family offices", "Long-term capital partners with aligned interests and complementary capabilities."],
-  ["06", "Advisors &amp; intermediaries", "Brokers, advisors, and professionals with proprietary access or knowledge."],
+  ["01", "Business owners", "Owners considering succession, a sale, or the next stage of growth.", "/partnerships/owners-founders/"],
+  ["02", "Founders", "Founders seeking an engaged, long-term operating partner.", "/partnerships/owners-founders/"],
+  ["03", "Independent operators", "Capable operators looking to acquire or grow a company.", "/partnerships/operators/"],
+  ["04", "Property owners", "Owners and developers pursuing acquisitions, redevelopment, or joint ventures.", "/partnerships/strategic-partners/"],
+  ["05", "Investors &amp; family offices", "Long-term capital partners with aligned interests and complementary capabilities.", "/partnerships/strategic-partners/"],
+  ["06", "Advisors &amp; intermediaries", "Brokers, advisors, and professionals with proprietary access or knowledge.", "/partnerships/strategic-partners/"],
 ];
 
 export const partnershipsPage = {
@@ -33,7 +33,7 @@ export const partnershipsPage = {
       <div class="shell criteria-grid partnership-grid">
         ${partners
           .map(
-            ([number, title, copy]) => `<article class="criterion reveal"><span>${number}</span><h3>${title}</h3><p>${copy}</p></article>`,
+            ([number, title, copy, href]) => `<article class="criterion reveal"><span>${number}</span><h3>${title}</h3><p>${copy}</p>${linkArrow("Explore this partnership", href)}</article>`,
           )
           .join("")}
       </div>

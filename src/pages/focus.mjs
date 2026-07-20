@@ -4,6 +4,7 @@ const focusAreas = [
   {
     number: "01",
     id: "companies",
+    detailPath: "/focus/operating-companies/",
     title: "Operating companies",
     heading: "Established foundations with room to compound.",
     copy: "Businesses supported by durable demand, recurring customer value, trusted relationships, and a clear role for focused operations.",
@@ -12,6 +13,7 @@ const focusAreas = [
   {
     number: "02",
     id: "real-estate",
+    detailPath: "/focus/real-estate/",
     title: "Real estate",
     heading: "Useful properties with unrealized potential.",
     copy: "Commercial, residential, specialty, land, and infrastructure opportunities where patient ownership and active management can strengthen long-term value.",
@@ -20,6 +22,7 @@ const focusAreas = [
   {
     number: "03",
     id: "software",
+    detailPath: "/focus/software-platforms/",
     title: "Software &amp; platforms",
     heading: "Useful products that can become essential.",
     copy: "Software, applications, and platforms with practical utility, valuable workflows, or an opportunity to become more capable through focused product development.",
@@ -28,6 +31,7 @@ const focusAreas = [
   {
     number: "04",
     id: "digital",
+    detailPath: "/focus/digital-assets/",
     title: "Digital assets",
     heading: "Owned distribution in durable markets.",
     copy: "Websites, domains, media properties, and other digital assets with defensible positioning, established demand, or overlooked commercial potential.",
@@ -36,6 +40,7 @@ const focusAreas = [
   {
     number: "05",
     id: "data",
+    detailPath: "/focus/data-information/",
     title: "Data &amp; information",
     heading: "Proprietary knowledge made more valuable.",
     copy: "Datasets and information assets that become more useful through better collection, organization, enrichment, access, or application.",
@@ -44,6 +49,7 @@ const focusAreas = [
   {
     number: "06",
     id: "intellectual-property",
+    detailPath: "/focus/intellectual-property-brands/",
     title: "Intellectual property &amp; brands",
     heading: "Distinctive rights with room to travel.",
     copy: "Brands, patents, trademarks, licenses, and other intellectual property with recognition, scarcity, utility, or unrealized extension opportunities.",
@@ -74,12 +80,13 @@ export const focusPage = {
       <div class="shell asset-grid">
         ${focusAreas
           .map(
-            ({ number, id, title, heading, copy, signals }) => `
+            ({ number, id, detailPath, title, heading, copy, signals }) => `
               <article class="asset-card reveal" id="${id}">
                 <div class="asset-card__meta"><span>${number}</span><span>${title}</span></div>
                 <h3>${heading}</h3>
                 <p>${copy}</p>
                 <ul>${signals.map((signal) => `<li>${signal}</li>`).join("")}</ul>
+                ${linkArrow(`Explore ${title.toLowerCase()}`, detailPath)}
               </article>`,
           )
           .join("")}

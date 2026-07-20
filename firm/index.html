@@ -96,7 +96,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .button-link:hover { color: white; background: var(--ink); }
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity 600ms ease, transform 600ms ease; }
 .reveal.visible { opacity: 1; transform: none; }
-.nav > *, .home-hero > *, .home-hero__lower > *, .split-heading > *, .two-column-copy > *, .section-heading > *, .standards__grid > *, .asset-preview__item > *, .pathways__intro > *, .pathways__grid > *, .page-hero__grid > *, .principle > *, .operating-model__grid > *, .feature-quote__grid > *, .strategy-block__grid > *, .criteria-detail__intro > *, .criteria-grid > *, .asset-grid > *, .contact-page__grid > *, .contact-guidance > *, .contact-checklist li > *, .footer__lead > *, .footer__bottom > * { min-width: 0; }
+.nav > *, .home-hero > *, .home-hero__lower > *, .split-heading > *, .two-column-copy > *, .section-heading > *, .standards__grid > *, .asset-preview__item > *, .pathways__intro > *, .pathways__grid > *, .page-hero__grid > *, .principle > *, .operating-model__grid > *, .feature-quote__grid > *, .strategy-block__grid > *, .criteria-detail__intro > *, .criteria-grid > *, .asset-grid > *, .contact-page__grid > *, .contact-guidance > *, .contact-checklist li > *, .footer__lead > *, .footer__directory > *, .sitemap-page__grid > *, .faq-group > * { min-width: 0; }
 
 /* Master navigation */
 .topbar { position: fixed; inset: 0 0 auto; z-index: 30; background: rgba(251, 250, 247, 0.9); border-bottom: 1px solid rgba(16, 18, 23, 0.1); backdrop-filter: blur(18px); }
@@ -256,8 +256,10 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .criterion > span { color: var(--blue); font-size: 10px; font-weight: 800; }
 .criterion h3 { margin: auto 0 20px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(32px, 2.8vw, 42px); font-weight: 400; line-height: 1; letter-spacing: -.04em; }
 .criterion p { min-height: 66px; margin: 0; color: var(--muted); font-size: 14px; }
+.criterion .text-link { align-self: flex-start; margin-top: 24px; }
 .criterion:hover { color: white; background: var(--blue); }
 .criterion:hover > span, .criterion:hover p { color: white; }
+.criterion:hover .text-link { border-color: white; }
 .mandate-list { margin: 0 0 28px; border-top: 1px solid rgba(16,18,23,.32); }
 .mandate-list div { min-height: 78px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; border-bottom: 1px solid rgba(16,18,23,.32); }
 .mandate-list dt { color: var(--muted-strong); font-size: 11px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
@@ -274,6 +276,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .asset-card > p { max-width: 580px; margin-bottom: 30px; color: var(--muted); font-size: 16px; }
 .asset-card ul { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
 .asset-card li { padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.asset-card .text-link { align-self: flex-start; margin-top: 26px; }
 .focus-standard .two-column-copy { border-color: rgba(255,255,255,.3); }
 .two-column-copy--light p { color: rgba(255,255,255,.68); }
 .focus-standard .text-link { border-color: white; }
@@ -297,6 +300,22 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .contact-location > p:last-child { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(32px, 3.5vw, 52px); letter-spacing: -.04em; }
 .contact-privacy { max-width: 760px; margin: 44px 0 0; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
 
+/* FAQ and sitemap */
+.faq-page { background: var(--paper); }
+.faq-page__groups { display: grid; gap: clamp(90px, 10vw, 145px); }
+.faq-group { display: grid; grid-template-columns: minmax(170px, .3fr) minmax(0, 1.7fr); gap: clamp(48px, 7vw, 108px); }
+.faq-group__heading .display { margin: 28px 0 0; font-size: clamp(40px, 4.3vw, 66px); }
+.faq-group .company-facts__list { margin-bottom: 0; }
+.sitemap-page { background: var(--paper); }
+.sitemap-page__grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.sitemap-group { min-height: 470px; display: flex; flex-direction: column; padding: clamp(28px, 4vw, 48px); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.sitemap-group .section-label { width: 80px; }
+.sitemap-group h2 { margin: auto 0 36px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(42px, 4.5vw, 66px); font-weight: 400; line-height: .96; letter-spacing: -.05em; }
+.sitemap-group__links { border-top: 1px solid var(--line); }
+.sitemap-group__links a { min-height: 54px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+.sitemap-group__links a span:last-child { color: var(--blue); font-size: 18px; font-weight: 400; transition: transform 160ms ease; }
+.sitemap-group__links a:hover span:last-child { transform: translate(3px, -3px); }
+
 /* Footer */
 .footer { position: relative; overflow: hidden; padding: clamp(90px, 10vw, 145px) 0 38px; color: var(--navy); background: var(--red); }
 .footer::after { content: ""; position: absolute; width: min(35vw, 430px); aspect-ratio: 552 / 686; right: 1vw; bottom: -145px; background: rgba(8,26,51,.12); -webkit-mask: url("/hc-logo.svg") center / contain no-repeat; mask: url("/hc-logo.svg") center / contain no-repeat; pointer-events: none; }
@@ -305,10 +324,15 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .footer h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(62px, 8vw, 120px); font-weight: 400; line-height: .86; letter-spacing: -.065em; }
 .footer__contact { min-width: 300px; display: flex; justify-content: space-between; gap: 45px; padding: 18px 20px; color: var(--navy); background: var(--paper); font-size: 10px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; transition: transform 160ms ease; }
 .footer__contact:hover { transform: translateY(-3px); }
-.footer__bottom { position: relative; z-index: 1; min-height: 88px; display: grid; grid-template-columns: 1fr auto 1fr; gap: 35px; align-items: center; border-top: 1px solid rgba(8,26,51,.42); border-bottom: 1px solid rgba(8,26,51,.42); }
-.footer__links { display: flex; gap: 28px; font-size: 9px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
-.footer__meta { justify-self: end; display: grid; justify-items: end; gap: 3px; }
+.footer__directory { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(150px,.45fr) minmax(0,1.75fr) minmax(140px,.35fr); gap: clamp(35px, 5vw, 80px); align-items: start; padding: 42px 0; border-top: 1px solid rgba(8,26,51,.42); border-bottom: 1px solid rgba(8,26,51,.42); }
+.footer__links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; }
+.footer__link-group { display: grid; align-content: start; gap: 8px; }
+.footer__link-group p { margin: 0 0 7px; font-size: 9px; font-weight: 850; letter-spacing: .15em; text-transform: uppercase; }
+.footer__link-group a { width: fit-content; color: rgba(8,26,51,.78); font-size: 11px; line-height: 1.35; }
+.footer__link-group a:hover { color: var(--navy); text-decoration: underline; text-underline-offset: 4px; }
+.footer__meta { justify-self: end; display: grid; justify-items: end; gap: 5px; }
 .footer__meta p { margin: 0; color: var(--navy); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+.footer__meta a { margin-top: 12px; padding-bottom: 4px; border-bottom: 1px solid var(--navy); font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
 .footer__disclosure { position: relative; z-index: 1; display: flex; justify-content: space-between; gap: 30px; padding-top: 22px; color: var(--navy); font-size: 9px; letter-spacing: .06em; text-transform: uppercase; }
 .footer__disclosure p { max-width: 820px; margin: 0; }
 .footer__disclosure a { flex: 0 0 auto; font-weight: 800; }
@@ -344,8 +368,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
   .strategy-block__copy { grid-column: 2; }
   .criteria-grid { grid-template-columns: repeat(2, 1fr); }
   .asset-card { min-height: 500px; }
-  .footer__bottom { grid-template-columns: 1fr 1fr; padding: 24px 0; }
-  .footer__links { justify-self: end; }
+  .footer__directory { grid-template-columns: 1fr 3fr; }
   .footer__meta { grid-column: 1 / -1; justify-self: start; justify-items: start; }
 }
 
@@ -357,6 +380,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 @media (max-width: 820px) {
   .asset-grid { grid-template-columns: 1fr; }
   .asset-card { min-height: 460px; }
+  .sitemap-page__grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 720px) {
@@ -369,7 +393,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
   .nav-links.open { max-height: calc(100dvh - 68px); }
   .brand { font-size: 11px; }
   .brand-mark { width: 25px; height: 31px; }
-  .split-heading, .section-heading, .pathways__intro, .criteria-detail__intro, .feature-quote__grid, .contact-page__grid { grid-template-columns: 1fr; gap: 40px; }
+  .split-heading, .section-heading, .pathways__intro, .criteria-detail__intro, .feature-quote__grid, .contact-page__grid, .faq-group { grid-template-columns: 1fr; gap: 40px; }
   .section-label { width: 165px; }
   .two-column-copy, .contact-guidance { grid-template-columns: 1fr; gap: 25px; }
   .home-hero { padding-top: 68px; }
@@ -419,9 +443,9 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
   .contact-checklist li { grid-template-columns: 42px 1fr; padding: 25px 0; }
   .contact-checklist p { grid-template-columns: 1fr; gap: 7px; }
   .contact-location { grid-template-columns: 1fr; gap: 24px; }
-  .footer__bottom { grid-template-columns: 1fr; }
+  .footer__directory { grid-template-columns: 1fr; }
   .footer h2 { font-size: clamp(48px, 15vw, 72px); }
-  .footer__links { justify-self: start; flex-wrap: wrap; gap: 18px 22px; }
+  .footer__links { grid-template-columns: 1fr 1fr; gap: 32px 24px; }
   .footer__meta { grid-column: auto; }
   .footer__disclosure { flex-direction: column; }
 }
@@ -573,22 +597,28 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
           <span>Share an opportunity</span><span aria-hidden="true">↗</span>
         </a>
       </div>
-      <div class="shell footer__bottom">
+      <div class="shell footer__directory">
         <a class="brand" href="/" aria-label="Hartnett Capital home">
           <img class="brand-mark" src="/brand/logos/svg/hartnett-capital-monogram-navy.svg" width="28" height="35" alt="">
           <span class="brand-name"><span>Hartnett</span><span>Capital</span></span>
         </a>
-        <div class="footer__links">
-          <a href="/firm/">About</a>
-          <a href="/strategy/">What We Do</a>
-          <a href="/focus/">Focus</a>
-          <a href="/criteria/">Criteria</a>
-          <a href="/partnerships/">Partnerships</a>
-          <a href="/contact/">Contact</a>
+        <nav class="footer__links" aria-label="Footer navigation">
+        <div class="footer__link-group">
+          <p>Company</p>
+          <a href="/firm/">About</a><a href="/strategy/">What We Do</a><a href="/criteria/">Investment Criteria</a><a href="/faq/">Frequently Asked Questions</a>
         </div>
+        <div class="footer__link-group">
+          <p>Focus Areas</p>
+          <a href="/focus/">Focus Overview</a><a href="/focus/operating-companies/">Operating Companies</a><a href="/focus/real-estate/">Real Estate</a><a href="/focus/software-platforms/">Software & Platforms</a><a href="/focus/digital-assets/">Digital Assets</a><a href="/focus/data-information/">Data & Information</a><a href="/focus/intellectual-property-brands/">IP & Brands</a>
+        </div>
+        <div class="footer__link-group">
+          <p>Partnerships</p>
+          <a href="/partnerships/">Partnerships Overview</a><a href="/partnerships/owners-founders/">Owners & Founders</a><a href="/partnerships/operators/">Independent Operators</a><a href="/partnerships/strategic-partners/">Strategic Partners</a><a href="/contact/">Share an Opportunity</a>
+        </div></nav>
         <div class="footer__meta">
           <p>McLean, Virginia</p>
           <p>© 2026 Hartnett Capital</p>
+          <a href="/sitemap/">View full sitemap</a>
         </div>
       </div>
       <div class="shell footer__disclosure">

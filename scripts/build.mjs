@@ -47,9 +47,14 @@ const staticPages = pages.map((page) => ({
 }));
 const staticNotFoundHtml = renderDocument(notFoundPage, styles, clientScript, siteOrigin);
 const sitemapPaths = pages.map((page) => page.path);
-const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemapPaths
-  .map((path) => `<url><loc>${siteOrigin}${path}</loc></url>`)
-  .join("")}</urlset>`;
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapPaths.map((path) => `  <url><loc>${siteOrigin}${path}</loc></url>`).join("\n")}
+</urlset>
+`;
+const llmsDirectory = pages
+  .map((page) => `- [${page.title}](${siteOrigin}${page.path}): ${page.description}`)
+  .join("\n");
 const llmsText = `# Hartnett Capital
 
 > Hartnett Capital is a privately held investment and operating company founded and headquartered in McLean, Virginia.
@@ -61,14 +66,9 @@ const llmsText = `# Hartnett Capital
 - The firm creates value through active operations, technology, automation, data, capital, strong relationships, and long-term ownership.
 - Hartnett Capital works with owners, founders, independent operators, property owners, developers, investors, family offices, advisors, intermediaries, and strategic partners.
 
-## Primary pages
+## Site directory
 
-- [About Hartnett Capital](${siteOrigin}/firm/): Company overview, perspective, values, and ownership philosophy.
-- [What We Do](${siteOrigin}/strategy/): Acquisition, operating, building, improvement, partnership, and holding approach.
-- [Focus Areas](${siteOrigin}/focus/): Asset classes and areas of investment interest.
-- [Investment Criteria](${siteOrigin}/criteria/): Characteristics considered when evaluating businesses and assets.
-- [Partnerships](${siteOrigin}/partnerships/): Partnership audiences and approach.
-- [Contact](${siteOrigin}/contact/): How to share an opportunity directly and discreetly.
+${llmsDirectory}
 
 ## Contact
 

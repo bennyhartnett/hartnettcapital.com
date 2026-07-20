@@ -9,14 +9,26 @@
 - The firm creates value through active operations, technology, automation, data, capital, strong relationships, and long-term ownership.
 - Hartnett Capital works with owners, founders, independent operators, property owners, developers, investors, family offices, advisors, intermediaries, and strategic partners.
 
-## Primary pages
+## Site directory
 
-- [About Hartnett Capital](https://hartnettcapital.com/firm/): Company overview, perspective, values, and ownership philosophy.
-- [What We Do](https://hartnettcapital.com/strategy/): Acquisition, operating, building, improvement, partnership, and holding approach.
-- [Focus Areas](https://hartnettcapital.com/focus/): Asset classes and areas of investment interest.
-- [Investment Criteria](https://hartnettcapital.com/criteria/): Characteristics considered when evaluating businesses and assets.
-- [Partnerships](https://hartnettcapital.com/partnerships/): Partnership audiences and approach.
-- [Contact](https://hartnettcapital.com/contact/): How to share an opportunity directly and discreetly.
+- [Hartnett Capital](https://hartnettcapital.com/): Hartnett Capital is a private investment and operating company in McLean, Virginia, acquiring and building durable businesses and differentiated assets.
+- [About](https://hartnettcapital.com/firm/): Learn about Hartnett Capital, a privately held investment and operating company in McLean, Virginia, built for active ownership and long-term value.
+- [What We Do](https://hartnettcapital.com/strategy/): Hartnett Capital acquires, operates, builds, improves, partners, and holds durable businesses and differentiated assets.
+- [Focus Areas](https://hartnettcapital.com/focus/): Explore Hartnett Capital's focus across operating companies, real estate, software, digital assets, proprietary data, intellectual property, and brands.
+- [Operating Companies](https://hartnettcapital.com/focus/operating-companies/): Hartnett Capital considers established operating companies with durable demand, sound economics, trusted relationships, and meaningful room to improve.
+- [Real Estate](https://hartnettcapital.com/focus/real-estate/): Hartnett Capital considers commercial, residential, specialty, land, and infrastructure opportunities where active ownership can strengthen long-term value.
+- [Software & Platforms](https://hartnettcapital.com/focus/software-platforms/): Hartnett Capital considers software products and platforms with practical utility, valuable workflows, and opportunities for focused product and operating improvement.
+- [Digital Assets](https://hartnettcapital.com/focus/digital-assets/): Hartnett Capital considers websites, domains, media properties, and other digital assets with durable demand, owned distribution, and room for commercial improvement.
+- [Data & Information](https://hartnettcapital.com/focus/data-information/): Hartnett Capital considers proprietary datasets and information assets that can become more useful through better collection, organization, enrichment, and access.
+- [Intellectual Property & Brands](https://hartnettcapital.com/focus/intellectual-property-brands/): Hartnett Capital considers brands, patents, trademarks, licenses, and other intellectual property with defensible ownership, recognition, utility, or extension potential.
+- [Investment Criteria](https://hartnettcapital.com/criteria/): Explore the business and asset characteristics Hartnett Capital considers when evaluating acquisitions and partnerships.
+- [Partnerships](https://hartnettcapital.com/partnerships/): Hartnett Capital partners with owners, founders, operators, investors, property owners, developers, advisors, and strategic partners.
+- [Owners & Founders](https://hartnettcapital.com/partnerships/owners-founders/): Hartnett Capital works directly with owners and founders considering succession, a sale, recapitalization, or the next stage of a company's growth.
+- [Independent Operators](https://hartnettcapital.com/partnerships/operators/): Hartnett Capital partners with capable independent operators seeking aligned capital and practical support to acquire, build, or grow durable businesses.
+- [Strategic Partners](https://hartnettcapital.com/partnerships/strategic-partners/): Hartnett Capital works with property owners, developers, investors, family offices, advisors, intermediaries, and strategic partners on aligned opportunities.
+- [Frequently Asked Questions](https://hartnettcapital.com/faq/): Answers to common questions about Hartnett Capital's investment focus, ownership approach, partnerships, evaluation process, and opportunity submissions.
+- [Contact](https://hartnettcapital.com/contact/): Contact Hartnett Capital to introduce a business, property, digital asset, dataset, partnership, or other opportunity.
+- [Sitemap](https://hartnettcapital.com/sitemap/): Browse the complete Hartnett Capital website, including company information, investment focus areas, partnership pathways, criteria, and contact details.
 
 ## Contact
 

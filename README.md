@@ -8,9 +8,20 @@ A multi-page investment and operating company website built from reusable page m
 - `/firm` — Company overview
 - `/strategy` — Acquisition and operating approach
 - `/focus` — Asset classes and areas of interest
+  - `/focus/operating-companies`
+  - `/focus/real-estate`
+  - `/focus/software-platforms`
+  - `/focus/digital-assets`
+  - `/focus/data-information`
+  - `/focus/intellectual-property-brands`
 - `/criteria` — Investment criteria
 - `/partnerships` — Partnership audiences and philosophy
+  - `/partnerships/owners-founders`
+  - `/partnerships/operators`
+  - `/partnerships/strategic-partners`
+- `/faq` — Frequently asked questions
 - `/contact` — Opportunity inquiries
+- `/sitemap` — Complete human-readable site directory
 
 Page content lives in `src/pages`, while global navigation, metadata, footer, styling, and browser behavior are centralized in `src`.
 
