@@ -2,18 +2,34 @@ const menuButton = document.querySelector(".menu-toggle");
 const menu = document.querySelector(".nav-links");
 
 if (menuButton && menu) {
+  const closeMenu = () => {
+    menu.classList.remove("open");
+    document.body.classList.remove("menu-open");
+    menuButton.setAttribute("aria-expanded", "false");
+    menuButton.setAttribute("aria-label", "Open menu");
+  };
+
   menuButton.addEventListener("click", () => {
     const open = menu.classList.toggle("open");
+    document.body.classList.toggle("menu-open", open);
     menuButton.setAttribute("aria-expanded", String(open));
     menuButton.setAttribute("aria-label", open ? "Close menu" : "Open menu");
   });
 
   menu.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      menu.classList.remove("open");
-      menuButton.setAttribute("aria-expanded", "false");
-      menuButton.setAttribute("aria-label", "Open menu");
-    });
+    link.addEventListener("click", closeMenu);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && menu.classList.contains("open")) {
+      closeMenu();
+      menuButton.focus();
+    }
+  });
+
+  const desktopNavigation = window.matchMedia("(min-width: 1051px)");
+  desktopNavigation.addEventListener("change", ({ matches }) => {
+    if (matches) closeMenu();
   });
 }
 
