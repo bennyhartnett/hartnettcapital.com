@@ -1,4 +1,4 @@
-import { linkArrow } from "../site.mjs";
+import { cloudLayer, linkArrow } from "../site.mjs";
 
 const faqs = [
   {
@@ -122,7 +122,8 @@ export const homePage = {
       </div>
     </section>
 
-    <section class="section pathways" aria-labelledby="pathways-title">
+    <section class="section pathways" aria-labelledby="pathways-title" data-scroll-sky>
+      ${cloudLayer()}
       <div class="shell pathways__intro">
         <p class="section-label">05 / Ways to engage</p>
         <div>

@@ -69,6 +69,45 @@ if (progressBar) {
   updateProgress();
 }
 
+const scrollSkies = [...document.querySelectorAll("[data-scroll-sky]")];
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+if (scrollSkies.length && !reducedMotion.matches) {
+  let cloudFrame;
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+  const updateClouds = () => {
+    cloudFrame = undefined;
+    const viewportHeight = window.innerHeight;
+    const viewportCenter = viewportHeight / 2;
+
+    scrollSkies.forEach((sky) => {
+      const rect = sky.getBoundingClientRect();
+      if (rect.bottom < -180 || rect.top > viewportHeight + 180) return;
+
+      const sectionCenter = rect.top + rect.height / 2;
+      const distance = viewportCenter - sectionCenter;
+      const setCloudPosition = (name, xSpeed, ySpeed, maxX, maxY) => {
+        sky.style.setProperty(`--cloud-${name}-x`, `${clamp(distance * xSpeed, -maxX, maxX).toFixed(1)}px`);
+        sky.style.setProperty(`--cloud-${name}-y`, `${clamp(distance * ySpeed, -maxY, maxY).toFixed(1)}px`);
+      };
+
+      setCloudPosition("one", .15, -.035, 150, 42);
+      setCloudPosition("two", -.1, .045, 120, 52);
+      setCloudPosition("three", .07, -.025, 90, 34);
+      setCloudPosition("four", -.045, .02, 62, 26);
+    });
+  };
+
+  const requestCloudUpdate = () => {
+    if (cloudFrame === undefined) cloudFrame = requestAnimationFrame(updateClouds);
+  };
+
+  window.addEventListener("scroll", requestCloudUpdate, { passive: true });
+  window.addEventListener("resize", requestCloudUpdate);
+  updateClouds();
+}
+
 const copyButton = document.querySelector(".copy-email");
 if (copyButton && navigator.clipboard) {
   const status = document.querySelector(".copy-email__status");

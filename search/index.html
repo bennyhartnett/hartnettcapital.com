@@ -195,7 +195,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .company-facts__list dd { margin: 0; align-self: center; color: var(--muted-strong); font-size: 16px; line-height: 1.65; }
 
 /* Homepage engagement pathways */
-.pathways { color: white; background: var(--blue); }
+.pathways { position: relative; isolation: isolate; overflow: hidden; color: white; background: var(--blue); }
+.pathways > .shell { position: relative; z-index: 2; }
 .pathways__intro { display: grid; grid-template-columns: .32fr 1.68fr; gap: clamp(48px, 7vw, 105px); padding-bottom: 58px; }
 .pathways .section-label { color: white; border-color: rgba(255,255,255,.65); }
 .pathways .display { max-width: 1100px; margin-bottom: 30px; }
@@ -220,7 +221,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 
 /* Interior hero */
 .page-hero { position: relative; min-height: max(680px, 100svh); padding: 78px 0 0; overflow: hidden; color: white; background: var(--navy-grid); background-position: center; background-size: 44px 44px; background-attachment: fixed; }
-.page-hero--blue { background: var(--blue); }
+.page-hero--blue { isolation: isolate; background: var(--blue); }
 .page-hero--red { background: var(--red); }
 .page-hero__grid { position: relative; z-index: 2; min-height: max(602px, calc(100svh - 78px)); padding-top: clamp(82px, 9vw, 140px); padding-bottom: 58px; display: grid; grid-template-columns: minmax(170px, .3fr) minmax(0, 1.7fr); gap: clamp(48px, 7vw, 108px); }
 .page-hero__meta { display: flex; gap: 18px; color: rgba(255,255,255,.68); font-size: 9px; font-weight: 800; letter-spacing: .17em; text-transform: uppercase; }
@@ -228,8 +229,19 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .page-hero__content { align-self: end; }
 .page-hero h1 { max-width: 1100px; margin-bottom: 44px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(70px, 8.7vw, 136px); font-weight: 400; line-height: .85; letter-spacing: -.068em; }
 .page-hero__content > p { max-width: 660px; margin: 0; padding-top: 26px; border-top: 1px solid rgba(255,255,255,.42); font-size: clamp(18px, 1.8vw, 25px); line-height: 1.4; }
-.page-hero__shape { position: absolute; width: 470px; height: 470px; right: -220px; top: 112px; border: 105px solid rgba(255,255,255,.1); border-radius: 50%; }
+.page-hero__shape { position: absolute; z-index: 1; width: 470px; height: 470px; right: -220px; top: 112px; border: 105px solid rgba(255,255,255,.1); border-radius: 50%; }
 .page-hero__shape::after { content: ""; position: absolute; width: 120px; height: 480px; right: 290px; top: 180px; background: rgba(255,255,255,.11); transform: rotate(43deg); }
+
+/* Scroll-linked clouds for bright-blue sections */
+.scroll-clouds { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.scroll-cloud { position: absolute; width: clamp(180px, 22vw, 340px); height: clamp(54px, 7vw, 104px); border-radius: 999px; background: rgba(255,255,255,.16); box-shadow: 0 18px 55px rgba(255,255,255,.06); filter: blur(.25px); will-change: transform; }
+.scroll-cloud::before, .scroll-cloud::after { content: ""; position: absolute; aspect-ratio: 1; border-radius: 50%; background: inherit; }
+.scroll-cloud::before { width: 44%; left: 17%; bottom: 28%; }
+.scroll-cloud::after { width: 34%; right: 13%; bottom: 34%; }
+.scroll-cloud--one { top: 13%; left: -8%; transform: translate3d(var(--cloud-one-x, 0), var(--cloud-one-y, 0), 0); }
+.scroll-cloud--two { top: 42%; right: -9%; width: clamp(220px, 27vw, 410px); opacity: .76; transform: translate3d(var(--cloud-two-x, 0), var(--cloud-two-y, 0), 0); }
+.scroll-cloud--three { bottom: 7%; left: 24%; width: clamp(150px, 18vw, 270px); opacity: .6; transform: translate3d(var(--cloud-three-x, 0), var(--cloud-three-y, 0), 0); }
+.scroll-cloud--four { top: 6%; right: 19%; width: clamp(125px, 14vw, 210px); opacity: .48; transform: translate3d(var(--cloud-four-x, 0), var(--cloud-four-y, 0), 0); }
 
 /* Firm */
 .page-statement .display { max-width: 1110px; }
@@ -548,6 +560,10 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
   .home-hero__visual p { right: 24px; }
   .focus-grid { grid-template-columns: 1fr; }
   .pathways__grid { grid-template-columns: 1fr; }
+  .scroll-cloud--one { top: 10%; left: -28%; }
+  .scroll-cloud--two { top: 48%; right: -32%; }
+  .scroll-cloud--three { left: 8%; bottom: 5%; }
+  .scroll-cloud--four { top: 28%; right: 8%; }
   .pathway, .pathway:last-child { min-height: 340px; grid-column: auto; }
   .pathway p { min-height: 0; }
   .asset-preview__grid, .asset-grid { grid-template-columns: 1fr; }
@@ -648,6 +664,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; transition-delay: 0ms !important; animation-duration: .01ms !important; animation-delay: 0ms !important; animation-iteration-count: 1 !important; }
   .reveal { opacity: 1; transform: none; }
+  .scroll-cloud { transform: none !important; will-change: auto; }
 }
 </style>
 </head>
@@ -980,6 +997,45 @@ if (progressBar) {
   window.addEventListener("scroll", updateProgress, { passive: true });
   window.addEventListener("resize", updateProgress);
   updateProgress();
+}
+
+const scrollSkies = [...document.querySelectorAll("[data-scroll-sky]")];
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+if (scrollSkies.length && !reducedMotion.matches) {
+  let cloudFrame;
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+  const updateClouds = () => {
+    cloudFrame = undefined;
+    const viewportHeight = window.innerHeight;
+    const viewportCenter = viewportHeight / 2;
+
+    scrollSkies.forEach((sky) => {
+      const rect = sky.getBoundingClientRect();
+      if (rect.bottom < -180 || rect.top > viewportHeight + 180) return;
+
+      const sectionCenter = rect.top + rect.height / 2;
+      const distance = viewportCenter - sectionCenter;
+      const setCloudPosition = (name, xSpeed, ySpeed, maxX, maxY) => {
+        sky.style.setProperty(`--cloud-${name}-x`, `${clamp(distance * xSpeed, -maxX, maxX).toFixed(1)}px`);
+        sky.style.setProperty(`--cloud-${name}-y`, `${clamp(distance * ySpeed, -maxY, maxY).toFixed(1)}px`);
+      };
+
+      setCloudPosition("one", .15, -.035, 150, 42);
+      setCloudPosition("two", -.1, .045, 120, 52);
+      setCloudPosition("three", .07, -.025, 90, 34);
+      setCloudPosition("four", -.045, .02, 62, 26);
+    });
+  };
+
+  const requestCloudUpdate = () => {
+    if (cloudFrame === undefined) cloudFrame = requestAnimationFrame(updateClouds);
+  };
+
+  window.addEventListener("scroll", requestCloudUpdate, { passive: true });
+  window.addEventListener("resize", requestCloudUpdate);
+  updateClouds();
 }
 
 const copyButton = document.querySelector(".copy-email");

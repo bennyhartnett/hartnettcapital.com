@@ -69,9 +69,19 @@ export function linkArrow(label, href, className = "text-link") {
   return `<a class="${className}" href="${href}"><span>${label}</span><span aria-hidden="true">↗</span></a>`;
 }
 
+export function cloudLayer() {
+  return `<div class="scroll-clouds" aria-hidden="true">
+    <span class="scroll-cloud scroll-cloud--one"></span>
+    <span class="scroll-cloud scroll-cloud--two"></span>
+    <span class="scroll-cloud scroll-cloud--three"></span>
+    <span class="scroll-cloud scroll-cloud--four"></span>
+  </div>`;
+}
+
 export function pageIntro({ index, eyebrow, title, copy, variant = "navy" }) {
   return `
-    <section class="page-hero page-hero--${variant}">
+    <section class="page-hero page-hero--${variant}"${variant === "blue" ? ' data-scroll-sky' : ""}>${variant === "blue" ? `
+      ${cloudLayer()}` : ""}
       <div class="shell page-hero__grid">
         <div class="page-hero__meta">
           <span>${index}</span>
