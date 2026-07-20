@@ -46,7 +46,46 @@ if ("IntersectionObserver" in window) {
     { threshold: 0.12 },
   );
 
-  document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+  document.querySelectorAll(".reveal").forEach((item) => {
+    const siblings = [...item.parentElement.children].filter((child) => child.classList.contains("reveal"));
+    if (siblings.length > 1) {
+      item.style.setProperty("--stagger", `${Math.min(siblings.indexOf(item) * 70, 350)}ms`);
+    }
+    observer.observe(item);
+  });
 } else {
   document.querySelectorAll(".reveal").forEach((item) => item.classList.add("visible"));
+}
+
+const progressBar = document.querySelector(".scroll-progress");
+if (progressBar) {
+  const updateProgress = () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? Math.min(window.scrollY / scrollable, 1) : 0;
+    progressBar.style.setProperty("--scroll-progress", progress.toFixed(4));
+  };
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  window.addEventListener("resize", updateProgress);
+  updateProgress();
+}
+
+const copyButton = document.querySelector(".copy-email");
+if (copyButton && navigator.clipboard) {
+  const status = document.querySelector(".copy-email__status");
+  copyButton.parentElement.classList.add("available");
+  let statusTimer;
+  copyButton.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(copyButton.dataset.email);
+      status.textContent = "Copied";
+    } catch {
+      status.textContent = "Copy failed";
+    }
+    status.classList.add("shown");
+    clearTimeout(statusTimer);
+    statusTimer = setTimeout(() => {
+      status.classList.remove("shown");
+      status.textContent = "";
+    }, 2400);
+  });
 }

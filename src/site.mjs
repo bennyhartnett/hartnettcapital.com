@@ -77,7 +77,7 @@ export function pageIntro({ index, eyebrow, title, copy, variant = "navy" }) {
           <span>${index}</span>
           <span>${eyebrow}</span>
         </div>
-        <div class="page-hero__content reveal">
+        <div class="page-hero__content">
           <h1>${title}</h1>
           <p>${copy}</p>
         </div>

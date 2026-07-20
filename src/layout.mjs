@@ -246,7 +246,9 @@ export function renderDocument(page, styles, clientScript, origin = "{{ORIGIN}}"
   <style>${styles}</style>
 </head>
 <body class="${page.bodyClass ?? ""}">
+  <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
   ${renderHeader(page.path)}
   <main id="main">${page.body}</main>
   ${page.hideFooter ? "" : renderFooter()}

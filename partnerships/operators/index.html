@@ -92,10 +92,13 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .two-column-copy p { margin-bottom: 0; max-width: 530px; color: var(--muted); font-size: 17px; }
 .text-link { display: inline-flex; align-items: center; gap: 28px; padding-bottom: 8px; border-bottom: 1px solid var(--ink); font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; transition: gap 180ms ease; }
 .text-link:hover { gap: 36px; }
+.button-link span[aria-hidden], .focus-card b, .asset-preview__item b, .footer__contact span[aria-hidden] { transition: transform 180ms ease; }
+.button-link:hover span[aria-hidden], .focus-card:hover b, .asset-preview__item:hover b, .footer__contact:hover span[aria-hidden] { transform: translate(3px, -3px); }
 .button-link { display: inline-flex; min-width: 245px; align-items: center; justify-content: space-between; gap: 40px; padding: 17px 20px; border: 1px solid currentColor; font-size: 11px; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; transition: color 180ms ease, background 180ms ease; }
 .button-link:hover { color: white; background: var(--ink); }
-.reveal { opacity: 0; transform: translateY(26px); transition: opacity 600ms ease, transform 600ms ease; }
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity 600ms ease var(--stagger, 0ms), transform 600ms ease var(--stagger, 0ms); }
 .reveal.visible { opacity: 1; transform: none; }
+.scroll-progress { position: fixed; inset: 0 0 auto; z-index: 40; height: 2px; background: var(--blue); transform: scaleX(var(--scroll-progress, 0)); transform-origin: left; pointer-events: none; }
 .nav > *, .home-hero > *, .home-hero__lower > *, .split-heading > *, .two-column-copy > *, .section-heading > *, .standards__grid > *, .asset-preview__item > *, .pathways__intro > *, .pathways__grid > *, .page-hero__grid > *, .principle > *, .operating-model__grid > *, .feature-quote__grid > *, .strategy-block__grid > *, .criteria-detail__intro > *, .criteria-grid > *, .asset-grid > *, .contact-page__grid > *, .contact-guidance > *, .contact-checklist li > *, .footer__lead > *, .footer__directory > *, .sitemap-page__grid > *, .faq-group > * { min-width: 0; }
 
 /* Master navigation */
@@ -135,11 +138,38 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .home-hero__visual > span { position: absolute; z-index: 2; top: 45px; left: 42px; color: rgba(255,255,255,.64); font-size: 9px; font-weight: 800; letter-spacing: .17em; text-transform: uppercase; }
 .home-hero__visual img { position: absolute; z-index: 2; left: 42px; bottom: 42px; width: clamp(120px, 13vw, 190px); opacity: .94; }
 .home-hero__visual p { position: absolute; z-index: 2; right: 36px; bottom: 42px; margin: 0; color: rgba(255,255,255,.7); font-size: 10px; line-height: 1.65; letter-spacing: .09em; text-transform: uppercase; }
+
+/* Entrance + ambient motion */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(28px); }
+}
+@keyframes ring-drift {
+  0%, 100% { transform: rotate(-12deg) scale(1); }
+  50% { transform: rotate(-7deg) scale(1.045); }
+}
+@keyframes bar-drift {
+  0%, 100% { transform: rotate(38deg) translateY(0); }
+  50% { transform: rotate(38deg) translateY(-26px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-kicker { animation: rise-in 700ms ease 80ms both; }
+  .home-hero h1 { animation: rise-in 800ms ease 180ms both; }
+  .home-hero__lower > p { animation: rise-in 700ms ease 340ms both; }
+  .hero-actions { animation: rise-in 700ms ease 460ms both; }
+  .home-hero__visual > span, .home-hero__visual img, .home-hero__visual p { animation: rise-in 900ms ease 500ms both; }
+  .home-hero__visual::before { animation: ring-drift 9.6s ease-in-out infinite; }
+  .home-hero__visual::after { animation: bar-drift 9.6s ease-in-out -2.4s infinite; }
+  .page-hero__meta { animation: rise-in 700ms ease 80ms both; }
+  .page-hero h1 { animation: rise-in 800ms ease 180ms both; }
+  .page-hero__content > p { animation: rise-in 700ms ease 340ms both; }
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 180ms; }
+}
 .manifesto { background: var(--paper); }
 .section-heading { display: grid; grid-template-columns: .32fr 1.68fr; gap: clamp(48px, 7vw, 105px); padding-bottom: 56px; }
 .section-heading .display { margin-bottom: 0; }
 .focus-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(255,255,255,.2); border-left: 1px solid rgba(255,255,255,.2); }
-.focus-card { min-height: 440px; padding: 28px; display: flex; flex-direction: column; border-right: 1px solid rgba(255,255,255,.2); border-bottom: 1px solid rgba(255,255,255,.2); transition: color 180ms ease, background 180ms ease; }
+.focus-card { min-height: 440px; padding: 28px; display: flex; flex-direction: column; border-right: 1px solid rgba(255,255,255,.2); border-bottom: 1px solid rgba(255,255,255,.2); transition: color 180ms ease, background 180ms ease, opacity 600ms ease var(--stagger, 0ms), transform 600ms ease var(--stagger, 0ms); }
 .focus-card > span { color: var(--blue-soft); font-family: Georgia, "Times New Roman", serif; font-size: 42px; }
 .focus-card h3 { margin: auto 0 24px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(35px, 3.1vw, 50px); font-weight: 400; line-height: .98; letter-spacing: -.04em; }
 .focus-card p { max-width: 330px; margin: 0; color: rgba(255,255,255,.63); font-size: 14px; }
@@ -165,7 +195,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .pathways .display { max-width: 1100px; margin-bottom: 30px; }
 .pathways__lede { max-width: 680px; margin: 0; color: rgba(255,255,255,.76); font-size: clamp(17px, 1.5vw, 21px); }
 .pathways__grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(255,255,255,.3); border-left: 1px solid rgba(255,255,255,.3); }
-.pathway { min-height: 390px; padding: 28px; display: flex; flex-direction: column; border-right: 1px solid rgba(255,255,255,.3); border-bottom: 1px solid rgba(255,255,255,.3); transition: color 180ms ease, background 180ms ease; }
+.pathway { min-height: 390px; padding: 28px; display: flex; flex-direction: column; border-right: 1px solid rgba(255,255,255,.3); border-bottom: 1px solid rgba(255,255,255,.3); transition: color 180ms ease, background 180ms ease, opacity 600ms ease var(--stagger, 0ms), transform 600ms ease var(--stagger, 0ms); }
 .pathway > span { color: rgba(255,255,255,.7); font-size: 10px; font-weight: 800; }
 .pathway h3 { margin: auto 0 18px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(34px, 3.1vw, 48px); font-weight: 400; line-height: .98; letter-spacing: -.045em; }
 .pathway p { min-height: 92px; margin-bottom: 30px; color: rgba(255,255,255,.72); font-size: 14px; }
@@ -173,7 +203,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 
 /* Homepage focus preview */
 .asset-preview__grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(16,18,23,.3); border-left: 1px solid rgba(16,18,23,.3); }
-.asset-preview__item { min-height: 185px; display: grid; grid-template-columns: 54px 1fr auto; gap: 18px; align-items: center; padding: 30px; border-right: 1px solid rgba(16,18,23,.3); border-bottom: 1px solid rgba(16,18,23,.3); transition: color 180ms ease, background 180ms ease; }
+.asset-preview__item { min-height: 185px; display: grid; grid-template-columns: 54px 1fr auto; gap: 18px; align-items: center; padding: 30px; border-right: 1px solid rgba(16,18,23,.3); border-bottom: 1px solid rgba(16,18,23,.3); transition: color 180ms ease, background 180ms ease, opacity 600ms ease var(--stagger, 0ms), transform 600ms ease var(--stagger, 0ms); }
 .asset-preview__item > span { align-self: start; color: var(--blue); font-size: 10px; font-weight: 800; }
 .asset-preview__item h3 { margin: 0 0 8px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(28px, 2.3vw, 38px); font-weight: 400; line-height: 1; letter-spacing: -.035em; }
 .asset-preview__item p { max-width: 420px; margin: 0; color: var(--muted-strong); font-size: 14px; }
@@ -252,7 +282,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .criteria-detail__intro .display { margin: 0; }
 .criteria-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
 .partnership-grid .criterion { min-height: 330px; }
-.criterion { min-height: 360px; padding: 28px; display: flex; flex-direction: column; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: color 180ms ease, background 180ms ease; }
+.criterion { min-height: 360px; padding: 28px; display: flex; flex-direction: column; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: color 180ms ease, background 180ms ease, opacity 600ms ease var(--stagger, 0ms), transform 600ms ease var(--stagger, 0ms); }
 .criterion > span { color: var(--blue); font-size: 10px; font-weight: 800; }
 .criterion h3 { margin: auto 0 20px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(32px, 2.8vw, 42px); font-weight: 400; line-height: 1; letter-spacing: -.04em; }
 .criterion p { min-height: 66px; margin: 0; color: var(--muted); font-size: 14px; }
@@ -315,6 +345,12 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .sitemap-group__links a { min-height: 54px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
 .sitemap-group__links a span:last-child { color: var(--blue); font-size: 18px; font-weight: 400; transition: transform 160ms ease; }
 .sitemap-group__links a:hover span:last-child { transform: translate(3px, -3px); }
+.contact-copy { display: none; align-items: center; gap: 16px; margin-top: 26px; }
+.contact-copy.available { display: flex; }
+.copy-email { padding: 0 0 8px; border: 0; border-bottom: 1px solid var(--ink); background: transparent; color: var(--ink); font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; }
+.copy-email:hover { color: var(--blue); border-color: var(--blue); }
+.copy-email__status { color: var(--blue); font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0; transition: opacity 180ms ease; }
+.copy-email__status.shown { opacity: 1; }
 
 /* Footer */
 .footer { position: relative; overflow: hidden; padding: clamp(90px, 10vw, 145px) 0 38px; color: var(--navy); background: var(--red); }
@@ -338,11 +374,23 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .footer__disclosure a { flex: 0 0 auto; font-weight: 800; }
 
 /* 404 */
-.not-found__content { min-height: 100vh; padding: 170px 0 90px; color: white; background: var(--navy); }
+.not-found__content { position: relative; overflow: hidden; min-height: 100vh; padding: 170px 0 90px; color: white; background: linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px), var(--navy); background-position: center; background-size: 44px 44px; animation: hero-grid-pulse 4.8s ease-in-out infinite; }
+.not-found__content .shell { position: relative; z-index: 2; }
 .not-found__content .section-label { width: 210px; color: var(--blue-soft); border-color: var(--blue-soft); }
 .not-found__content h1 { margin: 90px 0 35px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(72px, 9vw, 140px); font-weight: 400; line-height: .84; letter-spacing: -.07em; }
 .not-found__content p:not(.section-label) { margin-bottom: 38px; color: rgba(255,255,255,.68); }
 .not-found__content .button-link:hover { color: var(--ink); background: white; }
+.not-found__numeral { position: absolute; z-index: 1; right: -0.06em; bottom: -0.24em; color: transparent; -webkit-text-stroke: 1px rgba(223,231,255,.22); font-family: Georgia, "Times New Roman", serif; font-size: clamp(200px, 34vw, 480px); font-weight: 400; line-height: 1; letter-spacing: -.05em; pointer-events: none; user-select: none; }
+@supports not (-webkit-text-stroke: 1px white) { .not-found__numeral { color: rgba(223,231,255,.07); } }
+.not-found__links { display: flex; flex-wrap: wrap; gap: 18px 32px; margin-top: 44px; font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.not-found__links a { padding-bottom: 6px; border-bottom: 1px solid rgba(223,231,255,.4); color: var(--blue-soft); transition: color 180ms ease, border-color 180ms ease; }
+.not-found__links a:hover { color: white; border-color: white; }
+@media (prefers-reduced-motion: no-preference) {
+  .not-found__content .section-label { animation: rise-in 700ms ease 80ms both; }
+  .not-found__content h1 { animation: rise-in 800ms ease 180ms both; }
+  .not-found__content p:not(.section-label) { animation: rise-in 700ms ease 340ms both; }
+  .not-found__content .button-link, .not-found__links { animation: rise-in 700ms ease 460ms both; }
+}
 
 @media (max-width: 1180px) {
   .home-hero__lower { grid-template-columns: 1fr; align-items: start; }
@@ -490,13 +538,15 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+  *, *::before, *::after { transition-duration: .01ms !important; transition-delay: 0ms !important; animation-duration: .01ms !important; animation-delay: 0ms !important; animation-iteration-count: 1 !important; }
   .reveal { opacity: 1; transform: none; }
 }
 </style>
 </head>
 <body class="">
+  <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
   
     <header class="topbar">
       <div class="shell nav">
@@ -527,7 +577,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
           <span>05</span>
           <span>Independent Operators</span>
         </div>
-        <div class="page-hero__content reveal">
+        <div class="page-hero__content">
           <h1>Aligned capital for capable operators.</h1>
           <p>We partner with experienced people who have earned conviction in a business, market, or operating plan and want a long-term partner for the work ahead.</p>
         </div>
@@ -667,9 +717,48 @@ if ("IntersectionObserver" in window) {
     { threshold: 0.12 },
   );
 
-  document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+  document.querySelectorAll(".reveal").forEach((item) => {
+    const siblings = [...item.parentElement.children].filter((child) => child.classList.contains("reveal"));
+    if (siblings.length > 1) {
+      item.style.setProperty("--stagger", `${Math.min(siblings.indexOf(item) * 70, 350)}ms`);
+    }
+    observer.observe(item);
+  });
 } else {
   document.querySelectorAll(".reveal").forEach((item) => item.classList.add("visible"));
+}
+
+const progressBar = document.querySelector(".scroll-progress");
+if (progressBar) {
+  const updateProgress = () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? Math.min(window.scrollY / scrollable, 1) : 0;
+    progressBar.style.setProperty("--scroll-progress", progress.toFixed(4));
+  };
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  window.addEventListener("resize", updateProgress);
+  updateProgress();
+}
+
+const copyButton = document.querySelector(".copy-email");
+if (copyButton && navigator.clipboard) {
+  const status = document.querySelector(".copy-email__status");
+  copyButton.parentElement.classList.add("available");
+  let statusTimer;
+  copyButton.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(copyButton.dataset.email);
+      status.textContent = "Copied";
+    } catch {
+      status.textContent = "Copy failed";
+    }
+    status.classList.add("shown");
+    clearTimeout(statusTimer);
+    statusTimer = setTimeout(() => {
+      status.classList.remove("shown");
+      status.textContent = "";
+    }, 2400);
+  });
 }
 </script>
 </body>

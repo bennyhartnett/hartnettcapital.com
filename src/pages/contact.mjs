@@ -21,6 +21,10 @@ export const contactPage = {
         <p class="section-label">Contact Hartnett Capital</p>
         <div>
           <a class="contact-email reveal" href="mailto:${site.email}?subject=Opportunity%20for%20Hartnett%20Capital">${site.email}<span aria-hidden="true">↗</span></a>
+          <div class="contact-copy">
+            <button class="copy-email" type="button" data-email="${site.email}">Copy email address</button>
+            <span class="copy-email__status" role="status" aria-live="polite"></span>
+          </div>
           <div class="contact-guidance reveal">
             <div><h2>What to share</h2><p>A concise overview of the business, property, digital asset, dataset, partnership, or other opportunity; relevant context; and why Hartnett Capital may be a fit.</p></div>
             <div><h2>What happens next</h2><p>We review inquiries directly and discreetly. If the opportunity aligns with our interests, we will follow up to request more context or arrange a conversation.</p></div>
