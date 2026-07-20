@@ -22,6 +22,8 @@ A multi-page investment and operating company website built from reusable page m
 - `/faq` — Frequently asked questions
 - `/contact` — Opportunity inquiries
 - `/sitemap` — Complete human-readable site directory
+- `/search` — Full-site content search
+- `/login` — Private partner portal sign-in screen
 
 Page content lives in `src/pages`, while global navigation, metadata, footer, styling, and browser behavior are centralized in `src`.
 

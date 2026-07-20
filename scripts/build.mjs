@@ -46,13 +46,14 @@ const staticPages = pages.map((page) => ({
   html: renderDocument(page, styles, clientScript, siteOrigin),
 }));
 const staticNotFoundHtml = renderDocument(notFoundPage, styles, clientScript, siteOrigin);
-const sitemapPaths = pages.map((page) => page.path);
+const sitemapPaths = pages.filter((page) => !page.noIndex).map((page) => page.path);
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${sitemapPaths.map((path) => `  <url><loc>${siteOrigin}${path}</loc></url>`).join("\n")}
 </urlset>
 `;
 const llmsDirectory = pages
+  .filter((page) => !page.noIndex)
   .map((page) => `- [${page.title}](${siteOrigin}${page.path}): ${page.description}`)
   .join("\n");
 const llmsText = `# Hartnett Capital

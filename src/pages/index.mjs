@@ -5,13 +5,15 @@ import { firmPage } from "./firm.mjs";
 import { focusDetailPages } from "./focus-details.mjs";
 import { focusPage } from "./focus.mjs";
 import { homePage } from "./home.mjs";
+import { loginPage } from "./login.mjs";
 import { notFoundPage } from "./not-found.mjs";
 import { partnershipDetailPages } from "./partnership-detail.mjs";
 import { partnershipsPage } from "./partnerships.mjs";
 import { sitemapPage } from "./sitemap.mjs";
+import { createSearchPage } from "./search.mjs";
 import { strategyPage } from "./strategy.mjs";
 
-export const pages = [
+const contentPages = [
   homePage,
   firmPage,
   strategyPage,
@@ -24,4 +26,6 @@ export const pages = [
   contactPage,
   sitemapPage,
 ];
+
+export const pages = [...contentPages, createSearchPage(contentPages), loginPage];
 export { notFoundPage };

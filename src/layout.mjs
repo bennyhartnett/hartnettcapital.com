@@ -144,9 +144,15 @@ function renderHeader(activePath) {
         </a>
         <nav class="nav-links" id="site-menu" aria-label="Primary navigation">
           ${links}
+          <a class="nav-links__mobile-utility" href="/search/">Search</a>
+          <a class="nav-links__mobile-utility" href="/login/">Sign in</a>
           <a class="nav-links__mobile-contact" href="/contact/">Share an Opportunity</a>
         </nav>
-        <a class="nav-cta" href="/contact/"${activePath === "/contact/" ? ' aria-current="page"' : ""}>Share an Opportunity</a>
+        <div class="nav-utilities">
+          <a class="nav-search" href="/search/"${activePath === "/search/" ? ' aria-current="page"' : ""}>Search</a>
+          <a class="nav-login" href="/login/"${activePath === "/login/" ? ' aria-current="page"' : ""}>Sign in</a>
+          <a class="nav-cta" href="/contact/"${activePath === "/contact/" ? ' aria-current="page"' : ""}>Share an Opportunity</a>
+        </div>
         <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
           <span></span><span></span>
         </button>
