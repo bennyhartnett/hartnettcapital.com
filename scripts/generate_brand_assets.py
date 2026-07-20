@@ -377,11 +377,7 @@ def favicon_svg() -> str:
     return f'''<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="Hartnett Capital">
   <title>Hartnett Capital</title>
-  <style>
-    .mark {{ fill: {NAVY}; }}
-    @media (prefers-color-scheme: dark) {{ .mark {{ fill: {WHITE}; }} }}
-  </style>
-  <g class="mark" transform="translate({x:.3f} {padding}) scale({scale:.8f})">
+  <g fill="{BLUE}" transform="translate({x:.3f} {padding}) scale({scale:.8f})">
     <path d="{LEFT_PATH}"/>
     <path d="{RIGHT_PATH}"/>
   </g>
@@ -409,7 +405,7 @@ def generate_favicons() -> list[Path]:
         draw_mark(
             draw,
             (pad, pad, canvas.width - pad * 2, canvas.height - pad * 2),
-            NAVY if is_favicon else WHITE,
+            BLUE if is_favicon else WHITE,
         )
         rendered[size] = canvas.resize((size, size), Image.Resampling.LANCZOS)
 
