@@ -84,10 +84,7 @@ export function linkArrow(label, href, className = "text-link") {
 
 export function cloudLayer() {
   return `<div class="scroll-clouds" aria-hidden="true">
-    <span class="scroll-cloud scroll-cloud--one"></span>
-    <span class="scroll-cloud scroll-cloud--two"></span>
-    <span class="scroll-cloud scroll-cloud--three"></span>
-    <span class="scroll-cloud scroll-cloud--four"></span>
+    <span class="scroll-cloud-field"></span>
   </div>`;
 }
 

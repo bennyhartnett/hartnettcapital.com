@@ -101,6 +101,11 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity 600ms ease var(--stagger, 0ms), transform 600ms ease var(--stagger, 0ms); }
 .reveal.visible { opacity: 1; transform: none; }
 .scroll-progress { position: fixed; inset: 0 0 auto; z-index: 40; height: 2px; background: var(--blue); transform: scaleX(var(--scroll-progress, 0)); transform-origin: left; pointer-events: none; }
+.grid-scroll-surface { position: relative; isolation: isolate; overflow: hidden; background-attachment: scroll; animation: none; }
+.grid-scroll-line { position: absolute; inset: 0; z-index: -1; display: block; overflow: hidden; pointer-events: none; }
+.grid-scroll-line::before, .grid-scroll-line::after { content: ""; position: absolute; display: block; background: var(--blue); box-shadow: 0 0 12px rgba(23, 71, 232, .32); }
+.grid-scroll-line::before { top: var(--grid-line-y, 44px); right: var(--grid-line-right, 44px); left: var(--grid-line-x, 44px); height: 2px; transform: scaleX(var(--grid-line-progress, 0)); transform-origin: left center; }
+.grid-scroll-line::after { top: var(--grid-line-y, 44px); bottom: var(--grid-line-bottom, 44px); left: var(--grid-line-x, 44px); width: 2px; transform: scaleY(var(--grid-line-progress, 0)); transform-origin: center top; }
 .nav > *, .home-hero > *, .home-hero__lower > *, .split-heading > *, .two-column-copy > *, .section-heading > *, .standards__grid > *, .asset-preview__item > *, .pathways__intro > *, .pathways__grid > *, .page-hero__grid > *, .principle > *, .operating-model__grid > *, .feature-quote__grid > *, .strategy-block__grid > *, .criteria-detail__intro > *, .criteria-grid > *, .asset-grid > *, .contact-page__grid > *, .contact-guidance > *, .contact-checklist li > *, .footer__lead > *, .footer__directory > *, .sitemap-page__grid > *, .faq-group > *, .insight-card > *, .article-grid > *, .doc-hero__grid > *, .legal-doc__grid > *, .intake-form > * { min-width: 0; }
 
 /* Master navigation */
@@ -233,12 +238,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .page-hero__shape::after { content: ""; position: absolute; width: 120px; height: 480px; right: 290px; top: 180px; background: rgba(255,255,255,.11); transform: rotate(43deg); }
 
 /* Scroll-linked clouds for bright-blue sections */
-.scroll-clouds { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
-.scroll-cloud { position: absolute; background-position: center; background-repeat: no-repeat; background-size: contain; filter: brightness(1.05) contrast(1.03); will-change: transform; }
-.scroll-cloud--one { top: 6%; left: -9%; width: clamp(360px, 43vw, 720px); aspect-ratio: 755 / 415; background-image: url("/assets/clouds/cumulus-large.png"); opacity: .62; transform: translate3d(var(--cloud-one-x, 0), var(--cloud-one-y, 0), 0); }
-.scroll-cloud--two { top: 35%; right: -10%; width: clamp(360px, 45vw, 760px); aspect-ratio: 765 / 375; background-image: url("/assets/clouds/cumulus-round.png"); opacity: .55; transform: translate3d(var(--cloud-two-x, 0), var(--cloud-two-y, 0), 0); }
-.scroll-cloud--three { bottom: -3%; left: 17%; width: clamp(300px, 40vw, 660px); aspect-ratio: 770 / 380; background-image: url("/assets/clouds/cumulus-low.png"); opacity: .48; transform: translate3d(var(--cloud-three-x, 0), var(--cloud-three-y, 0), 0); }
-.scroll-cloud--four { top: 2%; right: 15%; width: clamp(240px, 31vw, 520px); aspect-ratio: 570 / 390; background-image: url("/assets/clouds/cumulus-wisp.png"); opacity: .38; transform: translate3d(var(--cloud-four-x, 0), var(--cloud-four-y, 0), 0); }
+.scroll-clouds { position: absolute; inset: -32% -18%; z-index: 0; pointer-events: none; }
+.scroll-cloud-field { position: absolute; inset: 0; background: url("/assets/clouds/cloud-field.png") center / cover no-repeat; opacity: .46; filter: brightness(1.05) contrast(1.03); transform: translate3d(var(--cloud-field-x, 0), var(--cloud-field-y, 0), 0) scale(1.08); will-change: transform; }
 
 /* Firm */
 .page-statement .display { max-width: 1110px; }
@@ -620,10 +621,8 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
   .home-hero__visual p { right: 24px; }
   .focus-grid { grid-template-columns: 1fr; }
   .pathways__grid { grid-template-columns: 1fr; }
-  .scroll-cloud--one { top: 8%; left: -42%; }
-  .scroll-cloud--two { top: 45%; right: -45%; }
-  .scroll-cloud--three { left: -8%; bottom: 1%; }
-  .scroll-cloud--four { top: 27%; right: -2%; }
+  .scroll-clouds { inset: -38% -70%; }
+  .scroll-cloud-field { background-size: auto 100%; opacity: .5; }
   .pathway, .pathway:last-child { min-height: 340px; grid-column: auto; }
   .pathway p { min-height: 0; }
   .asset-preview__grid, .asset-grid { grid-template-columns: 1fr; }
@@ -730,7 +729,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; transition-delay: 0ms !important; animation-duration: .01ms !important; animation-delay: 0ms !important; animation-iteration-count: 1 !important; }
   .reveal { opacity: 1; transform: none; }
-  .scroll-cloud { transform: none !important; will-change: auto; }
+  .scroll-cloud-field { will-change: auto; }
 }
 </style>
 </head>
@@ -958,33 +957,98 @@ if (progressBar) {
   updateProgress();
 }
 
+const gridSurfaces = [...document.querySelectorAll([
+  ".section--navy",
+  ".home-hero__visual",
+  ".page-hero:not(.page-hero--blue):not(.page-hero--red)",
+  ".feature-quote",
+  ".strategy-block--navy",
+  ".search-hero",
+  ".access-page__story",
+  ".not-found__content",
+].join(", "))];
+
+if (gridSurfaces.length) {
+  const gridSize = 44;
+  let gridFrame;
+
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  const positiveModulo = (value, divisor) => ((value % divisor) + divisor) % divisor;
+
+  const alignTraceToGrid = (surface) => {
+    const width = surface.clientWidth;
+    const height = surface.clientHeight;
+    const phaseX = positiveModulo((width - gridSize) / 2, gridSize);
+    const phaseY = positiveModulo((height - gridSize) / 2, gridSize);
+    const lineX = phaseX + gridSize;
+    const lineY = phaseY + gridSize;
+    const lastLineX = phaseX + Math.max(1, Math.floor((width - gridSize - phaseX) / gridSize)) * gridSize;
+    const lastLineY = phaseY + Math.max(1, Math.floor((height - gridSize - phaseY) / gridSize)) * gridSize;
+
+    surface.style.setProperty("--grid-line-x", `${lineX.toFixed(1)}px`);
+    surface.style.setProperty("--grid-line-y", `${lineY.toFixed(1)}px`);
+    surface.style.setProperty("--grid-line-right", `${Math.max(gridSize, width - lastLineX).toFixed(1)}px`);
+    surface.style.setProperty("--grid-line-bottom", `${Math.max(gridSize, height - lastLineY).toFixed(1)}px`);
+  };
+
+  const updateGridLines = () => {
+    gridFrame = undefined;
+    const viewportHeight = window.innerHeight;
+    const scrollTop = window.scrollY;
+
+    gridSurfaces.forEach((surface) => {
+      const surfaceTop = surface.getBoundingClientRect().top + scrollTop;
+      const start = surfaceTop < viewportHeight ? 0 : surfaceTop - viewportHeight * .85;
+      const end = Math.max(start + 1, surfaceTop + surface.offsetHeight - viewportHeight * .18);
+      const progress = clamp((scrollTop - start) / (end - start), 0, 1);
+      surface.style.setProperty("--grid-line-progress", progress.toFixed(4));
+    });
+  };
+
+  const requestGridUpdate = () => {
+    if (gridFrame === undefined) gridFrame = requestAnimationFrame(updateGridLines);
+  };
+
+  gridSurfaces.forEach((surface) => {
+    surface.classList.add("grid-scroll-surface");
+    const line = document.createElement("i");
+    line.className = "grid-scroll-line";
+    line.setAttribute("aria-hidden", "true");
+    surface.append(line);
+    alignTraceToGrid(surface);
+  });
+
+  window.addEventListener("scroll", requestGridUpdate, { passive: true });
+  window.addEventListener("resize", () => {
+    gridSurfaces.forEach(alignTraceToGrid);
+    requestGridUpdate();
+  });
+  updateGridLines();
+}
+
 const scrollSkies = [...document.querySelectorAll("[data-scroll-sky]")];
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-if (scrollSkies.length && !reducedMotion.matches) {
+if (scrollSkies.length) {
   let cloudFrame;
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
   const updateClouds = () => {
     cloudFrame = undefined;
     const viewportHeight = window.innerHeight;
-    const viewportCenter = viewportHeight / 2;
 
-    scrollSkies.forEach((sky) => {
+    scrollSkies.forEach((sky, index) => {
       const rect = sky.getBoundingClientRect();
       if (rect.bottom < -180 || rect.top > viewportHeight + 180) return;
 
-      const sectionCenter = rect.top + rect.height / 2;
-      const distance = viewportCenter - sectionCenter;
-      const setCloudPosition = (name, xSpeed, ySpeed, maxX, maxY) => {
-        sky.style.setProperty(`--cloud-${name}-x`, `${clamp(distance * xSpeed, -maxX, maxX).toFixed(1)}px`);
-        sky.style.setProperty(`--cloud-${name}-y`, `${clamp(distance * ySpeed, -maxY, maxY).toFixed(1)}px`);
-      };
-
-      setCloudPosition("one", .15, -.035, 150, 42);
-      setCloudPosition("two", -.1, .045, 120, 52);
-      setCloudPosition("three", .07, -.025, 90, 34);
-      setCloudPosition("four", -.045, .02, 62, 26);
+      const progress = clamp((viewportHeight - rect.top) / (viewportHeight + rect.height), 0, 1);
+      const phase = progress - .5;
+      const direction = index % 2 === 0 ? 1 : -1;
+      const motionScale = reducedMotion.matches ? .2 : 1;
+      const cloudX = clamp(phase * 500 * direction * motionScale, -220, 220);
+      const cloudY = clamp(phase * 1100 * motionScale, -340, 340);
+      sky.style.setProperty("--cloud-field-x", `${cloudX.toFixed(1)}px`);
+      sky.style.setProperty("--cloud-field-y", `${cloudY.toFixed(1)}px`);
     });
   };
 
@@ -994,6 +1058,7 @@ if (scrollSkies.length && !reducedMotion.matches) {
 
   window.addEventListener("scroll", requestCloudUpdate, { passive: true });
   window.addEventListener("resize", requestCloudUpdate);
+  if ("addEventListener" in reducedMotion) reducedMotion.addEventListener("change", requestCloudUpdate);
   updateClouds();
 }
 

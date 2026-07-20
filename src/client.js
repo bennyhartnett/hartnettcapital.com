@@ -69,33 +69,98 @@ if (progressBar) {
   updateProgress();
 }
 
+const gridSurfaces = [...document.querySelectorAll([
+  ".section--navy",
+  ".home-hero__visual",
+  ".page-hero:not(.page-hero--blue):not(.page-hero--red)",
+  ".feature-quote",
+  ".strategy-block--navy",
+  ".search-hero",
+  ".access-page__story",
+  ".not-found__content",
+].join(", "))];
+
+if (gridSurfaces.length) {
+  const gridSize = 44;
+  let gridFrame;
+
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  const positiveModulo = (value, divisor) => ((value % divisor) + divisor) % divisor;
+
+  const alignTraceToGrid = (surface) => {
+    const width = surface.clientWidth;
+    const height = surface.clientHeight;
+    const phaseX = positiveModulo((width - gridSize) / 2, gridSize);
+    const phaseY = positiveModulo((height - gridSize) / 2, gridSize);
+    const lineX = phaseX + gridSize;
+    const lineY = phaseY + gridSize;
+    const lastLineX = phaseX + Math.max(1, Math.floor((width - gridSize - phaseX) / gridSize)) * gridSize;
+    const lastLineY = phaseY + Math.max(1, Math.floor((height - gridSize - phaseY) / gridSize)) * gridSize;
+
+    surface.style.setProperty("--grid-line-x", `${lineX.toFixed(1)}px`);
+    surface.style.setProperty("--grid-line-y", `${lineY.toFixed(1)}px`);
+    surface.style.setProperty("--grid-line-right", `${Math.max(gridSize, width - lastLineX).toFixed(1)}px`);
+    surface.style.setProperty("--grid-line-bottom", `${Math.max(gridSize, height - lastLineY).toFixed(1)}px`);
+  };
+
+  const updateGridLines = () => {
+    gridFrame = undefined;
+    const viewportHeight = window.innerHeight;
+    const scrollTop = window.scrollY;
+
+    gridSurfaces.forEach((surface) => {
+      const surfaceTop = surface.getBoundingClientRect().top + scrollTop;
+      const start = surfaceTop < viewportHeight ? 0 : surfaceTop - viewportHeight * .85;
+      const end = Math.max(start + 1, surfaceTop + surface.offsetHeight - viewportHeight * .18);
+      const progress = clamp((scrollTop - start) / (end - start), 0, 1);
+      surface.style.setProperty("--grid-line-progress", progress.toFixed(4));
+    });
+  };
+
+  const requestGridUpdate = () => {
+    if (gridFrame === undefined) gridFrame = requestAnimationFrame(updateGridLines);
+  };
+
+  gridSurfaces.forEach((surface) => {
+    surface.classList.add("grid-scroll-surface");
+    const line = document.createElement("i");
+    line.className = "grid-scroll-line";
+    line.setAttribute("aria-hidden", "true");
+    surface.append(line);
+    alignTraceToGrid(surface);
+  });
+
+  window.addEventListener("scroll", requestGridUpdate, { passive: true });
+  window.addEventListener("resize", () => {
+    gridSurfaces.forEach(alignTraceToGrid);
+    requestGridUpdate();
+  });
+  updateGridLines();
+}
+
 const scrollSkies = [...document.querySelectorAll("[data-scroll-sky]")];
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-if (scrollSkies.length && !reducedMotion.matches) {
+if (scrollSkies.length) {
   let cloudFrame;
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
   const updateClouds = () => {
     cloudFrame = undefined;
     const viewportHeight = window.innerHeight;
-    const viewportCenter = viewportHeight / 2;
 
-    scrollSkies.forEach((sky) => {
+    scrollSkies.forEach((sky, index) => {
       const rect = sky.getBoundingClientRect();
       if (rect.bottom < -180 || rect.top > viewportHeight + 180) return;
 
-      const sectionCenter = rect.top + rect.height / 2;
-      const distance = viewportCenter - sectionCenter;
-      const setCloudPosition = (name, xSpeed, ySpeed, maxX, maxY) => {
-        sky.style.setProperty(`--cloud-${name}-x`, `${clamp(distance * xSpeed, -maxX, maxX).toFixed(1)}px`);
-        sky.style.setProperty(`--cloud-${name}-y`, `${clamp(distance * ySpeed, -maxY, maxY).toFixed(1)}px`);
-      };
-
-      setCloudPosition("one", .15, -.035, 150, 42);
-      setCloudPosition("two", -.1, .045, 120, 52);
-      setCloudPosition("three", .07, -.025, 90, 34);
-      setCloudPosition("four", -.045, .02, 62, 26);
+      const progress = clamp((viewportHeight - rect.top) / (viewportHeight + rect.height), 0, 1);
+      const phase = progress - .5;
+      const direction = index % 2 === 0 ? 1 : -1;
+      const motionScale = reducedMotion.matches ? .2 : 1;
+      const cloudX = clamp(phase * 500 * direction * motionScale, -220, 220);
+      const cloudY = clamp(phase * 1100 * motionScale, -340, 340);
+      sky.style.setProperty("--cloud-field-x", `${cloudX.toFixed(1)}px`);
+      sky.style.setProperty("--cloud-field-y", `${cloudY.toFixed(1)}px`);
     });
   };
 
@@ -105,6 +170,7 @@ if (scrollSkies.length && !reducedMotion.matches) {
 
   window.addEventListener("scroll", requestCloudUpdate, { passive: true });
   window.addEventListener("resize", requestCloudUpdate);
+  if ("addEventListener" in reducedMotion) reducedMotion.addEventListener("change", requestCloudUpdate);
   updateClouds();
 }
 
