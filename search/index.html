@@ -1009,8 +1009,10 @@ if (scrollSkies.length) {
       const phase = progress - .5;
       const direction = index % 2 === 0 ? 1 : -1;
       const motionScale = reducedMotion.matches ? .2 : 1;
-      sky.style.setProperty("--cloud-field-x", `${(phase * 240 * direction * motionScale).toFixed(1)}px`);
-      sky.style.setProperty("--cloud-field-y", `${(phase * 600 * motionScale).toFixed(1)}px`);
+      const cloudX = clamp(phase * 500 * direction * motionScale, -220, 220);
+      const cloudY = clamp(phase * 1100 * motionScale, -340, 340);
+      sky.style.setProperty("--cloud-field-x", `${cloudX.toFixed(1)}px`);
+      sky.style.setProperty("--cloud-field-y", `${cloudY.toFixed(1)}px`);
     });
   };
 
