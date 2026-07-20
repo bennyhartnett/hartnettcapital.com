@@ -172,10 +172,14 @@ function renderFooter() {
           <a href="/partnerships/">Partnerships</a>
           <a href="/contact/">Contact</a>
         </div>
-        <p>© ${year} Hartnett Capital. All rights reserved.</p>
+        <div class="footer__meta">
+          <p>McLean, Virginia</p>
+          <p>© ${year} Hartnett Capital</p>
+        </div>
       </div>
       <div class="shell footer__disclosure">
-        This website is for general informational purposes only and does not constitute an offer to sell or a solicitation to purchase any security.
+        <p>This website is for general informational purposes only and does not constitute an offer to sell or a solicitation to purchase any security.</p>
+        <a href="#main">Back to top <span aria-hidden="true">↑</span></a>
       </div>
     </footer>`;
 }

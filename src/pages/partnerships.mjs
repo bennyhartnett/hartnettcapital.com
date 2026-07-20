@@ -50,6 +50,21 @@ export const partnershipsPage = {
       </div>
     </section>
 
+    <section class="section partner-process" aria-labelledby="partner-process-title">
+      <div class="shell split-heading">
+        <p class="section-label">The path forward</p>
+        <div>
+          <h2 class="display reveal" id="partner-process-title">Deliberate from the first conversation.</h2>
+          <ol class="partner-process__list reveal">
+            <li><span>01</span><div><h3>Listen</h3><p>Understand the asset, the people around it, the owner’s priorities, and what a successful outcome means.</p></div></li>
+            <li><span>02</span><div><h3>Assess</h3><p>Study the fundamentals, risks, sources of value, and the practical work required to improve the opportunity.</p></div></li>
+            <li><span>03</span><div><h3>Align</h3><p>Define responsibilities, incentives, structure, timing, and expectations clearly before moving forward.</p></div></li>
+            <li><span>04</span><div><h3>Build</h3><p>Work together with direct communication, measurable priorities, and a long-term standard for ownership.</p></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
     <section class="section partnership-principles">
       <div class="shell split-heading">
         <p class="section-label">How we partner</p>

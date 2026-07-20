@@ -96,7 +96,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .button-link:hover { color: white; background: var(--ink); }
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity 600ms ease, transform 600ms ease; }
 .reveal.visible { opacity: 1; transform: none; }
-.nav > *, .home-hero > *, .home-hero__lower > *, .split-heading > *, .two-column-copy > *, .section-heading > *, .standards__grid > *, .asset-preview__item > *, .page-hero__grid > *, .principle > *, .feature-quote__grid > *, .strategy-block__grid > *, .criteria-detail__intro > *, .criteria-grid > *, .asset-grid > *, .contact-page__grid > *, .contact-guidance > *, .footer__lead > *, .footer__bottom > * { min-width: 0; }
+.nav > *, .home-hero > *, .home-hero__lower > *, .split-heading > *, .two-column-copy > *, .section-heading > *, .standards__grid > *, .asset-preview__item > *, .pathways__intro > *, .pathways__grid > *, .page-hero__grid > *, .principle > *, .operating-model__grid > *, .feature-quote__grid > *, .strategy-block__grid > *, .criteria-detail__intro > *, .criteria-grid > *, .asset-grid > *, .contact-page__grid > *, .contact-guidance > *, .contact-checklist li > *, .footer__lead > *, .footer__bottom > * { min-width: 0; }
 
 /* Master navigation */
 .topbar { position: fixed; inset: 0 0 auto; z-index: 30; background: rgba(251, 250, 247, 0.9); border-bottom: 1px solid rgba(16, 18, 23, 0.1); backdrop-filter: blur(18px); }
@@ -158,6 +158,19 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .company-facts__list dt { font-family: Georgia, "Times New Roman", serif; font-size: clamp(24px, 2.2vw, 34px); line-height: 1.08; letter-spacing: -.035em; }
 .company-facts__list dd { margin: 0; align-self: center; color: var(--muted-strong); font-size: 16px; line-height: 1.65; }
 
+/* Homepage engagement pathways */
+.pathways { color: white; background: var(--blue); }
+.pathways__intro { display: grid; grid-template-columns: .32fr 1.68fr; gap: clamp(48px, 7vw, 105px); padding-bottom: 58px; }
+.pathways .section-label { color: white; border-color: rgba(255,255,255,.65); }
+.pathways .display { max-width: 1100px; margin-bottom: 30px; }
+.pathways__lede { max-width: 680px; margin: 0; color: rgba(255,255,255,.76); font-size: clamp(17px, 1.5vw, 21px); }
+.pathways__grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(255,255,255,.3); border-left: 1px solid rgba(255,255,255,.3); }
+.pathway { min-height: 390px; padding: 28px; display: flex; flex-direction: column; border-right: 1px solid rgba(255,255,255,.3); border-bottom: 1px solid rgba(255,255,255,.3); transition: color 180ms ease, background 180ms ease; }
+.pathway > span { color: rgba(255,255,255,.7); font-size: 10px; font-weight: 800; }
+.pathway h3 { margin: auto 0 18px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(34px, 3.1vw, 48px); font-weight: 400; line-height: .98; letter-spacing: -.045em; }
+.pathway p { min-height: 92px; margin-bottom: 30px; color: rgba(255,255,255,.72); font-size: 14px; }
+.pathway .text-link { align-self: flex-start; border-color: white; }
+
 /* Homepage focus preview */
 .asset-preview__grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(16,18,23,.3); border-left: 1px solid rgba(16,18,23,.3); }
 .asset-preview__item { min-height: 185px; display: grid; grid-template-columns: 54px 1fr auto; gap: 18px; align-items: center; padding: 30px; border-right: 1px solid rgba(16,18,23,.3); border-bottom: 1px solid rgba(16,18,23,.3); transition: color 180ms ease, background 180ms ease; }
@@ -197,6 +210,14 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .feature-quote blockquote + p { max-width: 540px; margin-bottom: 40px; color: rgba(255,255,255,.66); }
 .feature-quote .text-link { border-color: white; }
 
+/* Operating model */
+.operating-model { background: var(--paper); }
+.operating-model__grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.operating-model__item { min-height: 350px; padding: 28px; display: flex; flex-direction: column; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.operating-model__item > span { color: var(--blue); font-size: 10px; font-weight: 800; }
+.operating-model__item h3 { margin: auto 0 20px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(30px, 2.5vw, 40px); font-weight: 400; line-height: 1; letter-spacing: -.04em; }
+.operating-model__item p { min-height: 108px; margin: 0; color: var(--muted); font-size: 14px; }
+
 /* Strategy */
 .strategy-block { padding: clamp(90px, 10vw, 145px) 0; scroll-margin-top: 78px; background: var(--paper); }
 .strategy-block--ivory { background: var(--ivory); }
@@ -217,6 +238,14 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .process-list li > span { color: var(--blue); font-size: 10px; font-weight: 800; }
 .process-list h3 { margin: 0 0 6px; font-family: Georgia, "Times New Roman", serif; font-size: 34px; font-weight: 400; letter-spacing: -.035em; }
 .process-list p { margin: 0; color: var(--muted); }
+
+/* Partnership process */
+.partner-process { background: var(--ivory); }
+.partner-process__list { counter-reset: none; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.partner-process__list li { min-height: 145px; display: grid; grid-template-columns: 88px 1fr; align-items: center; border-bottom: 1px solid var(--line); }
+.partner-process__list li > span { color: var(--blue); font-size: 10px; font-weight: 800; }
+.partner-process__list h3 { margin: 0 0 7px; font-family: Georgia, "Times New Roman", serif; font-size: 34px; font-weight: 400; letter-spacing: -.035em; }
+.partner-process__list p { max-width: 690px; margin: 0; color: var(--muted); }
 
 /* Criteria */
 .criteria-detail__intro { display: grid; grid-template-columns: .3fr 1.7fr; gap: clamp(48px, 7vw, 108px); padding-bottom: 55px; }
@@ -256,7 +285,17 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .contact-guidance { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(34px, 6vw, 86px); margin-top: 65px; }
 .contact-guidance h2 { margin-bottom: 18px; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
 .contact-guidance p { max-width: 500px; color: var(--muted); }
-.contact-privacy { max-width: 760px; margin: 65px 0 0; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+.contact-checklist { margin-top: 70px; }
+.contact-checklist > h2 { margin-bottom: 24px; color: var(--blue); font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.contact-checklist ul { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.contact-checklist li { min-height: 118px; display: grid; grid-template-columns: 70px 1fr; align-items: center; border-bottom: 1px solid var(--line); }
+.contact-checklist li > span { color: var(--blue); font-size: 10px; font-weight: 800; }
+.contact-checklist p { display: grid; grid-template-columns: minmax(150px,.42fr) 1fr; gap: 30px; margin: 0; color: var(--muted); }
+.contact-checklist strong { color: var(--ink); font-family: Georgia, "Times New Roman", serif; font-size: 23px; font-weight: 400; letter-spacing: -.025em; }
+.contact-location { display: grid; grid-template-columns: minmax(160px,.42fr) 1fr; gap: 30px; align-items: end; margin-top: 70px; padding-top: 25px; border-top: 1px solid var(--line); }
+.contact-location .eyebrow { width: 160px; }
+.contact-location > p:last-child { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(32px, 3.5vw, 52px); letter-spacing: -.04em; }
+.contact-privacy { max-width: 760px; margin: 44px 0 0; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
 
 /* Footer */
 .footer { position: relative; overflow: hidden; padding: clamp(90px, 10vw, 145px) 0 38px; color: var(--navy); background: var(--red); }
@@ -268,8 +307,11 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
 .footer__contact:hover { transform: translateY(-3px); }
 .footer__bottom { position: relative; z-index: 1; min-height: 88px; display: grid; grid-template-columns: 1fr auto 1fr; gap: 35px; align-items: center; border-top: 1px solid rgba(8,26,51,.42); border-bottom: 1px solid rgba(8,26,51,.42); }
 .footer__links { display: flex; gap: 28px; font-size: 9px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
-.footer__bottom > p { justify-self: end; margin: 0; color: var(--navy); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
-.footer__disclosure { position: relative; z-index: 1; padding-top: 22px; color: var(--navy); font-size: 9px; letter-spacing: .06em; text-transform: uppercase; }
+.footer__meta { justify-self: end; display: grid; justify-items: end; gap: 3px; }
+.footer__meta p { margin: 0; color: var(--navy); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+.footer__disclosure { position: relative; z-index: 1; display: flex; justify-content: space-between; gap: 30px; padding-top: 22px; color: var(--navy); font-size: 9px; letter-spacing: .06em; text-transform: uppercase; }
+.footer__disclosure p { max-width: 820px; margin: 0; }
+.footer__disclosure a { flex: 0 0 auto; font-weight: 800; }
 
 /* 404 */
 .not-found__content { min-height: 100vh; padding: 170px 0 90px; color: white; background: var(--navy); }
@@ -294,14 +336,17 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
   .home-hero__visual { min-height: clamp(480px, 62vw, 640px); }
   .standards__grid { grid-template-columns: 1fr; }
   .company-facts__list > div { grid-template-columns: 1fr; gap: 18px; }
+  .pathways__grid { grid-template-columns: 1fr 1fr; }
+  .pathway:last-child { grid-column: 1 / -1; min-height: 330px; }
   .principle { grid-template-columns: 78px .8fr 1.2fr; }
+  .operating-model__grid { grid-template-columns: 1fr 1fr; }
   .strategy-block__grid { grid-template-columns: 70px 1fr; }
   .strategy-block__copy { grid-column: 2; }
   .criteria-grid { grid-template-columns: repeat(2, 1fr); }
   .asset-card { min-height: 500px; }
   .footer__bottom { grid-template-columns: 1fr 1fr; padding: 24px 0; }
   .footer__links { justify-self: end; }
-  .footer__bottom > p { grid-column: 1 / -1; justify-self: start; }
+  .footer__meta { grid-column: 1 / -1; justify-self: start; justify-items: start; }
 }
 
 @media (max-width: 900px) {
@@ -324,7 +369,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
   .nav-links.open { max-height: calc(100dvh - 68px); }
   .brand { font-size: 11px; }
   .brand-mark { width: 25px; height: 31px; }
-  .split-heading, .section-heading, .criteria-detail__intro, .feature-quote__grid, .contact-page__grid { grid-template-columns: 1fr; gap: 40px; }
+  .split-heading, .section-heading, .pathways__intro, .criteria-detail__intro, .feature-quote__grid, .contact-page__grid { grid-template-columns: 1fr; gap: 40px; }
   .section-label { width: 165px; }
   .two-column-copy, .contact-guidance { grid-template-columns: 1fr; gap: 25px; }
   .home-hero { padding-top: 68px; }
@@ -340,6 +385,9 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
   .home-hero__visual > span, .home-hero__visual img { left: 24px; }
   .home-hero__visual p { right: 24px; }
   .focus-grid { grid-template-columns: 1fr; }
+  .pathways__grid { grid-template-columns: 1fr; }
+  .pathway, .pathway:last-child { min-height: 340px; grid-column: auto; }
+  .pathway p { min-height: 0; }
   .asset-preview__grid, .asset-grid { grid-template-columns: 1fr; }
   .asset-preview__item { min-height: 170px; grid-template-columns: 38px 1fr auto; padding: 24px 20px; }
   .focus-card { min-height: 310px; }
@@ -352,6 +400,9 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
   .principle { min-height: 0; grid-template-columns: 46px 1fr; gap: 18px; padding: 30px 0; }
   .principle > span { grid-row: 1 / span 2; font-size: 36px; }
   .principle p { grid-column: 2; }
+  .operating-model__grid { grid-template-columns: 1fr; }
+  .operating-model__item { min-height: 310px; }
+  .operating-model__item p { min-height: 0; }
   .strategy-block { padding: clamp(72px, 20vw, 96px) 0; }
   .strategy-block__grid { grid-template-columns: 1fr; gap: 28px; }
   .strategy-block__number { font-size: 38px; }
@@ -365,10 +416,14 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
   .mandate-list dd { font-size: 23px; }
   .contact-email { align-items: flex-end; font-size: clamp(22px, 7vw, 42px); }
   .contact-email span { flex: 0 0 auto; font-size: 20px; }
+  .contact-checklist li { grid-template-columns: 42px 1fr; padding: 25px 0; }
+  .contact-checklist p { grid-template-columns: 1fr; gap: 7px; }
+  .contact-location { grid-template-columns: 1fr; gap: 24px; }
   .footer__bottom { grid-template-columns: 1fr; }
   .footer h2 { font-size: clamp(48px, 15vw, 72px); }
   .footer__links { justify-self: start; flex-wrap: wrap; gap: 18px 22px; }
-  .footer__bottom > p { grid-column: auto; }
+  .footer__meta { grid-column: auto; }
+  .footer__disclosure { flex-direction: column; }
 }
 
 @media (max-width: 430px) {
@@ -460,10 +515,23 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
       <div class="shell contact-page__grid">
         <p class="section-label">Contact Hartnett Capital</p>
         <div>
-          <a class="contact-email reveal" href="mailto:inquiries@hartnettcapital.com">inquiries@hartnettcapital.com<span aria-hidden="true">↗</span></a>
+          <a class="contact-email reveal" href="mailto:inquiries@hartnettcapital.com?subject=Opportunity%20for%20Hartnett%20Capital">inquiries@hartnettcapital.com<span aria-hidden="true">↗</span></a>
           <div class="contact-guidance reveal">
             <div><h2>What to share</h2><p>A concise overview of the business, property, digital asset, dataset, partnership, or other opportunity; relevant context; and why Hartnett Capital may be a fit.</p></div>
             <div><h2>What happens next</h2><p>We review inquiries directly and discreetly. If the opportunity aligns with our interests, we will follow up to request more context or arrange a conversation.</p></div>
+          </div>
+          <div class="contact-checklist reveal" aria-labelledby="contact-checklist-title">
+            <h2 id="contact-checklist-title">A useful first note</h2>
+            <ul>
+              <li><span>01</span><p><strong>The opportunity</strong>A plain-language description of the business, asset, property, or partnership.</p></li>
+              <li><span>02</span><p><strong>The context</strong>Ownership, location, stage, and the reason you are beginning a conversation now.</p></li>
+              <li><span>03</span><p><strong>The potential</strong>What is durable today and where focused ownership could make it more valuable.</p></li>
+              <li><span>04</span><p><strong>The next step</strong>The person we should speak with and the best way to continue the discussion.</p></li>
+            </ul>
+          </div>
+          <div class="contact-location reveal">
+            <p class="eyebrow">Headquartered in</p>
+            <p>McLean, Virginia</p>
           </div>
           <p class="contact-privacy">Please do not send sensitive personal information by email. Sending an inquiry does not create an advisory, fiduciary, or other professional relationship.</p>
         </div>
@@ -493,10 +561,14 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-
           <a href="/partnerships/">Partnerships</a>
           <a href="/contact/">Contact</a>
         </div>
-        <p>© 2026 Hartnett Capital. All rights reserved.</p>
+        <div class="footer__meta">
+          <p>McLean, Virginia</p>
+          <p>© 2026 Hartnett Capital</p>
+        </div>
       </div>
       <div class="shell footer__disclosure">
-        This website is for general informational purposes only and does not constitute an offer to sell or a solicitation to purchase any security.
+        <p>This website is for general informational purposes only and does not constitute an offer to sell or a solicitation to purchase any security.</p>
+        <a href="#main">Back to top <span aria-hidden="true">↑</span></a>
       </div>
     </footer>
   <script>const menuButton = document.querySelector(".menu-toggle");

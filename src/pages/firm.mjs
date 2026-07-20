@@ -44,6 +44,19 @@ export const firmPage = {
       </div>
     </section>
 
+    <section class="section operating-model" aria-labelledby="operating-model-title">
+      <div class="shell section-heading">
+        <p class="section-label">What we bring</p>
+        <h2 class="display reveal" id="operating-model-title">A flexible mandate.<br>A hands-on model.</h2>
+      </div>
+      <div class="shell operating-model__grid">
+        <article class="operating-model__item reveal"><span>01</span><h3>Independent judgment</h3><p>We evaluate each opportunity on its fundamentals and make decisions with a long-term owner’s perspective.</p></article>
+        <article class="operating-model__item reveal"><span>02</span><h3>Direct engagement</h3><p>Partners work directly with decision-makers who remain involved from the first conversation through ownership.</p></article>
+        <article class="operating-model__item reveal"><span>03</span><h3>Operating capability</h3><p>We contribute practical work across strategy, systems, technology, automation, data, and commercial execution.</p></article>
+        <article class="operating-model__item reveal"><span>04</span><h3>Patient perspective</h3><p>We give strong assets and capable people the time, attention, and reinvestment required to compound.</p></article>
+      </div>
+    </section>
+
     <section class="section feature-quote">
       <div class="shell feature-quote__grid">
         <p class="section-label">Our philosophy</p>

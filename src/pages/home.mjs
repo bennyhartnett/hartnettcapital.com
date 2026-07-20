@@ -122,9 +122,39 @@ export const homePage = {
       </div>
     </section>
 
+    <section class="section pathways" aria-labelledby="pathways-title">
+      <div class="shell pathways__intro">
+        <p class="section-label">05 / Ways to engage</p>
+        <div>
+          <h2 class="display reveal" id="pathways-title">Built for opportunities that do not fit a template.</h2>
+          <p class="pathways__lede reveal">We begin with the opportunity itself, then determine where ownership, operating capability, technology, relationships, or patient capital can make the greatest difference.</p>
+        </div>
+      </div>
+      <div class="shell pathways__grid">
+        <article class="pathway reveal">
+          <span>01</span>
+          <h3>Owner transitions</h3>
+          <p>A thoughtful next chapter for owners who care about continuity, reputation, employees, customers, and what happens after a transaction.</p>
+          ${linkArrow("For owners & founders", "/partnerships/")}
+        </article>
+        <article class="pathway reveal">
+          <span>02</span>
+          <h3>Operator partnerships</h3>
+          <p>Aligned capital and practical support for capable operators with experience, conviction, and a clear plan to build long-term value.</p>
+          ${linkArrow("How we partner", "/partnerships/")}
+        </article>
+        <article class="pathway reveal">
+          <span>03</span>
+          <h3>Direct opportunities</h3>
+          <p>Businesses and differentiated assets where active ownership can preserve durable strengths and unlock overlooked potential.</p>
+          ${linkArrow("Review our criteria", "/criteria/")}
+        </article>
+      </div>
+    </section>
+
     <section class="company-facts section section--blue-soft" aria-labelledby="company-facts-title">
       <div class="shell split-heading">
-        <p class="section-label">05 / At a glance</p>
+        <p class="section-label">06 / At a glance</p>
         <div>
           <h2 class="display reveal" id="company-facts-title">Clear answers.<br>Direct access.</h2>
           <dl class="company-facts__list reveal">
