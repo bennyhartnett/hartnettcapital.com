@@ -6,6 +6,9 @@ export const site = {
     "Founded and headquartered in McLean, Virginia, Hartnett Capital is a private investment and operating company focused on durable businesses and differentiated assets.",
   slogan: "Building enduring value through ownership and operation.",
   email: "inquiries@hartnettcapital.com",
+  // Set to a hosted form endpoint (e.g. "https://formspree.io/f/XXXXXXXX") to enable
+  // live form submission. Leave empty to fall back to a structured mailto compose.
+  formEndpoint: "",
   location: {
     locality: "McLean",
     region: "Virginia",
@@ -39,6 +42,7 @@ export const site = {
     { href: "/focus/", label: "Focus" },
     { href: "/criteria/", label: "Criteria" },
     { href: "/partnerships/", label: "Partnerships" },
+    { href: "/insights/", label: "Insights" },
   ],
   sitemapGroups: [
     {
@@ -47,6 +51,7 @@ export const site = {
         { href: "/firm/", label: "About" },
         { href: "/strategy/", label: "What We Do" },
         { href: "/criteria/", label: "Investment Criteria" },
+        { href: "/insights/", label: "Insights" },
         { href: "/faq/", label: "Frequently Asked Questions" },
       ],
     },
@@ -70,6 +75,14 @@ export const site = {
         { href: "/partnerships/operators/", label: "Independent Operators" },
         { href: "/partnerships/strategic-partners/", label: "Strategic Partners" },
         { href: "/contact/", label: "Share an Opportunity" },
+      ],
+    },
+    {
+      label: "Legal",
+      links: [
+        { href: "/privacy/", label: "Privacy Policy" },
+        { href: "/terms/", label: "Terms of Use" },
+        { href: "/disclosures/", label: "Disclosures" },
       ],
     },
   ],

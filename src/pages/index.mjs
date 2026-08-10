@@ -5,6 +5,9 @@ import { firmPage } from "./firm.mjs";
 import { focusDetailPages } from "./focus-details.mjs";
 import { focusPage } from "./focus.mjs";
 import { homePage } from "./home.mjs";
+import { insightArticlePages } from "./insight-articles.mjs";
+import { insightsPage } from "./insights.mjs";
+import { legalPages } from "./legal.mjs";
 import { loginPage } from "./login.mjs";
 import { notFoundPage } from "./not-found.mjs";
 import { partnershipDetailPages } from "./partnership-detail.mjs";
@@ -22,8 +25,11 @@ const contentPages = [
   criteriaPage,
   partnershipsPage,
   ...partnershipDetailPages,
+  insightsPage,
+  ...insightArticlePages,
   faqPage,
   contactPage,
+  ...legalPages,
   sitemapPage,
 ];
 

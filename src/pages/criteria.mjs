@@ -42,6 +42,37 @@ export const criteriaPage = {
       </div>
     </section>
 
+    <section class="section section--blue-soft criteria-avoid">
+      <div class="shell split-heading">
+        <p class="section-label">What we tend to avoid</p>
+        <div>
+          <h2 class="display reveal">Knowing our limits<br>protects everyone.</h2>
+          <ol class="process-list reveal">
+            <li><span>01</span><div><h3>Pre-revenue concepts</h3><p>Ideas that need venture-style risk capital before demand is proven are better served by other investors.</p></div></li>
+            <li><span>02</span><div><h3>Commodity without an angle</h3><p>Undifferentiated businesses with no defensible position and no practical path to building one.</p></div></li>
+            <li><span>03</span><div><h3>Narrative pricing</h3><p>Assets valued on momentum or story rather than durable demand and understandable economics.</p></div></li>
+            <li><span>04</span><div><h3>Situations that need a flip</h3><p>Opportunities that only work with a fast resale conflict with how we own. We hold; we do not trade.</p></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section criteria-evaluate" aria-labelledby="criteria-evaluate-title">
+      <div class="shell split-heading">
+        <p class="section-label">How we evaluate</p>
+        <div>
+          <h2 class="display reveal" id="criteria-evaluate-title">A direct process.<br>A prompt answer.</h2>
+          <ol class="partner-process__list reveal">
+            <li><span>01</span><div><h3>Review</h3><p>We read every inquiry directly and respond when there may be a fit — typically within days, not weeks.</p></div></li>
+            <li><span>02</span><div><h3>Conversation</h3><p>A direct discussion with a decision-maker to understand the asset, the people, and the intent behind the outreach.</p></div></li>
+            <li><span>03</span><div><h3>Diligence</h3><p>Focused study of the operating fundamentals — customers, people, cash, and dependencies — before any structure talk.</p></div></li>
+            <li><span>04</span><div><h3>Decision</h3><p>A clear yes or no, with our reasoning. We do not string sellers along to keep options open.</p></div></li>
+          </ol>
+          ${linkArrow("Read common questions", "/faq/")}
+        </div>
+      </div>
+    </section>
+
     <section class="section mandate section--blue-soft">
       <div class="shell split-heading">
         <p class="section-label">Areas of interest</p>

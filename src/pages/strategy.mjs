@@ -54,5 +54,40 @@ ${operatingBlocks
           ${linkArrow("Review our criteria", "/criteria/")}
         </div>
       </div>
+    </section>
+
+    <section class="section section--blue-soft structures">
+      <div class="shell split-heading">
+        <p class="section-label">Structures we use</p>
+        <div>
+          <h2 class="display reveal">The structure follows<br>the situation.</h2>
+          <dl class="mandate-list reveal">
+            <div><dt>Outright acquisition</dt><dd>Full ownership &amp; responsibility</dd></div>
+            <div><dt>Majority recapitalization</dt><dd>Owners retain a meaningful stake</dd></div>
+            <div><dt>Operator-backed acquisition</dt><dd>Capital behind a proven operator</dd></div>
+            <div><dt>Joint venture</dt><dd>Shared ownership &amp; complementary roles</dd></div>
+            <div><dt>Internal build</dt><dd>New ventures created from scratch</dd></div>
+          </dl>
+          <p class="mandate-note">We choose the structure after understanding the opportunity — not before. Alignment, responsibilities, and incentives are documented clearly in every case.</p>
+          ${linkArrow("Explore partnerships", "/partnerships/")}
+        </div>
+      </div>
+    </section>
+
+    <section class="section first-conversation">
+      <div class="shell split-heading">
+        <p class="section-label">Getting started</p>
+        <div>
+          <h2 class="display reveal">What a first conversation looks like.</h2>
+          <ol class="process-list reveal">
+            <li><span>01</span><div><h3>A short note</h3><p>Send a concise overview of the business, property, or asset and the reason you are reaching out now.</p></div></li>
+            <li><span>02</span><div><h3>A direct conversation</h3><p>If there may be a fit, we arrange a call with a decision-maker — typically within a week, no committees.</p></div></li>
+            <li><span>03</span><div><h3>A clear next step</h3><p>We tell you plainly whether we want to go deeper, and what that would involve. A fast, honest no is part of the service.</p></div></li>
+          </ol>
+          ${linkArrow("Share an opportunity", "/contact/")}
+          <span class="inline-link-separator" aria-hidden="true"></span>
+          ${linkArrow("Review our criteria", "/criteria/")}
+        </div>
+      </div>
     </section>`,
 };
