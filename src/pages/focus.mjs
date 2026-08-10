@@ -62,6 +62,11 @@ export const focusPage = {
   title: "Focus Areas",
   seoTitle: "Investment Focus Areas | Hartnett Capital",
   schemaType: "CollectionPage",
+  collectionItems: focusAreas.map(({ detailPath, title, copy }) => ({
+    path: detailPath,
+    name: title.replaceAll("&amp;", "&"),
+    description: copy,
+  })),
   description:
     "Explore Hartnett Capital's focus across operating companies, real estate, software, digital assets, proprietary data, intellectual property, and brands.",
   body: `

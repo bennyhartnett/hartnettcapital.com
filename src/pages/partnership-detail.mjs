@@ -4,7 +4,7 @@ const partnershipDetails = [
   {
     path: "/partnerships/owners-founders/",
     title: "Owners & Founders",
-    seoTitle: "Partnerships with Business Owners & Founders | Hartnett Capital",
+    seoTitle: "Business Owner & Founder Partnerships | Hartnett Capital",
     description:
       "Hartnett Capital works directly with owners and founders considering succession, a sale, recapitalization, or the next stage of a company's growth.",
     headline: "A thoughtful next chapter for what you built.",

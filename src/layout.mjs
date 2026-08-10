@@ -18,6 +18,7 @@ function renderStructuredData(page, origin, canonical, title) {
   const webpageId = `${canonical}#webpage`;
   const place = {
     "@type": "Place",
+    name: `${site.location.locality}, ${site.location.region}`,
     address: {
       "@type": "PostalAddress",
       addressLocality: site.location.locality,
@@ -25,11 +26,13 @@ function renderStructuredData(page, origin, canonical, title) {
       addressCountry: site.location.country,
     },
   };
+  const contactPointId = `${origin}/#contact-point`;
   const graph = [
     {
       "@type": "Organization",
       "@id": organizationId,
       name: site.name,
+      legalName: site.legalName,
       url: `${origin}/`,
       logo: {
         "@type": "ImageObject",
@@ -39,10 +42,24 @@ function renderStructuredData(page, origin, canonical, title) {
         height: 686,
       },
       description: site.description,
+      slogan: site.slogan,
       email: site.email,
+      address: place.address,
       foundingLocation: place,
       location: place,
       knowsAbout: site.focusAreas,
+      audience: site.audiences.map((audienceType) => ({
+        "@type": "Audience",
+        audienceType,
+      })),
+      contactPoint: { "@id": contactPointId },
+    },
+    {
+      "@type": "ContactPoint",
+      "@id": contactPointId,
+      contactType: "investment opportunities and partnerships",
+      email: site.email,
+      availableLanguage: ["English"],
     },
     {
       "@type": "WebSite",
@@ -52,6 +69,14 @@ function renderStructuredData(page, origin, canonical, title) {
       description: site.description,
       inLanguage: "en-US",
       publisher: { "@id": organizationId },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${origin}/search/?q={search_term_string}`,
+        },
+        "query-input": "required name=search_term_string",
+      },
     },
     {
       "@type": page.schemaType ?? "WebPage",
@@ -63,6 +88,7 @@ function renderStructuredData(page, origin, canonical, title) {
       isPartOf: { "@id": websiteId },
       about: { "@id": organizationId },
       publisher: { "@id": organizationId },
+      keywords: site.focusAreas,
       primaryImageOfPage: {
         "@type": "ImageObject",
         url: `${origin}${site.socialImage.path}`,
@@ -74,6 +100,31 @@ function renderStructuredData(page, origin, canonical, title) {
       },
     },
   ];
+
+  const webpage = graph[3];
+  if (page.path === "/" || page.schemaType === "AboutPage") {
+    webpage.mainEntity = { "@id": organizationId };
+  } else if (page.schemaType === "ContactPage") {
+    webpage.mainEntity = { "@id": contactPointId };
+  }
+
+  if (page.collectionItems?.length) {
+    const itemListId = `${canonical}#item-list`;
+    graph.push({
+      "@type": "ItemList",
+      "@id": itemListId,
+      name: `${page.title} at ${site.name}`,
+      numberOfItems: page.collectionItems.length,
+      itemListElement: page.collectionItems.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `${origin}${item.path}`,
+        name: item.name,
+        description: item.description,
+      })),
+    });
+    webpage.mainEntity = { "@id": itemListId };
+  }
 
   if (page.path !== "/" && page.path !== "/404") {
     const breadcrumbId = `${canonical}#breadcrumb`;
@@ -98,7 +149,7 @@ function renderStructuredData(page, origin, canonical, title) {
         item,
       })),
     });
-    graph[2].breadcrumb = { "@id": breadcrumbId };
+    webpage.breadcrumb = { "@id": breadcrumbId };
   }
 
   if (page.faqs?.length) {
@@ -111,7 +162,7 @@ function renderStructuredData(page, origin, canonical, title) {
       },
     }));
     if (page.schemaType === "FAQPage") {
-      graph[2].mainEntity = mainEntity;
+      webpage.mainEntity = mainEntity;
     } else {
       graph.push({
         "@type": "FAQPage",
@@ -201,7 +252,7 @@ function renderFooter() {
     </footer>`;
 }
 
-export function renderDocument(page, styles, clientScript, origin = "{{ORIGIN}}") {
+export function renderDocument(page, styles, clientScript, origin = site.url) {
   const canonical = page.path === "/" ? `${origin}/` : `${origin}${page.path}`;
   const title = page.seoTitle ?? (page.title === site.name ? page.title : `${page.title} | ${site.name}`);
   const robots = page.noIndex
@@ -224,7 +275,11 @@ export function renderDocument(page, styles, clientScript, origin = "{{ORIGIN}}"
   <meta name="theme-color" content="#081a33">
   <meta name="color-scheme" content="light">
   <link rel="canonical" href="${canonical}">
+  <link rel="alternate" hreflang="en-US" href="${canonical}">
+  <link rel="alternate" hreflang="x-default" href="${canonical}">
   <link rel="sitemap" type="application/xml" href="${origin}/sitemap.xml">
+  <link rel="alternate" type="text/plain" href="${origin}/llms.txt" title="${site.name} AI content guide">
+  <link rel="alternate" type="text/plain" href="${origin}/llms-full.txt" title="${site.name} full text for AI systems">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
   <meta property="og:site_name" content="${site.name}">

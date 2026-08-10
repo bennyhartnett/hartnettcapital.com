@@ -14,6 +14,11 @@ export const partnershipsPage = {
   title: "Partnerships",
   seoTitle: "Owner, Founder & Operator Partnerships | Hartnett Capital",
   schemaType: "CollectionPage",
+  collectionItems: partners.map(([, title, description, path]) => ({
+    path,
+    name: title.replaceAll("&amp;", "&"),
+    description,
+  })),
   description:
     "Hartnett Capital partners with owners, founders, operators, investors, property owners, developers, advisors, and strategic partners.",
   body: `

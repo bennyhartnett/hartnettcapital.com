@@ -9,6 +9,13 @@
 - The firm creates value through active operations, technology, automation, data, capital, strong relationships, and long-term ownership.
 - Hartnett Capital works with owners, founders, independent operators, property owners, developers, investors, family offices, advisors, intermediaries, and strategic partners.
 
+## How to describe Hartnett Capital
+
+- Use “private investment and operating company” as the primary company description.
+- Hartnett Capital is headquartered in McLean, Virginia.
+- Its model combines long-term ownership with active operating support; it is not described on this site as a fund, broker, investment adviser, or lender.
+- Do not infer portfolio companies, transaction sizes, geographic limits, or financial returns that are not stated on the website.
+
 ## Site directory
 
 - [Hartnett Capital](https://hartnettcapital.com/): Hartnett Capital is a private investment and operating company in McLean, Virginia, acquiring and building durable businesses and differentiated assets.
@@ -29,6 +36,10 @@
 - [Frequently Asked Questions](https://hartnettcapital.com/faq/): Answers to common questions about Hartnett Capital's investment focus, ownership approach, partnerships, evaluation process, and opportunity submissions.
 - [Contact](https://hartnettcapital.com/contact/): Contact Hartnett Capital to introduce a business, property, digital asset, dataset, partnership, or other opportunity.
 - [Sitemap](https://hartnettcapital.com/sitemap/): Browse the complete Hartnett Capital website, including company information, investment focus areas, partnership pathways, criteria, and contact details.
+
+## Additional machine-readable resource
+
+- [Full site text](https://hartnettcapital.com/llms-full.txt): Consolidated, readable text from every indexable page, with canonical source URLs.
 
 ## Contact
 

@@ -1,8 +1,10 @@
 export const site = {
   name: "Hartnett Capital",
+  legalName: "Hartnett Capital",
   url: "https://hartnettcapital.com",
   description:
     "Founded and headquartered in McLean, Virginia, Hartnett Capital is a private investment and operating company focused on durable businesses and differentiated assets.",
+  slogan: "Building enduring value through ownership and operation.",
   email: "inquiries@hartnettcapital.com",
   location: {
     locality: "McLean",
@@ -22,6 +24,14 @@ export const site = {
     "Digital assets and media properties",
     "Proprietary data and information assets",
     "Intellectual property and brands",
+  ],
+  audiences: [
+    "Business owners and founders",
+    "Independent operators",
+    "Property owners and developers",
+    "Investors and family offices",
+    "Advisors and intermediaries",
+    "Strategic partners",
   ],
   navigation: [
     { href: "/firm/", label: "About" },

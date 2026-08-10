@@ -129,7 +129,7 @@ const focusDetails = [
   {
     path: "/focus/intellectual-property-brands/",
     title: "Intellectual Property & Brands",
-    seoTitle: "Intellectual Property & Brand Investment Focus | Hartnett Capital",
+    seoTitle: "IP & Brand Investment Focus | Hartnett Capital",
     description:
       "Hartnett Capital considers brands, patents, trademarks, licenses, and other intellectual property with defensible ownership, recognition, utility, or extension potential.",
     headline: "Distinctive rights with room to travel.",
